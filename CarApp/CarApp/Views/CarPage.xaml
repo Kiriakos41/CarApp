@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.CarPage"
+             xmlns:local="clr-namespace:CarApp.ViewModels"  
+             xmlns:model="clr-namespace:CarApp.Models"
+             Title="Αυτοκίνητο">
+    <ContentPage.Content>
+        <StackLayout x:DataType="local:MyCarViewModel">
+            <Frame HeightRequest="200" Margin="25" BackgroundColor="WhiteSmoke" HasShadow="True">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Image Source="vehicles" HeightRequest="40"/>
+                        <Label Text="Μάρκα αυτοκινήτου" HorizontalOptions="Center" FontSize="Medium" TextColor="black" FontAttributes="Bold" VerticalOptions="Center"/>
+                    </StackLayout>
+                    <Picker Title="Επιλογή μάρκας" HorizontalTextAlignment="Center" ItemsSource="{Binding types}" SelectedItem="{Binding Type ,Mode=TwoWay}"/>
+                    <Image Source="{Binding Type}" HeightRequest="100" VerticalOptions="Center"/>
+                </StackLayout>
+            </Frame>
+            <Frame HeightRequest="200" Margin="25" BackgroundColor="WhiteSmoke" HasShadow="True">
+                <StackLayout Margin="25">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Image Source="engine" HeightRequest="40"/>
+                        <Label Text="Στοιχεία αυτοκινήτου" HorizontalOptions="Center" FontSize="Medium" TextColor="black" FontAttributes="Bold" VerticalOptions="Center"/>
+                    </StackLayout>
+                    <Picker Title="Άλογα" HorizontalTextAlignment="Center" ItemsSource="{Binding power}" SelectedItem="{Binding HorsePower,Mode=TwoWay}"/>
+                    <Picker Title="Κυβικά" HorizontalTextAlignment="Center" ItemsSource="{Binding Cubic}" SelectedItem="{Binding CarCubic,Mode=TwoWay}"/>
+                </StackLayout>
+            </Frame>
+            <Frame Margin="25" HasShadow="True" BackgroundColor="WhiteSmoke">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Image Source="floppy" HeightRequest="50">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SaveCommad}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="Αποθήκευση" TextColor="Black" FontSize="Title" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

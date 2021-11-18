@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:CarApp.Views"
+       Title="CarApp"
+       x:Class="CarApp.AppShell"
+       FlyoutHeaderBehavior="CollapseOnScroll"
+       x:Name="myShell">
+    <FlyoutItem Title="Αυτοκίνητο" Icon="sedan.png">
+        <ShellContent Route="CarPage" ContentTemplate="{DataTemplate local:CarPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Γεμίσματα" Icon="gas.png">
+        <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Service" Icon="maintenance.png">
+        <ShellContent Route="ServicePage" ContentTemplate="{DataTemplate local:ServicePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Καθαριότητα" Icon="cleaning.png">
+        <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:CleanPage}" />
+    </FlyoutItem>
+</Shell>

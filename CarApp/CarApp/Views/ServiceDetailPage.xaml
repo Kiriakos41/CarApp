@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.ServiceDetailPage"
+             Title="Λεπτομέρειες Service">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame Margin="5,10,15,5">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="money" HeightRequest="30"/>
+                        <Label Text="Τιμή αλλαγών:" VerticalOptions="Center" FontSize="Medium" />
+                    </StackLayout>
+                    <Entry Text="{Binding Price}" Placeholder="Γράψε εδώ"/>
+                </StackLayout>
+            </Frame>
+            <StackLayout>
+                <BoxView BackgroundColor="Gainsboro" ScaleY="0.01"/>
+                <Label Text="Αλλαγές που έγιναν:" HorizontalOptions="Center" FontSize="Medium" TextColor="Black"/>
+                <CollectionView ItemsSource="{Binding Items}" SelectionMode="Multiple">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                             Span="2"
+                                             VerticalItemSpacing="15"
+                                         HorizontalItemSpacing="15"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="{Binding}" TextColor="Black" FontSize="Default"  HorizontalOptions="Center"/>
+                                <BoxView BackgroundColor="Gainsboro" HeightRequest="1"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

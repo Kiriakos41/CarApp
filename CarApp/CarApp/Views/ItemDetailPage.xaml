@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.ItemDetailPage"
+             Title="{Binding Title}">
+
+    <StackLayout >
+        <StackLayout Orientation="Horizontal" Margin="5">
+            <Image Source="gas" HeightRequest="30"/>
+            <Label Text="Ανανέωση Βενζίνης/Πετρελαίου/Αερίου: " FontSize="Medium" />
+        </StackLayout>
+        <StackLayout Margin="45,-15,0,0" >
+            <Entry Text="{Binding Gas, Mode=TwoWay}" FontSize="Large" TextColor="Black"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" Margin="5">
+            <Image Source="money" HeightRequest="30"/>
+            <Label Text="Τιμή γεμίσματος " FontSize="Medium" />
+        </StackLayout>
+        <StackLayout Margin="45,-15,0,0" >
+            <Entry Text="{Binding Price, Mode=TwoWay}" FontSize="Large" TextColor="Black"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" Margin="5">
+            <Image Source="distance" HeightRequest="30"/>
+            <Label Text="Απόσταση που διανύσατε " FontSize="Medium" />
+        </StackLayout>
+        <StackLayout Margin="45,-15,0,0" >
+            <Entry Text="{Binding Khm, Mode=TwoWay}" FontSize="Large" TextColor="Black"/>
+        </StackLayout>
+        <Label Text="Ρυθμίσεις" HorizontalOptions="Center" FontSize="Large" TextColor="black" FontAttributes="Bold" Margin="-5"/>
+        <Frame HasShadow="True" MinimumHeightRequest="200" Margin="10">
+            <StackLayout HorizontalOptions="Center" Orientation="Horizontal" Spacing="15">
+                <Image Source="delete" HeightRequest="50">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding DeleteCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="floppy" HeightRequest="40">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding UpdateCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+        </Frame>
+
+
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.ItemsPage"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:CarApp.ViewModels"  
+             xmlns:model="clr-namespace:CarApp.Models"  
+             x:Name="BrowseItemsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Προσθήκη" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <StackLayout Margin="10">
+            <Frame BackgroundColor="WhiteSmoke" HasShadow="True">
+                <StackLayout Orientation="Horizontal" Margin="5" Spacing="20">
+                    <Label Text="Σύνολο: " FontSize="Medium" TextColor="Black"/>
+                    <Image Source="money" HeightRequest="20"/>
+                    <Label Text="{Binding Pr}" VerticalOptions="Center" FontSize="Medium" TextColor="Black"/>
+                    <Image Source="Gas" HeightRequest="20" VerticalOptions="Center"/>
+                    <Label Text="{Binding Gs}" VerticalOptions="Center" FontSize="Medium" TextColor="Black"/>
+                    <Image Source="Distance" HeightRequest="20" VerticalOptions="Center"/>
+                    <Label Text="{Binding Kil}" VerticalOptions="Center" FontSize="Medium" TextColor="Black"/>
+                    <Image Source="sort" HeightRequest="20">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SortListCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+        <RefreshView x:DataType="local:AboutCarViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None"> 
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout Padding="10" x:DataType="model:AboutCar">
+                                <Frame  WidthRequest="500" HasShadow="True">
+                                    <StackLayout Orientation="Horizontal" Spacing="15">
+                                        <Image Source="gas.png" HeightRequest="30"/>
+                                        <Label Text="{Binding Gas , StringFormat='Λίτρα {0}'}"  LineBreakMode="NoWrap"  Style="{DynamicResource ListItemTextStyle}"  FontSize="13" VerticalOptions="Center" />
+                                        <Image Source="distance.png" HeightRequest="30"/>
+                                        <Label Text="{Binding Kilometer, StringFormat='Χιλιόμετρα {0}'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="13" />
+                                        <Image Source="money.png" HeightRequest="30"/>
+                                        <Label Text="{Binding Price, StringFormat='Τιμή {0}€'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="13" />
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:AboutCarViewModel}}, Path=ItemTapped}"		
+                                CommandParameter="{Binding .}">
+                                            </TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
+</ContentPage>

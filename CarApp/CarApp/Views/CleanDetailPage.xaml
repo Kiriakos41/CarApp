@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.CleanDetailPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame>
+                <StackLayout>
+                    <Picker ItemsSource="{Binding Rating}" SelectedItem="{Binding Quality, Mode=TwoWay}"/>
+                    <Entry Text="{Binding Price, Mode=TwoWay}"/>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Button Text="Πίσω" Command="{Binding CancelCommand}"/>
+                        <Button Text="Αλλαγή" Command="{Binding UpdateCommand}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

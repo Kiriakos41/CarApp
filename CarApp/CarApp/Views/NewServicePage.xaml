@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.NewServicePage"
+             Title="Προσθήκη Service"
+             xmlns:local="clr-namespace:CarApp.ViewModels"  
+             xmlns:model="clr-namespace:CarApp.Models"  >
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame Margin="5" HasShadow="True">
+                <StackLayout Margin="15">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Τιμή Αλλαγών" FontSize="Medium"/>
+                    </StackLayout>
+                    <Entry Text="{Binding Price}" Placeholder="Γράψε εδώ τιμή"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Αλλαγές" FontSize="Medium"/>
+                    </StackLayout>
+                    <CollectionView ItemsSource="{Binding services}" SelectionMode="Multiple" SelectedItems="{Binding SelectedServices ,Mode=TwoWay}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                             Span="2">
+                            </GridItemsLayout>
+                        </CollectionView.ItemsLayout>
+                    </CollectionView>
+                </StackLayout>
+            </Frame>
+            <Frame Margin="5" HasShadow="true" BackgroundColor="WhiteSmoke">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button WidthRequest="200" BackgroundColor="Red" Text="Ακύρωση" Command="{Binding CancelCommand}"/>
+                    <Button WidthRequest="200" Background="Green" Text="Προσθήκη" Command="{Binding SaveCommand}"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
