@@ -4,6 +4,9 @@
              x:Class="CarApp.Views.ServiceDetailPage"
              Title="Λεπτομέρειες Service"
              xmlns:lv="clr-namespace:Xamarin.Forms.MultiSelectListView;assembly=Xamarin.Forms.MultiSelectListView" Padding="0,20,0,0">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Αποθήκευση" Command="{Binding UpdateCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Frame Margin="5,10,15,5">
@@ -18,7 +21,10 @@
             <StackLayout>
                 <StackLayout IsVisible="{Binding ShowSecond}">
                     <BoxView BackgroundColor="Gainsboro" ScaleY="0.01"/>
-                    <Label Text="Αλλαγές που έγιναν:" HorizontalOptions="Center" FontSize="Medium" TextColor="Black"/>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="15">
+                        <Image Source="change" HeightRequest="30" HorizontalOptions="Start"/>
+                        <Label Text="Αλλαγές που έγιναν:" HorizontalOptions="Center" FontSize="Medium" TextColor="Black"/>
+                    </StackLayout>
                     <CollectionView ItemsSource="{Binding SelectedItems}">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
@@ -47,14 +53,19 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout>
-                                    <Label Text="{Binding}" TextColor="Black" FontSize="Default"  HorizontalOptions="Center"/>
+                                    <StackLayout>
+                                        <Label Text="{Binding}" TextColor="Black" FontSize="Default" HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
                                     <BoxView BackgroundColor="Gainsboro" HeightRequest="1"/>
                                 </StackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </StackLayout>
-                <Button Text="Επεξεργασία Λίστας" Command="{Binding PopUp}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="15" Spacing="25">
+                    <Button Text="Επεξεργασία Λίστας" Command="{Binding PopUp}" BackgroundColor="Green"/>
+                    <Button Text="Διαγραφή Service" Command="{Binding DeleteCommand}" BackgroundColor="Red"/>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

@@ -11,6 +11,7 @@
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                         <Button Text="Πίσω" Command="{Binding CancelCommand}"/>
                         <Button Text="Αλλαγή" Command="{Binding UpdateCommand}"/>
+                        <Button Text="Διαγραφή" Command="{Binding DeleteCommand}" BackgroundColor="Red"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>

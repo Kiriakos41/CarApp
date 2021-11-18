@@ -17,6 +17,7 @@ namespace CarApp.ViewModels
         public Command AddItemCommand { get; }
         public Command<AboutCar> ItemTapped { get; }
         public Command SortListCommand { get; }
+
         public long Pr
         {
             get => pr;
@@ -25,6 +26,14 @@ namespace CarApp.ViewModels
         private long pr;
         private long kil;
         private long gs;
+        private DateTime date;
+        
+        public DateTime Date
+        {
+            get =>  date;
+            set => SetProperty(ref date, value);
+        }
+
         public long Kil
         {
             get => kil;

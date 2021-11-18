@@ -20,6 +20,7 @@ namespace CarApp
             Routing.RegisterRoute(nameof(ServicePage), typeof(ServicePage));
             Routing.RegisterRoute(nameof(NewServicePage), typeof(NewServicePage));
             Routing.RegisterRoute(nameof(ServiceDetailPage), typeof(ServiceDetailPage));
+            Routing.RegisterRoute(nameof(DamagePage), typeof(DamagePage));
         }
 
     }

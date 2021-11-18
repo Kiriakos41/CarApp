@@ -13,9 +13,16 @@ namespace CarApp.Services
         {
             items = new List<AboutCar>()
             {
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "10", Kilometer="25", Price ="15"},
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "20", Kilometer="50", Price ="20" },
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25" },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "10", Kilometer="25", Price ="15", Date = new DateTime(2020,02,04)},
+                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "20", Kilometer="50", Price ="20", Date = new DateTime(2024,02,04) },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2100,02,04) },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2020,02,04) },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2020,02,04) },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2020,02,04) },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2020,02,04) },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25" , Date = new DateTime(2020,02,04)},
+                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2020,02,04) },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2020,02,04) },
             };
         }
         public async Task<bool> AddItemAsync(AboutCar item)

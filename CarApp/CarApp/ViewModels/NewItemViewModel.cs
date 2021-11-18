@@ -26,7 +26,6 @@ namespace CarApp.ViewModels
             return !String.IsNullOrWhiteSpace(gas)
                 && !String.IsNullOrWhiteSpace(khm);
         }
-
         public string Gas
         {
             get => gas;
@@ -60,6 +59,7 @@ namespace CarApp.ViewModels
                 Gas = Gas,
                 Kilometer = Khm,
                 Price = Price,
+                Date = DateTime.Now,
             };
 
             await DataStore.AddItemAsync(newItem);

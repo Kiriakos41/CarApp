@@ -2,6 +2,7 @@
 using CarApp.ViewModels;
 using CarApp.Views;
 using System;
+using System.Globalization;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,6 +18,7 @@ namespace CarApp
             DependencyService.Register<CleanData>();
             DependencyService.Register<ServiceData>();
             MainPage = new AppShell();
+            SetCultureToGreek();
         }
 
         protected override void OnStart()
@@ -29,6 +31,11 @@ namespace CarApp
 
         protected override void OnResume()
         {
+        }
+        private void SetCultureToGreek()
+        {
+            CultureInfo englishUSCulture = new CultureInfo("el-Gr");
+            CultureInfo.DefaultThreadCurrentCulture = englishUSCulture;
         }
     }
 }

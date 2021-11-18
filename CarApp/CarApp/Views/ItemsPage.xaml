@@ -10,26 +10,8 @@
         <ToolbarItem Text="Προσθήκη" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
     <StackLayout>
-        <StackLayout Margin="10">
-            <Frame BackgroundColor="WhiteSmoke" HasShadow="True">
-                <StackLayout Orientation="Horizontal" Margin="5" Spacing="20">
-                    <Label Text="Σύνολο: " FontSize="Medium" TextColor="Black"/>
-                    <Image Source="money" HeightRequest="20"/>
-                    <Label Text="{Binding Pr}" VerticalOptions="Center" FontSize="Medium" TextColor="Black"/>
-                    <Image Source="Gas" HeightRequest="20" VerticalOptions="Center"/>
-                    <Label Text="{Binding Gs}" VerticalOptions="Center" FontSize="Medium" TextColor="Black"/>
-                    <Image Source="Distance" HeightRequest="20" VerticalOptions="Center"/>
-                    <Label Text="{Binding Kil}" VerticalOptions="Center" FontSize="Medium" TextColor="Black"/>
-                    <Image Source="sort" HeightRequest="20">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SortListCommand}"/>
-                        </Image.GestureRecognizers>
-                    </Image>
-                </StackLayout>
-            </Frame>
-        </StackLayout>
         <RefreshView x:DataType="local:AboutCarViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None"> 
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal">
@@ -57,5 +39,25 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
+        <StackLayout>
+            <StackLayout>
+                <Frame BackgroundColor="#2196f3" HasShadow="True" Margin="5">
+                    <StackLayout Orientation="Horizontal" Margin="5" Spacing="20">
+                        <Label Text="Σύνολο: " FontSize="Medium" TextColor="White"/>
+                        <Image Source="money" HeightRequest="20"/>
+                        <Label Text="{Binding Pr}" VerticalOptions="Center" FontSize="Medium" TextColor="White"/>
+                        <Image Source="Gas" HeightRequest="20" VerticalOptions="Center"/>
+                        <Label Text="{Binding Gs}" VerticalOptions="Center" FontSize="Medium" TextColor="White"/>
+                        <Image Source="Distance" HeightRequest="20" VerticalOptions="Center"/>
+                        <Label Text="{Binding Kil}" VerticalOptions="Center" FontSize="Medium" TextColor="White"/>
+                        <Image Source="sort" HeightRequest="20">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SortListCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </StackLayout>
     </StackLayout>
 </ContentPage>

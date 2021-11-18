@@ -16,6 +16,7 @@ namespace CarApp.ViewModels
         private string gas;
         private string khm;
         private string price;
+        private DateTime date;
         public ObservableCollection<AboutCar> car { get; set; } = new ObservableCollection<AboutCar>();
         public string Id { get; set; }
         public string Gas
@@ -23,7 +24,11 @@ namespace CarApp.ViewModels
             get => gas;
             set => SetProperty(ref gas, value);
         }
-
+        public DateTime Date
+        {
+            get => date;
+            set => SetProperty(ref date, value);
+        }
         public string Khm
         {
             get => khm;
@@ -81,6 +86,7 @@ namespace CarApp.ViewModels
                 Gas = item.Gas;
                 Khm = item.Kilometer;
                 Price = item.Price;
+                Date = item.Date;
             }
             catch (Exception ex)
             {

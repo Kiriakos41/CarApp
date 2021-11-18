@@ -81,8 +81,8 @@ namespace CarApp.ViewModels
         }
         public async void DeleteItem()
         {
-            var item = await CleanData.GetItemAsync(itemId);
-            await CleanData.DeleteItemAsync(ItemId);
+            var item = await ServiceData.GetItemAsync(itemId);
+            await ServiceData.DeleteItemAsync(ItemId);
             await Shell.Current.GoToAsync("..");
         }
         public async void UpdateItem()
@@ -93,7 +93,7 @@ namespace CarApp.ViewModels
             item.Changes = SelectedServices.Count.ToString();
             item.Ser = SelectedServices.Select(x => x.ToString()).ToList();
             await ServiceData.UpdateItemAsync(item);
-            LoadItemId(item.Id);
+            await Shell.Current.GoToAsync("..");
         }
 
         public async void LoadItemId(string itemId)
@@ -122,7 +122,7 @@ namespace CarApp.ViewModels
             {
                 Show = false;
                 ShowSecond = true;
-                if(sr.Count > 0)
+                if (sr.Count > 0)
                 {
                     UpdateItem();
                 }

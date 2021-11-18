@@ -2,9 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.ItemDetailPage"
-             Title="{Binding Title}">
+             Title="{Binding Date, StringFormat='Ημερομηνία : {0:MMMM dd, yyyy}'}">
 
-    <StackLayout >
+    <StackLayout>
+
         <StackLayout Orientation="Horizontal" Margin="5">
             <Image Source="gas" HeightRequest="30"/>
             <Label Text="Ανανέωση Βενζίνης/Πετρελαίου/Αερίου: " FontSize="Medium" />

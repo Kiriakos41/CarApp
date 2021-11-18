@@ -6,6 +6,18 @@
        x:Class="CarApp.AppShell"
        FlyoutHeaderBehavior="CollapseOnScroll"
        x:Name="myShell">
+    
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="Black"
+                  HeightRequest="200">
+                <Image Aspect="AspectFill"
+                       Source="gg"
+                       Opacity="1" />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    
     <FlyoutItem Title="Αυτοκίνητο" Icon="sedan.png">
         <ShellContent Route="CarPage" ContentTemplate="{DataTemplate local:CarPage}" />
     </FlyoutItem>
@@ -18,4 +30,9 @@
     <FlyoutItem Title="Καθαριότητα" Icon="cleaning.png">
         <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:CleanPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Ζημιές" Icon="car.png">
+        <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:DamagePage}" />
+    </FlyoutItem>
+    <MenuItem Text="kiriakos41@outlook.com" Icon="email"/>
+
 </Shell>
