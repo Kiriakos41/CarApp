@@ -1,9 +1,10 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using System.IO;
+using Environment = System.Environment;
+using SQLite;
 
 namespace CarApp.Droid
 {
@@ -14,9 +15,15 @@ namespace CarApp.Droid
         {
             base.OnCreate(savedInstanceState);
 
+            var filename = "ThermidesApp.sqlite";
+            var fileLocation = Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            var fullpath = Path.Combine(fileLocation, filename);
+
+            var conn = new SQLiteAsyncConnection(fullpath);
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+            LoadApplication(new App(conn));
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

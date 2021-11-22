@@ -21,7 +21,7 @@ namespace CarApp.Views
         }
         protected override void OnAppearing()
         {
-            viewModel.OnAppear();
+            viewModel.OnAppearAsync();
         }
     }
 }

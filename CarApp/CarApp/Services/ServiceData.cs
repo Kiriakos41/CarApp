@@ -16,9 +16,6 @@ namespace CarApp.Services
         {
             serviceStats = new List<Service>()
             {
-                new Service{ Id= Guid.NewGuid().ToString(), Price="15",Changes="2" },
-                new Service{ Id= Guid.NewGuid().ToString(), Price="0",Changes="1" },
-                new Service{ Id= Guid.NewGuid().ToString(), Price="120",Changes="7" },
             };
         }
         public async Task<bool> AddItemAsync(Service item)

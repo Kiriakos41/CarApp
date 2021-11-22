@@ -10,11 +10,19 @@ namespace CarApp.ViewModels
     public class NewItemViewModel : BaseViewModel
     {
         private string gas;
-        private string khm;
+        private long khm;
         private string price;
+        private DateTime date;
+
+        public DateTime Date
+        {
+            get => date;
+            set => SetProperty(ref date, value);
+        }
 
         public NewItemViewModel()
         {
+            Date = DateTime.Now;
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
             this.PropertyChanged +=
@@ -23,8 +31,7 @@ namespace CarApp.ViewModels
 
         private bool ValidateSave()
         {
-            return !String.IsNullOrWhiteSpace(gas)
-                && !String.IsNullOrWhiteSpace(khm);
+            return !String.IsNullOrWhiteSpace(gas);
         }
         public string Gas
         {
@@ -36,7 +43,7 @@ namespace CarApp.ViewModels
             get => price;
             set => SetProperty(ref price, value);
         }
-        public string Khm
+        public long Khm
         {
             get => khm;
             set => SetProperty(ref khm, value);
@@ -59,7 +66,7 @@ namespace CarApp.ViewModels
                 Gas = Gas,
                 Kilometer = Khm,
                 Price = Price,
-                Date = DateTime.Now,
+                Date = Date,
             };
 
             await DataStore.AddItemAsync(newItem);

@@ -1,6 +1,7 @@
 ﻿using CarApp.Services;
 using CarApp.ViewModels;
 using CarApp.Views;
+using SQLite;
 using System;
 using System.Globalization;
 using Xamarin.Forms;
@@ -10,15 +11,19 @@ namespace CarApp
 {
     public partial class App : Application
     {
+        public static SQLiteAsyncConnection DbPath;
         public App()
         {
             InitializeComponent();
             DependencyService.Register<MockDataStore>();
-            DependencyService.Register<CarData>();
             DependencyService.Register<CleanData>();
             DependencyService.Register<ServiceData>();
             MainPage = new AppShell();
             SetCultureToGreek();
+        }
+        public App(SQLiteAsyncConnection dbPath) : this()
+        {
+            DbPath = dbPath;
         }
 
         protected override void OnStart()

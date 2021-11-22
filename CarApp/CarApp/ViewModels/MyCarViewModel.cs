@@ -14,74 +14,105 @@ namespace CarApp.ViewModels
     public class MyCarViewModel : BaseViewModel
     {
         private string id;
-        private string type;
-        private string horsePower;
-        private string cubic;
-        private MyCar car;
+        private DateTime dateTo;
+        private DateTime dateFrom;
 
-        public Command SaveCommad { get; set; }
-        public Command CancelCommand { get; set; }
-
+        public DateTime DateTo
+        {
+            get => dateTo;
+            set => SetProperty(ref dateTo, value);
+        }
+        public DateTime DateFrom
+        {
+            get => dateFrom;
+            set => SetProperty(ref dateFrom, value);
+        }
         public string Id
         {
             get => id;
             set => SetProperty(ref id, value);
         }
+        public long Pr
+        {
+            get => pr;
+            set => SetProperty(ref pr, value);
+        }
+        public long KilMax
+        {
+            get => kilmax;
+            set => SetProperty(ref kilmax, value);
+        }
+        public long Gs
+        {
+            get => gs;
+            set => SetProperty(ref gs, value);
+        }
+
+
+
+        private long pr;
+        private long kilmax;
+        private long gs;
+        public ObservableCollection<AboutCar> Items { get; set; }
+        public Command SortCommand { get; set; }
 
         public MyCarViewModel()
         {
-            Title = "Tab1";
-            SaveCommad = new Command(OnSave);
-            CancelCommand = new Command(OnCancel);
+            SortCommand = new Command(SortByDate);
+            Items = new ObservableCollection<AboutCar>();
+            DateTo = DateTime.Now;
         }
-        public MyCar Car
+
+        public async Task OnAppearAsync()
         {
-            get => car;
-            set => SetProperty(ref car, value);
-        }
-        public string Type
-        {
-            get => type;
-            set
+            try
             {
-                SetProperty(ref type, value);
+                Gs = 0;
+                Pr = 0;
+                KilMax = 0;
+                var items = await DataStore.GetItemsAsync(true);
+                var items1 = await CleanData.GetItemsAsync(true);
+                var items2 = await ServiceData.GetItemsAsync(true);
+                KilMax = items.Select(x => x.Kilometer).Max();
+                foreach (var item in items)
+                {
+                    Items.Add(item);
+                    KilMax += item.Kilometer;
+                    Pr += Convert.ToInt64(item.Price);
+                    Gs += Convert.ToInt64(item.Gas);
+                }
+                foreach (var item in items1)
+                {
+                    Pr += Convert.ToInt64(item.Price);
+                }
+                foreach (var item in items2)
+                {
+                    Pr += Convert.ToInt64(item.Price);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
         }
-        public string HorsePower
+
+        public void SortByDate()
         {
-            get => horsePower;
-            set => SetProperty(ref horsePower, value);
-        }
-        public string CarCubic
-        {
-            get => cubic;
-            set => SetProperty(ref cubic, value);
-        }
-        public async void OnAppear()
-        {
-            Car = await CarData.GetItemAsync("1");
-            if (Car == null)
+            Gs = 0;
+            Pr = 0;
+            KilMax = 0;
+            var newItems = Items.Where(x => x.Date >= DateFrom && x.Date <= DateTo).ToList();
+            foreach (var item in newItems)
             {
-                return;
-            }
-            else
-            {
-                Type = Car.Type;
-                HorsePower = Car.HorsePower;
-                CarCubic = Car.Cubic;
+                KilMax += item.Kilometer;
+                Pr += Convert.ToInt64(item.Price);
+                Gs += Convert.ToInt64(item.Gas);
             }
         }
-        public List<string> types { get; set; } = new List<string> { "Mazda", "Seat", "Polo", "Fiat", "Skoda", "Citroen", "Honda" };
-        public List<string> Cubic { get; set; } = new List<string> { "800", "1000", "1200", "1400", "1500", "1600", "1800", "2000" };
-        public List<string> power { get; set; } = new List<string> { "70", "80", "90", "100", "110", "120", "130", "140" };
         private async void OnSave()
         {
-            MyCar car = new MyCar();
-            car.Id = "1";
-            car.Type = type;
-            car.HorsePower = horsePower;
-            car.Cubic = cubic;
-            await CarData.AddItemAsync(car);
+
             await Shell.Current.GoToAsync(nameof(ItemsPage));
         }
         private async void OnCancel()

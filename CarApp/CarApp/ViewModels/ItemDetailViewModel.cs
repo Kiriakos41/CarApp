@@ -14,7 +14,7 @@ namespace CarApp.ViewModels
     {
         private string itemId;
         private string gas;
-        private string khm;
+        private long khm;
         private string price;
         private DateTime date;
         public ObservableCollection<AboutCar> car { get; set; } = new ObservableCollection<AboutCar>();
@@ -29,7 +29,7 @@ namespace CarApp.ViewModels
             get => date;
             set => SetProperty(ref date, value);
         }
-        public string Khm
+        public long Khm
         {
             get => khm;
             set => SetProperty(ref khm, value);

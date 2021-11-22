@@ -14,9 +14,6 @@ namespace CarApp.Services
         {
             cleanStats = new List<Clean>()
             {
-                new Clean() { Id=Guid.NewGuid().ToString() ,Quality = "Άριστη", Price="25"},
-                new Clean() { Id=Guid.NewGuid().ToString() ,Quality = "Μέτρια", Price="5"},
-                new Clean() { Id=Guid.NewGuid().ToString() ,Quality = "Απλή", Price="1"},
             };
         }
         public async Task<bool> AddItemAsync(Clean item)

@@ -18,22 +18,33 @@ namespace CarApp.ViewModels
         public Command<AboutCar> ItemTapped { get; }
         public Command SortListCommand { get; }
 
+        private long pr;
+        private long kil;
+        private long gs;
+        private string sortText;
+        private string sortImage;
+        private DateTime date;
+
+        public string SortText
+        {
+            get => sortText;
+            set => SetProperty(ref sortText, value);
+        }
+        public string SortImage
+        {
+            get => sortImage;
+            set => SetProperty(ref sortImage, value);
+        }
         public long Pr
         {
             get => pr;
             set => SetProperty(ref pr, value);
         }
-        private long pr;
-        private long kil;
-        private long gs;
-        private DateTime date;
-        
         public DateTime Date
         {
             get =>  date;
             set => SetProperty(ref date, value);
         }
-
         public long Kil
         {
             get => kil;
@@ -46,7 +57,6 @@ namespace CarApp.ViewModels
             set => SetProperty(ref isSort, value);
 
         }
-
         public long Gs
         {
             get => gs;
@@ -56,6 +66,8 @@ namespace CarApp.ViewModels
         {
             Title = "Γεμίσματα";
             Items = new ObservableCollection<AboutCar>();
+
+
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             ItemTapped = new Command<AboutCar>(OnItemSelected);
@@ -68,12 +80,13 @@ namespace CarApp.ViewModels
         {
             if (!isSort)
             {
+                SortImage = "sortdescending";
+                SortText = "Ταξινόμηση από το παλιότερο προς το νεότερο: ";
                 isSort = true;
-                var sorted = Items.OrderByDescending(x => x.Kilometer).ToList();
+                var sorted = Items.OrderByDescending(x => x.Date).ToList();
                 Items.Clear();
                 Gs = 0;
                 Pr = 0;
-                Kil = 0;
                 foreach (var item in sorted)
                 {
                     Items.Add(item);
@@ -84,18 +97,18 @@ namespace CarApp.ViewModels
             }
             else
             {
+                SortImage = "sortascending";
+                SortText = "Ταξινόμηση από το νεότερο προς το παλιότερο: ";
                 isSort = false;
-                var sorted = Items.OrderBy(x => x.Kilometer).ToList();
+                var sorted = Items.OrderBy(x => x.Date).ToList();
                 Items.Clear();
                 Gs = 0;
                 Pr = 0;
-                Kil = 0;
                 foreach (var item in sorted)
                 {
                     Items.Add(item);
                     Pr += Convert.ToInt64(item.Price);
                     Gs += Convert.ToInt64(item.Gas);
-                    Kil += Convert.ToInt64(item.Kilometer);
                 }
             }
         }
@@ -107,16 +120,16 @@ namespace CarApp.ViewModels
             {
                 Gs = 0;
                 Pr = 0;
-                Kil = 0;
                 Items.Clear();
                 var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+                var sortedItems = items.OrderBy(x => x.Date).ToList();
+                foreach (var item in sortedItems)
                 {
                     Items.Add(item);
                     Pr += Convert.ToInt64(item.Price);
                     Gs += Convert.ToInt64(item.Gas);
-                    Kil += Convert.ToInt64(item.Kilometer);
                 }
+                SortList();
 
             }
             catch (Exception ex)

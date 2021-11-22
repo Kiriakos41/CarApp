@@ -18,10 +18,10 @@
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
     
-    <FlyoutItem Title="Αυτοκίνητο" Icon="sedan.png">
+    <FlyoutItem Title="Γενικά" Icon="sedan.png">
         <ShellContent Route="CarPage" ContentTemplate="{DataTemplate local:CarPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Γεμίσματα" Icon="gas.png">
+    <FlyoutItem Title="Ανεφοδιασμός" Icon="gas.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Service" Icon="maintenance.png">
@@ -30,7 +30,7 @@
     <FlyoutItem Title="Καθαριότητα" Icon="cleaning.png">
         <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:CleanPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Ζημιές" Icon="car.png">
+    <FlyoutItem Title="Βλάβες" Icon="breakdown.png">
         <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:DamagePage}" />
     </FlyoutItem>
     <MenuItem Text="kiriakos41@outlook.com" Icon="email"/>

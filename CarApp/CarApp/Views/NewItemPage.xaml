@@ -10,7 +10,7 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal" Margin="5">
                 <Image Source="gas" HeightRequest="30"/>
-                <Label Text="Ανανέωση Καυσίμου: " FontSize="Medium" />
+                <Label Text="Ανεφοδιασμός Καυσίμου: " FontSize="Medium" />
                 <Label Text="Προαιρετικό*" FontSize="Small" TextColor="Gray"/>
             </StackLayout>
             <StackLayout Margin="45,-15,0,0" >
@@ -18,7 +18,7 @@
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="5">
                 <Image Source="distance" HeightRequest="30"/>
-                <Label Text="Χιλιόμετρα: " FontSize="Medium" />
+                <Label Text="Τωρινά Χιλιόμετρα: " FontSize="Medium" />
                 <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="PaleVioletRed"/>
             </StackLayout>
             <StackLayout Margin="45,-15,0,0" >
@@ -31,6 +31,13 @@
             </StackLayout>
             <StackLayout Margin="45,-15,0,0" >
                 <Entry Text="{Binding Price,Mode= TwoWay}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="5">
+                <Image Source="schedule" HeightRequest="30"/>
+                <Label Text="Ημερομηνία: " FontSize="Medium" />  
+            </StackLayout>
+            <StackLayout Margin="45,-15,0,0" >
+                <DatePicker Date="{Binding Date, Mode=TwoWay}"/>
             </StackLayout>
 
             <StackLayout Orientation="Horizontal">

@@ -11,7 +11,6 @@ namespace CarApp.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<AboutCar> DataStore => DependencyService.Get<IDataStore<AboutCar>>();
-        public IDataStore<MyCar> CarData => DependencyService.Get<IDataStore<MyCar>>();
         public IDataStore<Clean> CleanData => DependencyService.Get<IDataStore<Clean>>();
         public IDataStore<Service> ServiceData => DependencyService.Get<IDataStore<Service>>();
 

@@ -13,16 +13,11 @@ namespace CarApp.Services
         {
             items = new List<AboutCar>()
             {
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "10", Kilometer="25", Price ="15", Date = new DateTime(2020,02,04)},
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "20", Kilometer="50", Price ="20", Date = new DateTime(2024,02,04) },
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2100,02,04) },
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2020,02,04) },
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2020,02,04) },
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2020,02,04) },
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2020,02,04) },
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25" , Date = new DateTime(2020,02,04)},
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2020,02,04) },
-                new AboutCar { Id = Guid.NewGuid().ToString(), Gas = "30", Kilometer="80", Price ="25", Date = new DateTime(2020,02,04) },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Kilometer= 120, Gas="120", Price = "120", Date = new DateTime(2020,04,08) },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Kilometer= 120, Gas="120", Price = "120", Date = new DateTime(2018,08,06) },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Kilometer= 120, Gas="120", Price = "120", Date = new DateTime(2018,03,04) },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Kilometer= 120, Gas="120", Price = "120", Date = new DateTime(2020,02,02) },
+                new AboutCar { Id = Guid.NewGuid().ToString(), Kilometer= 120, Gas="120", Price = "120", Date = new DateTime(2015,08,09) }
             };
         }
         public async Task<bool> AddItemAsync(AboutCar item)

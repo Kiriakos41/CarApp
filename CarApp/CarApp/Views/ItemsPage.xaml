@@ -16,21 +16,24 @@
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal">
                             <StackLayout Padding="10" x:DataType="model:AboutCar">
+                                <Label Text="{Binding Date, StringFormat='  {0:MMMM dd, yyyy}'}" FontSize="Body" FontAttributes="Italic"/>
                                 <Frame  WidthRequest="500" HasShadow="True">
-                                    <StackLayout Orientation="Horizontal" Spacing="15">
-                                        <Image Source="gas.png" HeightRequest="30"/>
-                                        <Label Text="{Binding Gas , StringFormat='Λίτρα {0}'}"  LineBreakMode="NoWrap"  Style="{DynamicResource ListItemTextStyle}"  FontSize="13" VerticalOptions="Center" />
-                                        <Image Source="distance.png" HeightRequest="30"/>
-                                        <Label Text="{Binding Kilometer, StringFormat='Χιλιόμετρα {0}'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="13" />
-                                        <Image Source="money.png" HeightRequest="30"/>
-                                        <Label Text="{Binding Price, StringFormat='Τιμή {0}€'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="13" />
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer 
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal" Spacing="15">
+                                            <Image Source="gas.png" HeightRequest="30"/>
+                                            <Label Text="{Binding Gas , StringFormat='Λίτρα {0}'}"  LineBreakMode="NoWrap"  Style="{DynamicResource ListItemTextStyle}"  FontSize="13" VerticalOptions="Center" />
+                                            <Image Source="distance.png" HeightRequest="30"/>
+                                            <Label Text="{Binding Kilometer, StringFormat='Χιλιόμετρα {0}'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="13" />
+                                            <Image Source="money.png" HeightRequest="30"/>
+                                            <Label Text="{Binding Price, StringFormat='Τιμή {0}€'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="13" />
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:AboutCarViewModel}}, Path=ItemTapped}"		
                                 CommandParameter="{Binding .}">
-                                            </TapGestureRecognizer>
-                                        </StackLayout.GestureRecognizers>
+                                                </TapGestureRecognizer>
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
                                     </StackLayout>
                                 </Frame>
                             </StackLayout>
@@ -42,15 +45,9 @@
         <StackLayout>
             <StackLayout>
                 <Frame BackgroundColor="#2196f3" HasShadow="True" Margin="5">
-                    <StackLayout Orientation="Horizontal" Margin="5" Spacing="20">
-                        <Label Text="Σύνολο: " FontSize="Medium" TextColor="White"/>
-                        <Image Source="money" HeightRequest="20"/>
-                        <Label Text="{Binding Pr}" VerticalOptions="Center" FontSize="Medium" TextColor="White"/>
-                        <Image Source="Gas" HeightRequest="20" VerticalOptions="Center"/>
-                        <Label Text="{Binding Gs}" VerticalOptions="Center" FontSize="Medium" TextColor="White"/>
-                        <Image Source="Distance" HeightRequest="20" VerticalOptions="Center"/>
-                        <Label Text="{Binding Kil}" VerticalOptions="Center" FontSize="Medium" TextColor="White"/>
-                        <Image Source="sort" HeightRequest="20">
+                    <StackLayout Orientation="Horizontal" Margin="5" Spacing="25">
+                        <Label Text="{Binding SortText}" TextColor="White" VerticalOptions="Center"/>
+                        <Image Source="{Binding SortImage}" HeightRequest="40">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding SortListCommand}"/>
                             </Image.GestureRecognizers>

@@ -22,7 +22,7 @@
         </StackLayout>
         <StackLayout Orientation="Horizontal" Margin="5">
             <Image Source="distance" HeightRequest="30"/>
-            <Label Text="Απόσταση που διανύσατε " FontSize="Medium" />
+            <Label Text="Συνολικά Χιλιόμετρα" FontSize="Medium" />
         </StackLayout>
         <StackLayout Margin="45,-15,0,0" >
             <Entry Text="{Binding Khm, Mode=TwoWay}" FontSize="Large" TextColor="Black"/>

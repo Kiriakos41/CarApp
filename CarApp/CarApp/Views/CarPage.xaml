@@ -4,37 +4,44 @@
              x:Class="CarApp.Views.CarPage"
              xmlns:local="clr-namespace:CarApp.ViewModels"  
              xmlns:model="clr-namespace:CarApp.Models"
-             Title="Αυτοκίνητο">
+             Title="Γενικά">
     <ContentPage.Content>
         <StackLayout x:DataType="local:MyCarViewModel">
-            <Frame HeightRequest="200" Margin="25" BackgroundColor="WhiteSmoke" HasShadow="True">
-                <StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Image Source="vehicles" HeightRequest="40"/>
-                        <Label Text="Μάρκα αυτοκινήτου" HorizontalOptions="Center" FontSize="Medium" TextColor="black" FontAttributes="Bold" VerticalOptions="Center"/>
-                    </StackLayout>
-                    <Picker Title="Επιλογή μάρκας" HorizontalTextAlignment="Center" ItemsSource="{Binding types}" SelectedItem="{Binding Type ,Mode=TwoWay}"/>
-                    <Image Source="{Binding Type}" HeightRequest="100" VerticalOptions="Center"/>
-                </StackLayout>
-            </Frame>
-            <Frame HeightRequest="200" Margin="25" BackgroundColor="WhiteSmoke" HasShadow="True">
-                <StackLayout Margin="25">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Image Source="engine" HeightRequest="40"/>
-                        <Label Text="Στοιχεία αυτοκινήτου" HorizontalOptions="Center" FontSize="Medium" TextColor="black" FontAttributes="Bold" VerticalOptions="Center"/>
-                    </StackLayout>
-                    <Picker Title="Άλογα" HorizontalTextAlignment="Center" ItemsSource="{Binding power}" SelectedItem="{Binding HorsePower,Mode=TwoWay}"/>
-                    <Picker Title="Κυβικά" HorizontalTextAlignment="Center" ItemsSource="{Binding Cubic}" SelectedItem="{Binding CarCubic,Mode=TwoWay}"/>
-                </StackLayout>
-            </Frame>
-            <Frame Margin="25" HasShadow="True" BackgroundColor="WhiteSmoke">
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Image Source="floppy" HeightRequest="50">
+            <Frame BackgroundColor="#2196f3" HasShadow="True">
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                    <Image Source="schedule" HeightRequest="30"/>
+                    <DatePicker WidthRequest="150" TextColor="White" Date="{Binding DateFrom, StringFormat='Ημερομηνία : {0:MMMM dd, yyyy}',Mode=TwoWay}"/>
+                    <Label Text="Εώς" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" TextColor="White"/>
+                    <DatePicker WidthRequest="150" TextColor="White" Date="{Binding DateTo, StringFormat='Ημερομηνία : {0:MMMM dd, yyyy}',Mode=TwoWay}"/>
+                    <Image Source="Search" HeightRequest="30">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SaveCommad}"/>
+                            <TapGestureRecognizer Command="{Binding SortCommand}"/>
                         </Image.GestureRecognizers>
                     </Image>
-                    <Label Text="Αποθήκευση" TextColor="Black" FontSize="Title" VerticalTextAlignment="Center" FontAttributes="Bold"/>
+                </StackLayout>
+            </Frame>
+            <BoxView BackgroundColor="Black" HeightRequest="1" Margin="0,-6,0,0"/>
+            <Label Text="Σύνολο Ανεφοδιασμών : " FontSize="Title" Margin="30,10,-10,-10"/>
+            <Frame Margin="25" HasShadow="True">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="gas" HeightRequest="60" HorizontalOptions="Start"/>
+                    <Label Text="{Binding Gs}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
+                </StackLayout>
+            </Frame>
+            <BoxView BackgroundColor="Gray" HeightRequest="1" Margin="0,0,0,30"/>
+            <Label Text="Συνολικά Χιλιόμετρα : " FontSize="Title" Margin="30,-10,-10,-10"/>
+            <Frame Margin="25" HasShadow="True">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="distance" HeightRequest="60" HorizontalOptions="Start"/>
+                    <Label Text="{Binding KilMax}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
+                </StackLayout>
+            </Frame>
+            <BoxView BackgroundColor="Gray" HeightRequest="1" Margin="0,0,0,30"/>
+            <Label Text="Συνολικά Έξοδα : " FontSize="Title" Margin="30,-10,-10,-10"/>
+            <Frame Margin="25" HasShadow="True">
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="money" HeightRequest="60" HorizontalOptions="Start"/>
+                    <Label Text="{Binding Pr}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
                 </StackLayout>
             </Frame>
         </StackLayout>
