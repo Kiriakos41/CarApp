@@ -1,14 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CarApp.Views.CleanDetailPage">
+             x:Class="CarApp.Views.CleanDetailPage"
+             Title="Λεπτομέρειες Καθαριότητας">
     <ContentPage.Content>
         <StackLayout>
             <Frame>
                 <StackLayout>
-                    <Picker ItemsSource="{Binding Rating}" SelectedItem="{Binding Quality, Mode=TwoWay}"/>
-                    <Entry Text="{Binding Price, Mode=TwoWay}"/>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
+                        <Image Source="cleaning" HeightRequest="40"/>
+                        <Picker ItemsSource="{Binding Rating}" SelectedItem="{Binding Quality, Mode=TwoWay}" WidthRequest="250"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
+                        <Image Source="money" HeightRequest="40"/>
+                        <Entry Text="{Binding Price, Mode=TwoWay}" WidthRequest="250"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="25">
                         <Button Text="Πίσω" Command="{Binding CancelCommand}"/>
                         <Button Text="Αλλαγή" Command="{Binding UpdateCommand}"/>
                         <Button Text="Διαγραφή" Command="{Binding DeleteCommand}" BackgroundColor="Red"/>

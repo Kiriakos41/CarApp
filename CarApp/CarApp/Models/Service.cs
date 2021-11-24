@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace CarApp.Models
@@ -8,9 +9,10 @@ namespace CarApp.Models
     public class Service
     {
         [PrimaryKey, AutoIncrement]
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Price { get; set; }
         public string Changes { get; set; }
-        public List<string> Ser { get; set; }
+        public int NumberOfChanges { get; set; }
+      
     }
 }

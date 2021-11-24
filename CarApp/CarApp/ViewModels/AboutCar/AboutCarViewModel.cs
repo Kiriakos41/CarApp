@@ -1,4 +1,5 @@
 ﻿using CarApp.Models;
+using CarApp.Repositories;
 using CarApp.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -11,16 +12,15 @@ namespace CarApp.ViewModels
 {
     public class AboutCarViewModel : BaseViewModel
     {
+
         private AboutCar _selectedItem;
         public ObservableCollection<AboutCar> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
+        public Command DeleteCommand { get; }
         public Command<AboutCar> ItemTapped { get; }
         public Command SortListCommand { get; }
 
-        private long pr;
-        private long kil;
-        private long gs;
         private string sortText;
         private string sortImage;
         private DateTime date;
@@ -35,20 +35,10 @@ namespace CarApp.ViewModels
             get => sortImage;
             set => SetProperty(ref sortImage, value);
         }
-        public long Pr
-        {
-            get => pr;
-            set => SetProperty(ref pr, value);
-        }
         public DateTime Date
         {
-            get =>  date;
+            get => date;
             set => SetProperty(ref date, value);
-        }
-        public long Kil
-        {
-            get => kil;
-            set => SetProperty(ref kil, value);
         }
         private bool isSort;
         public bool IsSort
@@ -56,11 +46,6 @@ namespace CarApp.ViewModels
             get => isSort;
             set => SetProperty(ref isSort, value);
 
-        }
-        public long Gs
-        {
-            get => gs;
-            set => SetProperty(ref gs, value);
         }
         public AboutCarViewModel()
         {
@@ -75,6 +60,8 @@ namespace CarApp.ViewModels
             AddItemCommand = new Command(OnAddItem);
 
             SortListCommand = new Command(SortList);
+
+            DeleteCommand = new Command(DeleteItem);
         }
         public void SortList()
         {
@@ -85,14 +72,9 @@ namespace CarApp.ViewModels
                 isSort = true;
                 var sorted = Items.OrderByDescending(x => x.Date).ToList();
                 Items.Clear();
-                Gs = 0;
-                Pr = 0;
                 foreach (var item in sorted)
                 {
                     Items.Add(item);
-                    Pr += Convert.ToInt64(item.Price);
-                    Gs += Convert.ToInt64(item.Gas);
-                    Kil += Convert.ToInt64(item.Kilometer);
                 }
             }
             else
@@ -102,42 +84,25 @@ namespace CarApp.ViewModels
                 isSort = false;
                 var sorted = Items.OrderBy(x => x.Date).ToList();
                 Items.Clear();
-                Gs = 0;
-                Pr = 0;
                 foreach (var item in sorted)
                 {
                     Items.Add(item);
-                    Pr += Convert.ToInt64(item.Price);
-                    Gs += Convert.ToInt64(item.Gas);
                 }
             }
         }
 
         async Task ExecuteLoadItemsCommand()
         {
-            IsBusy = true;
-            try
+            Items.Clear();
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                Gs = 0;
-                Pr = 0;
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                var sortedItems = items.OrderBy(x => x.Date).ToList();
-                foreach (var item in sortedItems)
+                var refills = await unitOfwork.AboutCars.Get<AboutCar>();
+                foreach (var refil in refills)
                 {
-                    Items.Add(item);
-                    Pr += Convert.ToInt64(item.Price);
-                    Gs += Convert.ToInt64(item.Gas);
+                    Items.Add(refil);
                 }
+                /////////////
                 SortList();
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
                 IsBusy = false;
             }
         }
@@ -170,6 +135,14 @@ namespace CarApp.ViewModels
 
             // This will push the ItemDetailPage onto the navigation stack
             await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+        }
+        private async void DeleteItem()
+        {
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
+            {
+                //await unitOfwork.AboutCars.Delete();
+            }
+
         }
     }
 }

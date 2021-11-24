@@ -1,4 +1,5 @@
 ﻿using CarApp.Models;
+using CarApp.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +10,7 @@ namespace CarApp.ViewModels
 {
     public class NewItemViewModel : BaseViewModel
     {
-        private string gas;
+        private long gas;
         private long khm;
         private string price;
         private DateTime date;
@@ -23,17 +24,13 @@ namespace CarApp.ViewModels
         public NewItemViewModel()
         {
             Date = DateTime.Now;
-            SaveCommand = new Command(OnSave, ValidateSave);
+            SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
             this.PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
 
-        private bool ValidateSave()
-        {
-            return !String.IsNullOrWhiteSpace(gas);
-        }
-        public string Gas
+        public long Gas
         {
             get => gas;
             set => SetProperty(ref gas, value);
@@ -60,19 +57,21 @@ namespace CarApp.ViewModels
 
         private async void OnSave()
         {
-            AboutCar newItem = new AboutCar()
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                Id = Guid.NewGuid().ToString(),
-                Gas = Gas,
-                Kilometer = Khm,
-                Price = Price,
-                Date = Date,
-            };
+                AboutCar newItem = new AboutCar()
+                {
+                    Gas = Gas,
+                    Kilometer = Khm,
+                    Price = Price,
+                    Date = Date,
+                };
 
-            await DataStore.AddItemAsync(newItem);
+                await unitOfwork.AboutCars.Insert(newItem);
 
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync("..");
+                await Shell.Current.GoToAsync("..");
+            }
+
         }
     }
 }

@@ -43,7 +43,7 @@
                     </CollectionView>
                 </StackLayout>
                 <StackLayout IsVisible="{Binding Show}">
-                    <CollectionView ItemsSource="{Binding services}" SelectionMode="Multiple" SelectedItems="{Binding SelectedServices, Mode=TwoWay}">
+                    <CollectionView ItemsSource="{Binding Services}" SelectionMode="Multiple" SelectedItems="{Binding SelectedServices, Mode=TwoWay}">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
                                              Span="2"
@@ -54,7 +54,7 @@
                             <DataTemplate>
                                 <StackLayout>
                                     <StackLayout>
-                                        <Label Text="{Binding}" TextColor="Black" FontSize="Default" HorizontalTextAlignment="Center"/>
+                                        <Label Text="{Binding Text}" TextColor="Black" FontSize="Default" HorizontalTextAlignment="Center"/>
                                     </StackLayout>
                                     <BoxView BackgroundColor="Gainsboro" HeightRequest="1"/>
                                 </StackLayout>

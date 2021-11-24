@@ -10,18 +10,31 @@
             <Frame Margin="5" HasShadow="True">
                 <StackLayout Margin="15">
                     <StackLayout Orientation="Horizontal">
+                        <Image Source="change" HeightRequest="30"/>
                         <Label Text="Τιμή Αλλαγών" FontSize="Medium"/>
                     </StackLayout>
                     <Entry Text="{Binding Price}" Placeholder="Γράψε εδώ τιμή"/>
-                    <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal" Spacing="15" Padding="15" HorizontalOptions="Center">
+                        <Image Source="change" HeightRequest="30"/>
                         <Label Text="Αλλαγές" FontSize="Medium"/>
                     </StackLayout>
-                    <CollectionView ItemsSource="{Binding services}" SelectionMode="Multiple" SelectedItems="{Binding SelectedServices ,Mode=TwoWay}">
+                    <CollectionView ItemsSource="{Binding Services}" SelectionMode="Multiple" SelectedItems="{Binding SelectedServices, Mode=TwoWay}">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
-                                             Span="2">
-                            </GridItemsLayout>
+                                             Span="2"
+                                             VerticalItemSpacing="15"
+                                         HorizontalItemSpacing="15"/>
                         </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <StackLayout>
+                                        <Label Text="{Binding Text}" TextColor="Black" FontSize="Default" HorizontalTextAlignment="Center"/>
+                                    </StackLayout>
+                                    <BoxView BackgroundColor="Gainsboro" HeightRequest="1"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
                     </CollectionView>
                 </StackLayout>
             </Frame>

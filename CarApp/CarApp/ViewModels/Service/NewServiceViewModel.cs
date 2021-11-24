@@ -6,6 +6,9 @@ using System.ComponentModel;
 using System.Text;
 using Xamarin.Forms;
 using System.Linq;
+using CarApp.Repositories;
+using CarApp.Helpers;
+using static CarApp.Helpers.Extensions;
 
 namespace CarApp.ViewModels
 {
@@ -14,17 +17,23 @@ namespace CarApp.ViewModels
         private string changes;
         private string price;
         private IList<object> _selectedServices;
+        private List<BindingEnum> services;
+
         public IList<object> SelectedServices
         {
             get => _selectedServices;
             set => SetProperty(ref _selectedServices, value);
         }
-        public List<string> services { get; set; } = new List<string>()
-        {
-            "Λάδια","Φίλτρο Λαδιού","Φίλτρο","Φίλτρο Αέρος","Μπουζί","Φίλτρο καμπίνας","Βαλβολίνες","Φρένα Εμπρός","Φρένα Πίσω","Ιμάντας Χρονισμού","Ιμάντας Δυναμό","Υγρά Φρένων"
-        };
+
+        public List<BindingEnum> Services { 
+            get => services;
+            set => SetProperty(ref services, value);
+        }
+
+
         public NewServiceViewModel()
         {
+            Services = new BindingEnum().BindEnumToSelectListItem<ServiceEnum>();
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
             this.PropertyChanged +=
@@ -51,19 +60,20 @@ namespace CarApp.ViewModels
         }
         private async void OnSave()
         {
-            var sr = SelectedServices.ToList();
-            Service newItem = new Service()
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                Id = Guid.NewGuid().ToString(),
-                Changes = sr.Count.ToString(),
-                Price = Price,
-                Ser = sr.Select(x => x.ToString()).ToList()
-            };
-            await ServiceData.AddItemAsync(newItem);
-            
+                var sr = SelectedServices.ToList();
+                var newSr = sr.Cast<BindingEnum>().ToList();
+                Service newItem = new Service()
+                {
+                    Changes = string.Join(",", newSr.Select(x => x.Text)),
+                    Price = Price,
+                    NumberOfChanges = sr.Count,
+                };
+                await unitOfwork.ServiceTables.Insert(newItem);
 
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync("..");
+                await Shell.Current.GoToAsync("..");
+            }
         }
     }
 }

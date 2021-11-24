@@ -1,30 +1,20 @@
 ﻿using CarApp.Models;
+using CarApp.Repositories;
 using CarApp.Views;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-
 namespace CarApp.ViewModels
 {
-    public class ServiceViewModel : BaseViewModel
+    public class CleanViewModel : BaseViewModel
     {
-        private Service _selectedItem;
-        public ObservableCollection<Service> Items { get; }
-        public Command LoadItemsCommand { get; }
-        public Command AddItemCommand { get; }
-        public Command<Service> ItemTapped { get; }
-        public Command SortListCommand { get; }
-        public long Pr
-        {
-            get => pr;
-            set => SetProperty(ref pr, value);
-        }
-        private long pr;
-
+        private Clean _selectedItem;
         private bool isSort;
         public bool IsSort
         {
@@ -32,12 +22,34 @@ namespace CarApp.ViewModels
             set => SetProperty(ref isSort, value);
 
         }
-        public ServiceViewModel()
+
+        private string quality;
+        public string Quality
         {
-            Items = new ObservableCollection<Service>();
+            get => quality;
+            set
+            {
+                SetProperty(ref quality, value);
+            }
+        }
+        private long price;
+        public long Price
+        {
+            get => price;
+            set => SetProperty(ref price, value);
+        }
+        public ObservableCollection<Clean> Items { get; }
+        public Command LoadItemsCommand { get; }
+        public Command AddItemCommand { get; }
+        public Command<Clean> ItemTapped { get; }
+        public Command SortListCommand { get; }
+
+        public CleanViewModel()
+        {
+            Items = new ObservableCollection<Clean>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            ItemTapped = new Command<Service>(OnItemSelected);
+            ItemTapped = new Command<Clean>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
 
@@ -50,11 +62,11 @@ namespace CarApp.ViewModels
                 isSort = true;
                 var sorted = Items.OrderByDescending(x => x.Price).ToList();
                 Items.Clear();
-                Pr = 0;
+                Price = 0;
                 foreach (var item in sorted)
                 {
                     Items.Add(item);
-                    Pr += Convert.ToInt64(item.Price);
+                    Price += Convert.ToInt64(item.Price);
                 }
             }
             else
@@ -62,36 +74,29 @@ namespace CarApp.ViewModels
                 isSort = false;
                 var sorted = Items.OrderBy(x => x.Price).ToList();
                 Items.Clear();
-                Pr = 0;
+                Price = 0;
                 foreach (var item in sorted)
                 {
                     Items.Add(item);
-                    Pr += Convert.ToInt64(item.Price);
+                    Price += Convert.ToInt64(item.Price);
                 }
             }
         }
 
         async Task ExecuteLoadItemsCommand()
         {
-            IsBusy = true;
-            try
+            Price = 0;
+            Items.Clear();
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                Pr = 0;
-                Items.Clear();
-                var items = await ServiceData.GetItemsAsync(true);
-                foreach (var item in items)
+                var refills = await unitOfwork.Cleans.Get<Clean>();
+                foreach (var refil in refills)
                 {
-                    Items.Add(item);
-                    Pr += Convert.ToInt64(item.Price);
+                    Items.Add(refil);
+                    Price += Convert.ToInt64(refil.Price);
                 }
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
+                /////////////
+                SortList();
                 IsBusy = false;
             }
         }
@@ -102,7 +107,7 @@ namespace CarApp.ViewModels
             SelectedItem = null;
         }
 
-        public Service SelectedItem
+        public Clean SelectedItem
         {
             get => _selectedItem;
             set
@@ -114,15 +119,15 @@ namespace CarApp.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(NewServicePage));
+            await Shell.Current.GoToAsync(nameof(NewCleanPage));
         }
 
-        async void OnItemSelected(Service item)
+        async void OnItemSelected(Clean item)
         {
             if (item == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(ServiceDetailPage)}?{nameof(ServiceDetailViewModel.ItemId)}={item.Id}");
+            await Shell.Current.GoToAsync($"{nameof(CleanDetailPage)}?{nameof(CleanDetailViewModel.ItemId)}={item.Id}");
         }
     }
 }

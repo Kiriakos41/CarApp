@@ -1,4 +1,5 @@
-﻿using CarApp.Services;
+﻿
+using CarApp.Models;
 using CarApp.ViewModels;
 using CarApp.Views;
 using SQLite;
@@ -15,9 +16,6 @@ namespace CarApp
         public App()
         {
             InitializeComponent();
-            DependencyService.Register<MockDataStore>();
-            DependencyService.Register<CleanData>();
-            DependencyService.Register<ServiceData>();
             MainPage = new AppShell();
             SetCultureToGreek();
         }
@@ -28,6 +26,10 @@ namespace CarApp
 
         protected override void OnStart()
         {
+            DbPath.CreateTableAsync<Damage>();
+            DbPath.CreateTableAsync<Service>();
+            DbPath.CreateTableAsync<AboutCar>();
+            DbPath.CreateTableAsync<Clean>();
         }
 
         protected override void OnSleep()

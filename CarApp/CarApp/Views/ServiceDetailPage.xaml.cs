@@ -13,10 +13,16 @@ namespace CarApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ServiceDetailPage : ContentPage
     {
+        ServiceDetailViewModel viewmodel;
         public ServiceDetailPage()
         {
             InitializeComponent();
-            BindingContext = new ServiceDetailViewModel();
+            BindingContext = viewmodel = new ServiceDetailViewModel();
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            viewmodel.FillServices();
         }
     }
 }

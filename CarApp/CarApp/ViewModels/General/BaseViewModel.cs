@@ -1,5 +1,4 @@
 ﻿using CarApp.Models;
-using CarApp.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,10 +9,6 @@ namespace CarApp.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<AboutCar> DataStore => DependencyService.Get<IDataStore<AboutCar>>();
-        public IDataStore<Clean> CleanData => DependencyService.Get<IDataStore<Clean>>();
-        public IDataStore<Service> ServiceData => DependencyService.Get<IDataStore<Service>>();
-
         bool isBusy = false;
         public bool IsBusy
         {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CarApp.Interfaces
 {
-    internal interface IServiceRepository : IRepository<Service>
+    public interface IServiceTableRepository : IRepository<Service>
     {
     }
 }

@@ -1,4 +1,7 @@
-﻿using CarApp.Views;
+﻿using CarApp.Helpers;
+using CarApp.Models;
+using CarApp.Repositories;
+using CarApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,15 +9,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Xamarin.Forms;
+using static CarApp.Helpers.Extensions;
 
 namespace CarApp.ViewModels
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class ServiceDetailViewModel : BaseViewModel
     {
-        private string itemId;
-        public string Id { get; set; }
-        public string ItemId
+        private int itemId;
+        public int Id { get; set; }
+        public int ItemId
         {
             get
             {
@@ -27,6 +31,7 @@ namespace CarApp.ViewModels
             }
         }
         private string price;
+        private List<BindingEnum> services;
         private bool show;
         public bool Show
         {
@@ -46,20 +51,28 @@ namespace CarApp.ViewModels
             get => _selectedServices;
             set => SetProperty(ref _selectedServices, value);
         }
-        public ObservableCollection<string> services { get; set; } = new ObservableCollection<string>()
+        public List<BindingEnum> Services
         {
-            "Λάδια","Φίλτρο Λαδιού","Φίλτρο","Φίλτρο Αέρος","Μπουζί","Φίλτρο καμπίνας","Βαλβολίνες","Φρένα Εμπρός","Φρένα Πίσω","Ιμάντας Χρονισμού","Ιμάντας Δυναμό","Υγρά Φρένων"
-        };
-
-
+            get => services;
+            set => SetProperty(ref services, value);
+        }
         public string Price
         {
             get => price;
             set => SetProperty(ref price, value);
         }
+        private string[] selitem;
+        public string[] SelectedItems 
+        {
+            get => selitem; 
+            set => SetProperty(ref selitem, value);
+        }
 
 
-        public ObservableCollection<string> SelectedItems { get; set; }
+        public void FillServices()
+        {
+            Services = new BindingEnum().BindEnumToSelectListItem<ServiceEnum>();
+        }
 
         public Command DeleteCommand { get; set; }
         public Command UpdateCommand { get; set; }
@@ -72,7 +85,6 @@ namespace CarApp.ViewModels
             UpdateCommand = new Command(UpdateItem);
             CancelCommand = new Command(OnCancel);
             PopUp = new Command(ChangeList);
-            SelectedItems = new ObservableCollection<string>();
         }
         private async void OnCancel()
         {
@@ -81,40 +93,42 @@ namespace CarApp.ViewModels
         }
         public async void DeleteItem()
         {
-            var item = await ServiceData.GetItemAsync(itemId);
-            await ServiceData.DeleteItemAsync(ItemId);
-            await Shell.Current.GoToAsync("..");
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
+            {
+                Service item = await unitOfwork.ServiceTables.Get(ItemId);
+                await unitOfwork.ServiceTables.Delete(item);
+                await Shell.Current.GoToAsync("..");
+            }
+
         }
         public async void UpdateItem()
         {
-            var item = await ServiceData.GetItemAsync(itemId);
-            item.Id = Id;
-            item.Price = Price;
-            item.Changes = SelectedServices.Count.ToString();
-            item.Ser = SelectedServices.Select(x => x.ToString()).ToList();
-            await ServiceData.UpdateItemAsync(item);
-            await Shell.Current.GoToAsync("..");
+            var sr = SelectedServices.ToList();
+            var newSr = sr.Cast<BindingEnum>().ToList();
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
+            {
+                var item = await unitOfwork.ServiceTables.Get(itemId);
+                item.Id = Id;
+                item.Price = Price;
+                item.Changes = null;
+                item.Changes = string.Join(",", newSr.Select(x => x.Text));
+                item.NumberOfChanges = sr.Count;
+                await unitOfwork.ServiceTables.Update(item);
+                await Shell.Current.GoToAsync("..");
+            }
         }
 
-        public async void LoadItemId(string itemId)
+        public async void LoadItemId(int itemId)
         {
-            try
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                SelectedItems.Clear();
-                var item = await ServiceData.GetItemAsync(itemId);
+                var item = await unitOfwork.ServiceTables.Get(itemId);
                 Id = item.Id;
                 Price = item.Price;
-                var list = item.Ser;
-                foreach (var sr in list)
-                {
-                    SelectedItems.Add(sr);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
+                SelectedItems = item.Changes.Split(',');
             }
         }
+
         public void ChangeList()
         {
             var sr = SelectedServices.ToList();

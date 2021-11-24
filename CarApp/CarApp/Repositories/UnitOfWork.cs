@@ -10,9 +10,16 @@ namespace CarApp.Repositories
     {
         public UnitOfWork(SQLiteAsyncConnection context)
         {
-
+            AboutCars = new AboutCarRepository(context);
+            Cleans = new CleanRepository(context);
+            ServiceTables = new ServiceTableRepository(context);
+            Damages = new DamageRepository(context);
         }
 
+        public IAboutCarRepository AboutCars { get; }
+        public ICleanRepository Cleans { get; }
+        public IDamageRepository Damages { get; }
+        public IServiceTableRepository ServiceTables { get; }
 
         public void Dispose()
         {

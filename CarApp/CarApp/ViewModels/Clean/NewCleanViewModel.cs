@@ -1,4 +1,5 @@
 ﻿using CarApp.Models;
+using CarApp.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -45,17 +46,19 @@ namespace CarApp.ViewModels
 
         private async void OnSave()
         {
-            Clean newItem = new Clean()
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                Id = Guid.NewGuid().ToString(),
-                Quality = Quality,
-                Price = Price,
-            };
+                Clean newItem = new Clean()
+                {
+                    Quality = Quality,
+                    Price = Price,
+                };
 
-            await CleanData.AddItemAsync(newItem);
+                await unitOfwork.Cleans.Insert(newItem);
 
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync("..");
+                // This will pop the current page off the navigation stack
+                await Shell.Current.GoToAsync("..");
+            }
         }
     }
 }

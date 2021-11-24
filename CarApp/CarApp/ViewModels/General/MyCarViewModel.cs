@@ -1,5 +1,5 @@
 ﻿using CarApp.Models;
-using CarApp.Services;
+using CarApp.Repositories;
 using CarApp.Views;
 using System;
 using System.Collections.Generic;
@@ -70,26 +70,28 @@ namespace CarApp.ViewModels
                 Gs = 0;
                 Pr = 0;
                 KilMax = 0;
-                var items = await DataStore.GetItemsAsync(true);
-                var items1 = await CleanData.GetItemsAsync(true);
-                var items2 = await ServiceData.GetItemsAsync(true);
-                KilMax = items.Select(x => x.Kilometer).Max();
-                foreach (var item in items)
+                using (var unitOfwork = new UnitOfWork(App.DbPath))
                 {
-                    Items.Add(item);
-                    KilMax += item.Kilometer;
-                    Pr += Convert.ToInt64(item.Price);
-                    Gs += Convert.ToInt64(item.Gas);
+                    var items = await unitOfwork.AboutCars.Get<AboutCar>();
+                    var items1 = await unitOfwork.Cleans.Get<Clean>();
+                    var items2 = await unitOfwork.ServiceTables.Get<Clean>();
+                    KilMax = items.Select(x => x.Kilometer).Max();
+                    foreach (var item in items)
+                    {
+                        Items.Add(item);
+                        KilMax += item.Kilometer;
+                        Pr += Convert.ToInt64(item.Price);
+                        Gs += Convert.ToInt64(item.Gas);
+                    }
+                    foreach (var item in items1)
+                    {
+                        Pr += Convert.ToInt64(item.Price);
+                    }
+                    foreach (var item in items2)
+                    {
+                        Pr += Convert.ToInt64(item.Price);
+                    }
                 }
-                foreach (var item in items1)
-                {
-                    Pr += Convert.ToInt64(item.Price);
-                }
-                foreach (var item in items2)
-                {
-                    Pr += Convert.ToInt64(item.Price);
-                }
-
             }
             catch (Exception ex)
             {

@@ -8,7 +8,8 @@ namespace CarApp.Models
     public class Damage
     {
         [PrimaryKey, AutoIncrement]
-        public string Id { get; set; }
-        public string Price { get; set; }
+        public int Id { get; set; }
+        public string Prices { get; set; }
+        public string Changes { get; set; }
     }
 }

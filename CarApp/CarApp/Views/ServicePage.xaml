@@ -19,7 +19,7 @@
                                     <Frame WidthRequest="500" HasShadow="True">
                                         <StackLayout Padding="10" Orientation="Horizontal" Spacing="25">
                                             <Image Source="maintenance.png" HeightRequest="30"/>
-                                            <Label Text="{Binding Changes, StringFormat='Αλλαγές : {0}'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="16" />
+                                            <Label Text="{Binding NumberOfChanges, StringFormat='Αλλαγές : {0}'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="16" />
                                             <Image Source="money.png" HeightRequest="30"/>
                                             <Label Text="{Binding Price, StringFormat='Τιμή {0}€'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="16" />
                                             <StackLayout.GestureRecognizers>

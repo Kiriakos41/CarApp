@@ -1,4 +1,5 @@
 ﻿using CarApp.Models;
+using CarApp.Repositories;
 using CarApp.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -12,14 +13,14 @@ namespace CarApp.ViewModels
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class ItemDetailViewModel : BaseViewModel
     {
-        private string itemId;
-        private string gas;
+        private int itemId;
+        private long gas;
         private long khm;
         private string price;
         private DateTime date;
         public ObservableCollection<AboutCar> car { get; set; } = new ObservableCollection<AboutCar>();
-        public string Id { get; set; }
-        public string Gas
+        public int Id { get; set; }
+        public long Gas
         {
             get => gas;
             set => SetProperty(ref gas, value);
@@ -35,7 +36,7 @@ namespace CarApp.ViewModels
             set => SetProperty(ref khm, value);
         }
 
-        public string ItemId
+        public int ItemId
         {
             get
             {
@@ -62,35 +63,39 @@ namespace CarApp.ViewModels
         }
         public async void DeleteItem()
         {
-            var item = await DataStore.GetItemAsync(itemId);
-            await DataStore.DeleteItemAsync(ItemId);
-            await Shell.Current.GoToAsync("..");
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
+            {
+                var item = await unitOfwork.AboutCars.Get(ItemId);
+                await unitOfwork.AboutCars.Delete(item);
+                await Shell.Current.GoToAsync("..");
+            }
+
         }
         public async void UpdateItem()
         {
-            var item = await DataStore.GetItemAsync(itemId);
-            item.Id = Id;
-            item.Gas = Gas;
-            item.Kilometer = Khm;
-            item.Price = Price;
-            await DataStore.UpdateItemAsync(item);
-            await Shell.Current.GoToAsync("..");
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
+            {
+                AboutCar item = await unitOfwork.AboutCars.Get(ItemId);
+                item.Id = Id;
+                item.Gas = Gas;
+                item.Kilometer = Khm;
+                item.Price = Price;
+                await unitOfwork.AboutCars.Update(item);
+                await Shell.Current.GoToAsync("..");
+            }
+
         }
 
-        public async void LoadItemId(string itemId)
+        public async void LoadItemId(int itemId)
         {
-            try
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                var item = await DataStore.GetItemAsync(itemId);
+                var item = await unitOfwork.AboutCars.Get(itemId);
                 Id = item.Id;
                 Gas = item.Gas;
                 Khm = item.Kilometer;
                 Price = item.Price;
                 Date = item.Date;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
             }
         }
     }

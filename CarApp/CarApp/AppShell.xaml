@@ -6,7 +6,7 @@
        x:Class="CarApp.AppShell"
        FlyoutHeaderBehavior="CollapseOnScroll"
        x:Name="myShell">
-    
+
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid BackgroundColor="Black"
@@ -17,7 +17,7 @@
             </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
-    
+
     <FlyoutItem Title="Γενικά" Icon="sedan.png">
         <ShellContent Route="CarPage" ContentTemplate="{DataTemplate local:CarPage}" />
     </FlyoutItem>
@@ -32,6 +32,9 @@
     </FlyoutItem>
     <FlyoutItem Title="Βλάβες" Icon="breakdown.png">
         <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:DamagePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Ελαστικά" Icon="wheel">
+        <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:RubberPage}" />
     </FlyoutItem>
     <MenuItem Text="kiriakos41@outlook.com" Icon="email"/>
 

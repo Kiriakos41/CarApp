@@ -7,9 +7,9 @@ using System.Text;
 
 namespace CarApp.Repositories
 {
-    public class ServiceRepository : Repository<Service>, IServiceRepository
+    public class ServiceTableRepository : Repository<Service>, IServiceTableRepository
     {
-        public ServiceRepository(SQLiteAsyncConnection db) : base(db)
+        public ServiceTableRepository(SQLiteAsyncConnection db) : base(db)
         {
 
         }
