@@ -1,31 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CarApp.Views.ServicePage"
-             Title="Service"
+             x:Class="CarApp.Views.CleanPage"
+             Title="Καθαριότητα"
              xmlns:local="clr-namespace:CarApp.ViewModels"  
-             xmlns:model="clr-namespace:CarApp.Models">
+             xmlns:model="clr-namespace:CarApp.Models"
+             Shell.ForegroundColor="Transparent">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Προσθήκη" Command="{Binding AddItemCommand}" />
+        <ToolbarItem IconImageSource="add" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <RefreshView x:DataType="local:ServiceViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <RefreshView x:DataType="local:CleanViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
                 <CollectionView ItemsSource="{Binding Items}" SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Orientation="Horizontal">
-                                <StackLayout Padding="10" x:DataType="model:Service">
+                                <StackLayout Padding="10" x:DataType="model:Clean">
                                     <Frame WidthRequest="500" HasShadow="True">
                                         <StackLayout Padding="10" Orientation="Horizontal" Spacing="25">
-                                            <Image Source="maintenance.png" HeightRequest="30"/>
-                                            <Label Text="{Binding NumberOfChanges, StringFormat='Αλλαγές : {0}'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="16" />
+                                            <Image Source="cleaning.png" HeightRequest="30"/>
+                                            <Label Text="{Binding Quality, StringFormat='Ποιότητα : {0}'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="16" />
                                             <Image Source="money.png" HeightRequest="30"/>
                                             <Label Text="{Binding Price, StringFormat='Τιμή {0}€'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="16" />
                                             <StackLayout.GestureRecognizers>
                                                 <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ServiceViewModel}}, Path=ItemTapped}"		
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:CleanViewModel}}, Path=ItemTapped}"		
                                 CommandParameter="{Binding .}">
                                                 </TapGestureRecognizer>
                                             </StackLayout.GestureRecognizers>

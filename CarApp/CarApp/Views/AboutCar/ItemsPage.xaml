@@ -5,13 +5,14 @@
              Title="{Binding Title}"
              xmlns:local="clr-namespace:CarApp.ViewModels"  
              xmlns:model="clr-namespace:CarApp.Models"  
-             x:Name="BrowseItemsPage">
+             x:Name="BrowseItemsPage"
+             Shell.ForegroundColor="Transparent">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Προσθήκη" Command="{Binding AddItemCommand}" />
+        <ToolbarItem IconImageSource="add" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
     <StackLayout>
         <RefreshView x:DataType="local:AboutCarViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None">
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal">

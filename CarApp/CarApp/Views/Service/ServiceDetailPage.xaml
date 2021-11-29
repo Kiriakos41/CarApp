@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.ServiceDetailPage"
              Title="Λεπτομέρειες Service"
-             xmlns:lv="clr-namespace:Xamarin.Forms.MultiSelectListView;assembly=Xamarin.Forms.MultiSelectListView" Padding="0,20,0,0">
+             Padding="0,20,0,0"
+             Shell.ForegroundColor="Transparent">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Αποθήκευση" Command="{Binding UpdateCommand}"/>
+        <ToolbarItem IconImageSource="Update" Command="{Binding UpdateCommand}"/>
+        <ToolbarItem IconImageSource="Delete" Command="{Binding DeleteCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
@@ -64,7 +66,6 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="15" Spacing="25">
                     <Button Text="Επεξεργασία Λίστας" Command="{Binding PopUp}" BackgroundColor="Green"/>
-                    <Button Text="Διαγραφή Service" Command="{Binding DeleteCommand}" BackgroundColor="Red"/>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

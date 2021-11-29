@@ -9,11 +9,8 @@
 
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
-            <Grid BackgroundColor="Black"
-                  HeightRequest="200">
-                <Image Aspect="AspectFill"
-                       Source="gg"
-                       Opacity="1" />
+            <Grid BackgroundColor="Black" HeightRequest="200">
+                <Image Aspect="AspectFill" Source="gg" Opacity="1" />
             </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
@@ -36,6 +33,11 @@
     <FlyoutItem Title="Ελαστικά" Icon="wheel">
         <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:RubberPage}" />
     </FlyoutItem>
-    <MenuItem Text="kiriakos41@outlook.com" Icon="email"/>
+    <FlyoutItem Title="Διάγραμμα" Icon="charts">
+        <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:ChartsPage}" />
+    </FlyoutItem>
 
+    <FlyoutItem Title="Αναφορά Προβλήματος" Icon="support">
+        <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:ChartsPage}" />
+    </FlyoutItem>
 </Shell>

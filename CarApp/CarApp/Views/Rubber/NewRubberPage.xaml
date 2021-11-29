@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.NewRubberPage"
+             Title="Σελίδα Προσθήκης">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame Margin="5" HasShadow="True">
+                <StackLayout Margin="15">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="money" HeightRequest="30"/>
+                        <Label Text="Τιμή Ελαστικών " FontSize="Medium"/>
+                    </StackLayout>
+                    <Entry Text="{Binding Pr, Mode=TwoWay}" Placeholder="Γράψε εδώ.."/>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="schedule" HeightRequest="30"/>
+                        <Label Text="Ημερομηνία" FontSize="Medium"/>
+                    </StackLayout>
+                    <DatePicker/>   
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="wheel" HeightRequest="30"/>
+                        <Label Text="Σχόλια" FontSize="Medium"/>
+                    </StackLayout>
+                    <Editor Text="{Binding Commend, Mode=TwoWay}" Placeholder="Γράψε εδώ.." AutoSize="TextChanges" HeightRequest="80" BackgroundColor="WhiteSmoke"/>
+                </StackLayout>
+            </Frame>
+            <Frame Margin="5" HasShadow="true" BackgroundColor="WhiteSmoke">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button WidthRequest="200" BackgroundColor="Red" Text="Ακύρωση" Command="{Binding CancelCommand}"/>
+                    <Button WidthRequest="200" Background="Green" Text="Προσθήκη" Command="{Binding SaveCommand}"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

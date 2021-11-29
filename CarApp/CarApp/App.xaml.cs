@@ -30,6 +30,7 @@ namespace CarApp
             DbPath.CreateTableAsync<Service>();
             DbPath.CreateTableAsync<AboutCar>();
             DbPath.CreateTableAsync<Clean>();
+            DbPath.CreateTableAsync<Rubber>();
         }
 
         protected override void OnSleep()

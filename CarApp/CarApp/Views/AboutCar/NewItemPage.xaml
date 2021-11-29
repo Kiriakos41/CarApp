@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.NewItemPage"
+             Shell.PresentationMode="ModalAnimated"
+             Title="New Item"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="5">
+                <Image Source="gas" HeightRequest="30"/>
+                <Label Text="Ανεφοδιασμός Καυσίμου: " FontSize="Medium" />
+                <Label Text="Προαιρετικό*" FontSize="Small" TextColor="Gray"/>
+            </StackLayout>
+            <StackLayout Margin="45,-15,0,0" >
+                <Entry Text="τεστ"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="5">
+                <Image Source="distance" HeightRequest="30"/>
+                <Label Text="Τωρινά Χιλιόμετρα: " FontSize="Medium" />
+                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="PaleVioletRed"/>
+            </StackLayout>
+            <StackLayout Margin="45,-15,0,0" >
+                <Entry Text="τσετ"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="5">
+                <Image Source="money" HeightRequest="30"/>
+                <Label Text="Τιμή: " FontSize="Medium" />
+                <Label Text="Προαιρετικό*" FontSize="Small" TextColor="Gray"/>
+            </StackLayout>
+            <StackLayout Margin="45,-15,0,0" >
+                <Entry Text="τσετ}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="5">
+                <Image Source="schedule" HeightRequest="30"/>
+                <Label Text="Ημερομηνία: " FontSize="Medium" />  
+            </StackLayout>
+            <StackLayout Margin="45,-15,0,0" >
+                <DatePicker/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Πίσω" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                <Button Text="Αποθήκευση" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

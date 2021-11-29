@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.DamagePage"
+             Title="Βλάβες"
+             xmlns:local="clr-namespace:CarApp.ViewModels"  
+             xmlns:model="clr-namespace:CarApp.Models"
+             Shell.ForegroundColor="Transparent">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="add" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding SortedItem}" IsGroupingEnabled="true" GroupShortNameBinding="{Binding Key}" GroupDisplayBinding="{Binding Key}" SelectedItem="{Binding SelectedItem}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation = "Horizontal" Margin = "10,10,10,10">
+                                <Image Source="money">
+                                    <Image.HeightRequest>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="Android,Windows">20</On>
+                                        </OnPlatform>
+                                    </Image.HeightRequest>
+                                </Image>
+                                <Label Text = "{Binding Price, StringFormat='Τιμή :{0}'}" />
+                                <Image Source="parts" HeightRequest="20"/>
+                                <Label Text = "{Binding Description, StringFormat='Αλλαγή :{0}'}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

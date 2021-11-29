@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CarApp.ViewModels;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,11 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace CarApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DamagePage : ContentPage
+    public partial class NewRubberPage : ContentPage
     {
-        public DamagePage()
+        public NewRubberPage()
         {
             InitializeComponent();
+            BindingContext = new NewRubberViewModel();
         }
     }
 }

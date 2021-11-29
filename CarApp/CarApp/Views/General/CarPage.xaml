@@ -4,7 +4,11 @@
              x:Class="CarApp.Views.CarPage"
              xmlns:local="clr-namespace:CarApp.ViewModels"  
              xmlns:model="clr-namespace:CarApp.Models"
-             Title="Γενικά">
+             Title="Γενικά"
+             Shell.ForegroundColor="Transparent">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="sedan" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout x:DataType="local:MyCarViewModel">
             <Frame BackgroundColor="#2196f3" HasShadow="True">
@@ -44,6 +48,7 @@
                     <Label Text="{Binding Pr}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
                 </StackLayout>
             </Frame>
+            <Button VerticalOptions="EndAndExpand" Text="Διάγραμμα" Command="{Binding ChartsCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

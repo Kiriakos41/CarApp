@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,16 @@ namespace CarApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RubberPage : ContentPage
     {
+        RubberViewModel viewmodel;
         public RubberPage()
         {
             InitializeComponent();
+            BindingContext = viewmodel = new RubberViewModel();
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            viewmodel.OnAppearing();
         }
     }
 }

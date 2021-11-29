@@ -55,27 +55,29 @@ namespace CarApp.ViewModels
         private long gs;
         public ObservableCollection<AboutCar> Items { get; set; }
         public Command SortCommand { get; set; }
-
+        public Command ChartsCommand { get; set; }
         public MyCarViewModel()
         {
             SortCommand = new Command(SortByDate);
+            ChartsCommand = new Command(GoToCharts);
             Items = new ObservableCollection<AboutCar>();
             DateTo = DateTime.Now;
         }
-
-        public async Task OnAppearAsync()
+        public void GoToCharts()
         {
-            try
+            Shell.Current.CurrentItem.CurrentItem.Items.Add(new ChartsPage());
+            Shell.Current.CurrentItem.CurrentItem.Items.RemoveAt(0);
+        }
+        public async Task ExecuteLoadItemsCommand()
+        {
+            using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
                 Gs = 0;
                 Pr = 0;
                 KilMax = 0;
-                using (var unitOfwork = new UnitOfWork(App.DbPath))
+                try
                 {
                     var items = await unitOfwork.AboutCars.Get<AboutCar>();
-                    var items1 = await unitOfwork.Cleans.Get<Clean>();
-                    var items2 = await unitOfwork.ServiceTables.Get<Clean>();
-                    KilMax = items.Select(x => x.Kilometer).Max();
                     foreach (var item in items)
                     {
                         Items.Add(item);
@@ -83,22 +85,35 @@ namespace CarApp.ViewModels
                         Pr += Convert.ToInt64(item.Price);
                         Gs += Convert.ToInt64(item.Gas);
                     }
+                    var items1 = await unitOfwork.Cleans.Get<Clean>();
                     foreach (var item in items1)
                     {
                         Pr += Convert.ToInt64(item.Price);
                     }
+                    var items2 = await unitOfwork.ServiceTables.Get<Clean>();
                     foreach (var item in items2)
                     {
                         Pr += Convert.ToInt64(item.Price);
                     }
+                    var items3 = await unitOfwork.Damages.Get<Damage>();
+                    foreach (var item in items3)
+                    {
+                        Pr += Convert.ToInt64(item.Price);
+                    }
+                    var items4 = await unitOfwork.RubberTables.Get<Rubber>();
+                    foreach (var item in items4)
+                    {
+                        Pr += Convert.ToInt64(item.Price);
+                    }
+                    KilMax = items.Select(x => x.Kilometer).Max();
+                    IsBusy = false;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
         }
-
         public void SortByDate()
         {
             Gs = 0;

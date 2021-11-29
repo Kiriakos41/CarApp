@@ -1,40 +1,32 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CarApp.Views.NewItemPage"
-             Shell.PresentationMode="ModalAnimated"
-             Title="New Item"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true">
+             x:Class="CarApp.Views.NewDamagePage"
+             Title="Διάφορες Βλάβες">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Αποθήκευση" Command="{Binding SaveCommand}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal" Margin="5">
-                <Image Source="gas" HeightRequest="30"/>
-                <Label Text="Ανεφοδιασμός Καυσίμου: " FontSize="Medium" />
-                <Label Text="Προαιρετικό*" FontSize="Small" TextColor="Gray"/>
-            </StackLayout>
-            <StackLayout Margin="45,-15,0,0" >
-                <Entry Text="{Binding Gas,Mode= TwoWay}"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" Margin="5">
-                <Image Source="distance" HeightRequest="30"/>
-                <Label Text="Τωρινά Χιλιόμετρα: " FontSize="Medium" />
+                <Image Source="parts" HeightRequest="30"/>
+                <Label Text="Ανταλλακτικό:" FontSize="Medium" />
                 <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="PaleVioletRed"/>
             </StackLayout>
             <StackLayout Margin="45,-15,0,0" >
-                <Entry Text="{Binding Khm,Mode= TwoWay}"/>
+                <Picker SelectedItem="{Binding Description}" ItemsSource="{Binding Parts}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="5">
                 <Image Source="money" HeightRequest="30"/>
                 <Label Text="Τιμή: " FontSize="Medium" />
-                <Label Text="Προαιρετικό*" FontSize="Small" TextColor="Gray"/>
+                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="PaleVioletRed"/>
             </StackLayout>
             <StackLayout Margin="45,-15,0,0" >
-                <Entry Text="{Binding Price,Mode= TwoWay}"/>
+                <Entry Text="{Binding Price}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="5">
                 <Image Source="schedule" HeightRequest="30"/>
-                <Label Text="Ημερομηνία: " FontSize="Medium" />  
+                <Label Text="Ημερομηνία: " FontSize="Medium" />
             </StackLayout>
             <StackLayout Margin="45,-15,0,0" >
                 <DatePicker Date="{Binding Date, Mode=TwoWay}"/>
@@ -46,5 +38,4 @@
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
-    
 </ContentPage>

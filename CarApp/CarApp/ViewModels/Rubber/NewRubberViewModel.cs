@@ -7,29 +7,39 @@ using Xamarin.Forms;
 
 namespace CarApp.ViewModels
 {
-    public class NewCleanViewModel : BaseViewModel
+    public class NewRubberViewModel : BaseViewModel
     {
-        private string quality;
-        private string price;
+        private long gas;
+        private decimal price;
+        private string commend;
+        public string Commend
+        {
+            get => commend;
+            set => SetProperty(ref commend, value);
+        }
+        private DateTime date;
 
-        public List<string> Rating { get; set; } = new List<string>()
+        public DateTime Date
         {
-            "Απλή","Μέτρια","Τέλεια"
-        };
-        public NewCleanViewModel()
+            get => date;
+            set => SetProperty(ref date, value);
+        }
+
+        public NewRubberViewModel()
         {
+            Date = DateTime.Now;
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
             this.PropertyChanged +=
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
 
-        public string Quality
+        public long Gas
         {
-            get => quality;
-            set => SetProperty(ref quality, value);
+            get => gas;
+            set => SetProperty(ref gas, value);
         }
-        public string Price
+        public decimal Price
         {
             get => price;
             set => SetProperty(ref price, value);
@@ -40,7 +50,6 @@ namespace CarApp.ViewModels
 
         private async void OnCancel()
         {
-            // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");
         }
 
@@ -48,16 +57,18 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                Clean newItem = new Clean()
+                Rubber newItem = new Rubber()
                 {
-                    Quality = Quality,
+                    Date = Date,
                     Price = Price,
+                    Commend = Commend
                 };
-                await unitOfwork.Cleans.Insert(newItem);
 
-                // This will pop the current page off the navigation stack
+                await unitOfwork.RubberTables.Insert(newItem);
+
                 await Shell.Current.GoToAsync("..");
             }
+
         }
     }
 }

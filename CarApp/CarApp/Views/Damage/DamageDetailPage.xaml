@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.DamageDetailPage"
+             Title="Πληροφορίες Βλάβης"
+             Shell.ForegroundColor="Transparent">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="update" Command="{Binding UpdateCommand}" />
+        <ToolbarItem IconImageSource="delete" Command="{Binding DeleteCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="5">
+                <Image Source="parts" HeightRequest="30"/>
+                <Label Text="Ανταλλακτικό:" FontSize="Medium" />
+                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="PaleVioletRed"/>
+            </StackLayout>
+            <StackLayout Margin="45,-15,0,0" >
+                <Picker SelectedItem="{Binding Description,Mode=TwoWay}" ItemsSource="{Binding Parts,Mode=TwoWay}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="5">
+                <Image Source="money" HeightRequest="30"/>
+                <Label Text="Τιμή: " FontSize="Medium" />
+                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="PaleVioletRed"/>
+            </StackLayout>
+            <StackLayout Margin="45,-15,0,0" >
+                <Entry Text="{Binding Price,Mode=TwoWay}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Margin="5">
+                <Image Source="schedule" HeightRequest="30"/>
+                <Label Text="Ημερομηνία: " FontSize="Medium" />
+            </StackLayout>
+            <StackLayout Margin="45,-15,0,0" >
+                <DatePicker Date="{Binding Date, Mode=TwoWay}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

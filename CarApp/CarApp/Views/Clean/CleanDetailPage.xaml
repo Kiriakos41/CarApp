@@ -2,7 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.CleanDetailPage"
-             Title="Λεπτομέρειες Καθαριότητας">
+             Title="Λεπτομέρειες Καθαριότητας"
+             Shell.ForegroundColor="Transparent">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="Update" Command="{Binding UpdateCommand}"/>
+        <ToolbarItem IconImageSource="Delete" Command="{Binding DeleteCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Frame>
@@ -14,11 +19,6 @@
                     <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
                         <Image Source="money" HeightRequest="40"/>
                         <Entry Text="{Binding Price, Mode=TwoWay}" WidthRequest="250"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="25">
-                        <Button Text="Πίσω" Command="{Binding CancelCommand}"/>
-                        <Button Text="Αλλαγή" Command="{Binding UpdateCommand}"/>
-                        <Button Text="Διαγραφή" Command="{Binding DeleteCommand}" BackgroundColor="Red"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
