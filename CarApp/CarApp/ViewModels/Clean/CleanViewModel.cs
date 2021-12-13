@@ -16,14 +16,13 @@ namespace CarApp.ViewModels
     {
         private Clean _selectedItem;
         private bool isSort;
+        private string quality;
         public bool IsSort
         {
             get => isSort;
             set => SetProperty(ref isSort, value);
 
         }
-
-        private string quality;
         public string Quality
         {
             get => quality;
@@ -38,15 +37,13 @@ namespace CarApp.ViewModels
             get => price;
             set => SetProperty(ref price, value);
         }
-        public ObservableCollection<Clean> Items { get; }
+        public ObservableCollection<Clean> Items { get; set; } = new ObservableCollection<Clean>();
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Clean> ItemTapped { get; }
         public Command SortListCommand { get; }
-
         public CleanViewModel()
         {
-            Items = new ObservableCollection<Clean>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             ItemTapped = new Command<Clean>(OnItemSelected);
@@ -82,7 +79,6 @@ namespace CarApp.ViewModels
                 }
             }
         }
-
         async Task ExecuteLoadItemsCommand()
         {
             Price = 0;
@@ -95,18 +91,15 @@ namespace CarApp.ViewModels
                     Items.Add(refil);
                     Price += Convert.ToInt64(refil.Price);
                 }
-                /////////////
                 SortList();
-                IsBusy = false;
             }
+            IsBusy = false;
         }
-
         public void OnAppearing()
         {
             IsBusy = true;
             SelectedItem = null;
         }
-
         public Clean SelectedItem
         {
             get => _selectedItem;
@@ -116,12 +109,10 @@ namespace CarApp.ViewModels
                 OnItemSelected(value);
             }
         }
-
         private async void OnAddItem(object obj)
         {
             await Shell.Current.GoToAsync(nameof(NewCleanPage));
         }
-
         async void OnItemSelected(Clean item)
         {
             if (item == null)

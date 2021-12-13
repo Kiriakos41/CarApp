@@ -83,11 +83,9 @@ namespace CarApp.ViewModels
                     Items.Add(srv);
                     Pr += Convert.ToInt64(srv.Price);
                 }
-
                 SortList();
-                IsBusy = false;
             }
-
+            IsBusy = false;
         }
 
         public void OnAppearing()

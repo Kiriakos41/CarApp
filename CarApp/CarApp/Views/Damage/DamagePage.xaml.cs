@@ -23,7 +23,7 @@ namespace CarApp.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            viewModel.OnAppearing();
+            viewModel.OnAppearingAsync();
         }
     }
 }

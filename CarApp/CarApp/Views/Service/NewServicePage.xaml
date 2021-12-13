@@ -3,45 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.NewServicePage"
              Title="Προσθήκη Service"
-             xmlns:local="clr-namespace:CarApp.ViewModels"  
-             xmlns:model="clr-namespace:CarApp.Models"  >
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}"
+             Shell.PresentationMode="ModalAnimated">
     <ContentPage.Content>
         <StackLayout>
-            <Frame Margin="5" HasShadow="True">
+            <Frame Margin="5" BackgroundColor="{AppThemeBinding Light=White, Dark=gray}" HasShadow="True">
                 <StackLayout Margin="15">
                     <StackLayout Orientation="Horizontal">
-                        <Image Source="change" HeightRequest="30"/>
-                        <Label Text="Τιμή Αλλαγών" FontSize="Medium"/>
+                        <Image Source="money" HeightRequest="30"/>
+                        <Label Text="Τιμή Αλλαγών: " FontSize="Medium"  TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
                     </StackLayout>
-                    <Entry Text="{Binding Price}" Placeholder="Γράψε εδώ τιμή"/>
-                    <StackLayout Orientation="Horizontal" Spacing="15" Padding="15" HorizontalOptions="Center">
+                    <Entry Text="{Binding Price}" Placeholder="Γράψε εδώ τιμή.."  TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                    <StackLayout Orientation="Horizontal">
                         <Image Source="change" HeightRequest="30"/>
-                        <Label Text="Αλλαγές" FontSize="Medium"/>
+                        <Label Text="Αλλαγή: " FontSize="Medium"  TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
                     </StackLayout>
-                    <CollectionView ItemsSource="{Binding Services}" SelectionMode="Multiple" SelectedItems="{Binding SelectedServices, Mode=TwoWay}">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical"
-                                             Span="2"
-                                             VerticalItemSpacing="15"
-                                         HorizontalItemSpacing="15"/>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <StackLayout>
-                                        <Label Text="{Binding Text}" TextColor="Black" FontSize="Default" HorizontalTextAlignment="Center"/>
-                                    </StackLayout>
-                                    <BoxView BackgroundColor="Gainsboro" HeightRequest="1"/>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                    <Entry Text="{Binding Changes}" Placeholder="Γράψε εδώ την αλλαγή.."  TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
                 </StackLayout>
             </Frame>
-            <Frame Margin="5" HasShadow="true" BackgroundColor="WhiteSmoke">
+            <Frame Margin="5" HasShadow="true" BackgroundColor="{AppThemeBinding Light=white, Dark=gray}">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Button WidthRequest="200" BackgroundColor="Red" Text="Ακύρωση" Command="{Binding CancelCommand}"/>
-                    <Button WidthRequest="200" Background="Green" Text="Προσθήκη" Command="{Binding SaveCommand}"/>
+                    <Button WidthRequest="200" BackgroundColor="Red" Text="Ακύρωση" Command="{Binding CancelCommand}"  TextColor="{AppThemeBinding Light=White, Dark=White}"/>
+                    <Button WidthRequest="200" Background="Green" Text="Προσθήκη" Command="{Binding SaveCommand}"  TextColor="{AppThemeBinding Light=White, Dark=White}"/>
                 </StackLayout>
             </Frame>
         </StackLayout>

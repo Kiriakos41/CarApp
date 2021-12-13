@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.DamageDetailPage"
              Title="Πληροφορίες Βλάβης"
-             Shell.ForegroundColor="Transparent">
+             Shell.ForegroundColor="Transparent"
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="update" Command="{Binding UpdateCommand}" />
         <ToolbarItem IconImageSource="delete" Command="{Binding DeleteCommand}" />
@@ -12,26 +13,26 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal" Margin="5">
                 <Image Source="parts" HeightRequest="30"/>
-                <Label Text="Ανταλλακτικό:" FontSize="Medium" />
-                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="PaleVioletRed"/>
+                <Label Text="Ανταλλακτικό:" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
             </StackLayout>
             <StackLayout Margin="45,-15,0,0" >
-                <Picker SelectedItem="{Binding Description,Mode=TwoWay}" ItemsSource="{Binding Parts,Mode=TwoWay}"/>
+                <Entry Text="{Binding Description}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="5">
                 <Image Source="money" HeightRequest="30"/>
-                <Label Text="Τιμή: " FontSize="Medium" />
-                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="PaleVioletRed"/>
+                <Label Text="Τιμή: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
             </StackLayout>
             <StackLayout Margin="45,-15,0,0" >
                 <Entry Text="{Binding Price,Mode=TwoWay}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="5">
                 <Image Source="schedule" HeightRequest="30"/>
-                <Label Text="Ημερομηνία: " FontSize="Medium" />
+                <Label Text="Ημερομηνία: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
             </StackLayout>
             <StackLayout Margin="45,-15,0,0" >
-                <DatePicker Date="{Binding Date, Mode=TwoWay}"/>
+                <DatePicker Date="{Binding Date, Mode=TwoWay}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

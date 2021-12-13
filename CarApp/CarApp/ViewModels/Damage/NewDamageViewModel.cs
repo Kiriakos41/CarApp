@@ -2,8 +2,8 @@
 using CarApp.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace CarApp.ViewModels
@@ -13,7 +13,6 @@ namespace CarApp.ViewModels
         private DateTime _date = DateTime.Now;
         private decimal price;
         private string desc;
-        public List<string> Parts { get; set; } = new List<string> { "Φρένα", "Πόρτα", "Ιμάντας", "Φώτα", "Τούρμπο", "Μπαταρία", "Εξάτμιση", "Ζάντες","Μηχανή","Τιμόνι","ABS","Πιστόνια","Μπρστινό Τζάμι","Φιμέ","Κάθισματα","Ψυγείο","Ηχεία","΄Μοχλός Ταχυτήτων","Καπό","Καθρέφτης Πόρτας","Κοντέρ" };
         public decimal Price
         {
             get => price;
@@ -33,17 +32,13 @@ namespace CarApp.ViewModels
         {
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
-            this.PropertyChanged +=
-                (_, __) => SaveCommand.ChangeCanExecute();
-            Damage = new List<Damage>();
         }
         public Command AddEntryCommand { get; set; }
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
-        public List<Damage> Damage { get; set; }
         private async void OnCancel()
         {
-            await Shell.Current.GoToAsync("..");
+            await Application.Current.MainPage.Navigation.PopAsync();
         }
 
         private async void OnSave()
@@ -56,10 +51,7 @@ namespace CarApp.ViewModels
                     Description = Description,
                     Date = Date
                 };
-
-                Damage.Add(newItem);
                 await unitOfwork.Damages.Insert(newItem);
-
                 await Shell.Current.GoToAsync("..");
             }
         }

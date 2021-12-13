@@ -27,6 +27,7 @@ namespace CarApp
             Routing.RegisterRoute(nameof(CarPage), typeof(CarPage));
             Routing.RegisterRoute(nameof(RubberPage), typeof(RubberPage));
             Routing.RegisterRoute(nameof(NewRubberPage), typeof(NewRubberPage));
+            Routing.RegisterRoute(nameof(RubberDetailPage), typeof(RubberDetailPage));
         }
 
     }

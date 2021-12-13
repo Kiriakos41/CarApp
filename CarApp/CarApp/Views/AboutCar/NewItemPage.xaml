@@ -1,50 +1,54 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CarApp.Controls"
              x:Class="CarApp.Views.NewItemPage"
              Shell.PresentationMode="ModalAnimated"
-             Title="New Item"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true">
+             Shell.ForegroundColor="Transparent"
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal" Margin="5">
-                <Image Source="gas" HeightRequest="30"/>
-                <Label Text="Ανεφοδιασμός Καυσίμου: " FontSize="Medium" />
-                <Label Text="Προαιρετικό*" FontSize="Small" TextColor="Gray"/>
-            </StackLayout>
-            <StackLayout Margin="45,-15,0,0" >
-                <Entry Text="τεστ"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" Margin="5">
-                <Image Source="distance" HeightRequest="30"/>
-                <Label Text="Τωρινά Χιλιόμετρα: " FontSize="Medium" />
-                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="PaleVioletRed"/>
-            </StackLayout>
-            <StackLayout Margin="45,-15,0,0" >
-                <Entry Text="τσετ"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" Margin="5">
-                <Image Source="money" HeightRequest="30"/>
-                <Label Text="Τιμή: " FontSize="Medium" />
-                <Label Text="Προαιρετικό*" FontSize="Small" TextColor="Gray"/>
-            </StackLayout>
-            <StackLayout Margin="45,-15,0,0" >
-                <Entry Text="τσετ}"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" Margin="5">
-                <Image Source="schedule" HeightRequest="30"/>
-                <Label Text="Ημερομηνία: " FontSize="Medium" />  
-            </StackLayout>
-            <StackLayout Margin="45,-15,0,0" >
-                <DatePicker/>
-            </StackLayout>
+            <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="0,-8,-1,0">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="5">
+                        <Image Source="gas" HeightRequest="30"/>
+                        <Label Text="Ανεφοδιασμός Καυσίμου: " FontSize="Medium" TextColor="White"/>
+                        <Label Text="Προαιρετικό*" FontSize="Small" TextColor="gray"/>
+                    </StackLayout>
+                    <StackLayout Margin="45,-15,0,0" >
+                        <controls:BorderlessEntry Text="{Binding Gas}" TextColor="White"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="5">
+                        <Image Source="distance" HeightRequest="30"/>
+                        <Label Text="Τωρινά Χιλιόμετρα: " TextColor="White"/>
+                        <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="Red"/>
+                    </StackLayout>
+                    <StackLayout Margin="45,-15,0,0" >
+                        <controls:BorderlessEntry Text="{Binding Khm}" TextColor="White"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="5">
+                        <Image Source="money" HeightRequest="30"/>
+                        <Label Text="Τιμή: " FontSize="Medium"  TextColor="White"/>
+                        <Label Text="Προαιρετικό*" FontSize="Small" TextColor="Gray"/>
+                    </StackLayout>
+                    <StackLayout Margin="45,-15,0,0" >
+                        <controls:BorderlessEntry Text="{Binding Price}" TextColor="White"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="5">
+                        <Image Source="schedule" HeightRequest="30"/>
+                        <Label Text="Ημερομηνία: " FontSize="Medium" />
+                    </StackLayout>
+                    <StackLayout Margin="45,-15,0,0" >
+                        <DatePicker Date="{Binding Date}" TextColor="White"/>
+                    </StackLayout>
 
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Πίσω" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
-                <Button Text="Αποθήκευση" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
-            </StackLayout>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="5">
+                        <Button WidthRequest="125" BackgroundColor="#17A589" Text="Ακύρωση" Command="{Binding CancelCommand}" CornerRadius="20"/>
+                        <Button WidthRequest="125" Background="#17A589" Text="Προσθήκη" Command="{Binding SaveCommand}" CornerRadius="20"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
-    
+
 </ContentPage>

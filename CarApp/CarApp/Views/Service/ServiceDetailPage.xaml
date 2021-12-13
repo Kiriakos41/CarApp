@@ -4,70 +4,31 @@
              x:Class="CarApp.Views.ServiceDetailPage"
              Title="Λεπτομέρειες Service"
              Padding="0,20,0,0"
-             Shell.ForegroundColor="Transparent">
+             Shell.ForegroundColor="Transparent"
+               BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="Update" Command="{Binding UpdateCommand}"/>
         <ToolbarItem IconImageSource="Delete" Command="{Binding DeleteCommand}"/>
     </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        <StackLayout>
-            <Frame Margin="5,10,15,5">
-                <StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Image Source="money" HeightRequest="30"/>
-                        <Label Text="Τιμή αλλαγών:" VerticalOptions="Center" FontSize="Medium" />
-                    </StackLayout>
-                    <Entry Text="{Binding Price}" Placeholder="Γράψε εδώ"/>
-                </StackLayout>
-            </Frame>
+    <StackLayout>
+        <Frame Margin="5,10,15,5"  BackgroundColor="{AppThemeBinding Light=white, Dark=gray}" HasShadow="True">
             <StackLayout>
-                <StackLayout IsVisible="{Binding ShowSecond}">
-                    <BoxView BackgroundColor="Gainsboro" ScaleY="0.01"/>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="15">
-                        <Image Source="change" HeightRequest="30" HorizontalOptions="Start"/>
-                        <Label Text="Αλλαγές που έγιναν:" HorizontalOptions="Center" FontSize="Medium" TextColor="Black"/>
-                    </StackLayout>
-                    <CollectionView ItemsSource="{Binding SelectedItems}">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical"
-                                             Span="2"
-                                             VerticalItemSpacing="15"
-                                         HorizontalItemSpacing="15"/>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <Label Text="{Binding}" TextColor="Black" FontSize="Default"  HorizontalOptions="Center"/>
-                                    <BoxView BackgroundColor="Gainsboro" HeightRequest="1"/>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="money" HeightRequest="30"/>
+                    <Label Text="Τιμή Εργασίας:" VerticalOptions="Center" FontSize="Medium" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
                 </StackLayout>
-                <StackLayout IsVisible="{Binding Show}">
-                    <CollectionView ItemsSource="{Binding Services}" SelectionMode="Multiple" SelectedItems="{Binding SelectedServices, Mode=TwoWay}">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical"
-                                             Span="2"
-                                             VerticalItemSpacing="15"
-                                         HorizontalItemSpacing="15"/>
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <StackLayout>
-                                        <Label Text="{Binding Text}" TextColor="Black" FontSize="Default" HorizontalTextAlignment="Center"/>
-                                    </StackLayout>
-                                    <BoxView BackgroundColor="Gainsboro" HeightRequest="1"/>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                <Entry Text="{Binding Price}" Placeholder="Γράψε εδώ" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="change" HeightRequest="30"/>
+                    <Label Text="Τιμή Εργασίας:" VerticalOptions="Center" FontSize="Medium" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
                 </StackLayout>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="15" Spacing="25">
-                    <Button Text="Επεξεργασία Λίστας" Command="{Binding PopUp}" BackgroundColor="Green"/>
+                <Entry Text="{Binding Changes}" Placeholder="Γράψε εδώ" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="schedule" HeightRequest="30"/>
+                    <Label Text="Τιμή Εργασίας:" VerticalOptions="Center" FontSize="Medium" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
                 </StackLayout>
+                <DatePicker Date="{Binding Date}" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
             </StackLayout>
-        </StackLayout>
-    </ContentPage.Content>
+        </Frame>
+    </StackLayout>
 </ContentPage>

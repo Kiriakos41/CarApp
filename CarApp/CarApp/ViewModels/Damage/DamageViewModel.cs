@@ -1,7 +1,6 @@
 ﻿using CarApp.Models;
 using CarApp.Repositories;
 using CarApp.Views;
-using MvvmHelpers;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -36,8 +35,7 @@ namespace CarApp.ViewModels
             get => price;
             set => SetProperty(ref price, value);
         }
-        public ObservableCollection<Damage> Items { get; }
-        public ObservableCollection<Grouping<string, Damage>> SortedItem { get; set; } = new ObservableCollection<Grouping<string, Damage>>();
+        public ObservableCollection<Damage> Items { get; set; } = new ObservableCollection<Damage>();
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Damage> ItemTapped { get; }
@@ -45,85 +43,32 @@ namespace CarApp.ViewModels
 
         public DamageViewModel()
         {
-            Items = new ObservableCollection<Damage>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             ItemTapped = new Command<Damage>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
-
-            //SortListCommand = new Command(SortList);
         }
-        //public void SortList()
-        //{
-        //    if (!isSort)
-        //    {
-        //        isSort = true;
-        //        var sorted = Items.OrderByDescending(x => x.Price).ToList();
-        //        Items.Clear();
-        //        Price = 0;
-        //        foreach (var item in sorted)
-        //        {
-        //            Items.Add(item);
-        //            Price += Convert.ToInt64(item.Price);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        isSort = false;
-        //        var sorted = Items.OrderBy(x => x.Price).ToList();
-        //        Items.Clear();
-        //        Price = 0;
-        //        foreach (var item in sorted)
-        //        {
-        //            Items.Add(item);
-        //            Price += Convert.ToInt64(item.Price);
-        //        }
-        //    }
-        //}
 
         async Task ExecuteLoadItemsCommand()
         {
             Price = 0;
             Items.Clear();
-            SortedItem.Clear();
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                try
+                var refills = await unitOfwork.Damages.Get<Damage>();
+                foreach (var refil in refills)
                 {
-                    var damages = await unitOfwork.Damages.Get<Damage>();
-                    foreach (var dmg in damages)
-                    {
-                        Items.Add(dmg);
-                        //Price += Convert.ToInt64(refil.Price);
-                    }
-                    ///////////
-                    // SortList();
-
-                    var groupItem = from dmg in Items
-                                    orderby dmg.Date
-                                    group dmg by dmg.Date.ToString(String.Format("{0:D}", dmg.Date)) into dmgGroup
-                                    select new Grouping<string, Damage>(dmgGroup.Key, dmgGroup);
-
-                    foreach (var item in groupItem)
-                    {
-                        SortedItem.Add(item);
-                    }
-
-                    IsBusy = false;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
+                    Items.Add(refil);
                 }
             }
+            IsBusy = false;
         }
 
-        public void OnAppearing()
+        public void OnAppearingAsync()
         {
             IsBusy = true;
             SelectedItem = null;
-            ExecuteLoadItemsCommand();
         }
 
         public Damage SelectedItem

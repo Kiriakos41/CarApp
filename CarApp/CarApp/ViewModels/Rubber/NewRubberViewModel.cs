@@ -9,7 +9,7 @@ namespace CarApp.ViewModels
 {
     public class NewRubberViewModel : BaseViewModel
     {
-        private long gas;
+        private DateTime date = DateTime.Now;
         private decimal price;
         private string commend;
         public string Commend
@@ -17,32 +17,21 @@ namespace CarApp.ViewModels
             get => commend;
             set => SetProperty(ref commend, value);
         }
-        private DateTime date;
-
         public DateTime Date
         {
             get => date;
             set => SetProperty(ref date, value);
         }
-
-        public NewRubberViewModel()
-        {
-            Date = DateTime.Now;
-            SaveCommand = new Command(OnSave);
-            CancelCommand = new Command(OnCancel);
-            this.PropertyChanged +=
-                (_, __) => SaveCommand.ChangeCanExecute();
-        }
-
-        public long Gas
-        {
-            get => gas;
-            set => SetProperty(ref gas, value);
-        }
         public decimal Price
         {
             get => price;
             set => SetProperty(ref price, value);
+        }
+
+        public NewRubberViewModel()
+        {
+            SaveCommand = new Command(OnSave);
+            CancelCommand = new Command(OnCancel);
         }
 
         public Command SaveCommand { get; }

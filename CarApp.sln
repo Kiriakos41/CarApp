@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarApp.Android", "CarApp\CarApp.Android\CarApp.Android.csproj", "{FC2348E2-EC15-47B6-A25B-1CBA2AF63A62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarApp", "CarApp\CarApp\CarApp.csproj", "{485ABA49-6403-4841-B7C9-85897B1D0EF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarApp", "CarApp\CarApp\CarApp.csproj", "{485ABA49-6403-4841-B7C9-85897B1D0EF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

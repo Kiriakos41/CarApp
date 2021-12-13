@@ -1,41 +1,26 @@
 ﻿using CarApp.Models;
 using CarApp.Repositories;
-using CarApp.Views;
 using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Text;
 using Xamarin.Forms;
 
 namespace CarApp.ViewModels
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public class ItemDetailViewModel : BaseViewModel
+    public class RubberDetailViewModel : BaseViewModel
     {
         private int itemId;
-        private long gas;
-        private long khm;
         private decimal price;
+        private string commend;
         private DateTime date;
-        public ObservableCollection<AboutCar> car { get; set; } = new ObservableCollection<AboutCar>();
-        public int Id { get; set; }
-        public long Gas
-        {
-            get => gas;
-            set => SetProperty(ref gas, value);
-        }
+
         public DateTime Date
         {
             get => date;
             set => SetProperty(ref date, value);
         }
-        public long Khm
-        {
-            get => khm;
-            set => SetProperty(ref khm, value);
-        }
-
+        public int Id { get; set; }
         public int ItemId
         {
             get
@@ -48,6 +33,11 @@ namespace CarApp.ViewModels
                 LoadItemId(value);
             }
         }
+        public string Commend
+        {
+            get => commend;
+            set => SetProperty(ref commend, value);
+        }
         public decimal Price
         {
             get => price;
@@ -55,46 +45,50 @@ namespace CarApp.ViewModels
         }
         public Command DeleteCommand { get; set; }
         public Command UpdateCommand { get; set; }
+        public Command CancelCommand { get; set; }
 
-        public ItemDetailViewModel()
+        public RubberDetailViewModel()
         {
             DeleteCommand = new Command(DeleteItem);
             UpdateCommand = new Command(UpdateItem);
+            CancelCommand = new Command(OnCancel);
+        }
+        private async void OnCancel()
+        {
+            // This will pop the current page off the navigation stack
+            await Shell.Current.GoToAsync("..");
         }
         public async void DeleteItem()
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                var item = await unitOfwork.AboutCars.Get(ItemId);
-                await unitOfwork.AboutCars.Delete(item);
+                Rubber item = await unitOfwork.RubberTables.Get(itemId);
+                await unitOfwork.RubberTables.Delete(item);
                 await Shell.Current.GoToAsync("..");
             }
-
         }
         public async void UpdateItem()
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                AboutCar item = await unitOfwork.AboutCars.Get(ItemId);
+                var item = await unitOfwork.RubberTables.Get(itemId);
                 item.Id = Id;
-                item.Gas = Gas;
-                item.Kilometer = Khm;
                 item.Price = Price;
-                await unitOfwork.AboutCars.Update(item);
+                item.Commend = Commend;
+                item.Date = Date;
+                await unitOfwork.RubberTables.Update(item);
                 await Shell.Current.GoToAsync("..");
             }
-
         }
 
         public async void LoadItemId(int itemId)
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                var item = await unitOfwork.AboutCars.Get(itemId);
+                var item = await unitOfwork.RubberTables.Get(itemId);
                 Id = item.Id;
-                Gas = item.Gas;
-                Khm = item.Kilometer;
                 Price = item.Price;
+                Commend = item.Commend;
                 Date = item.Date;
             }
         }

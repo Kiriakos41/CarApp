@@ -2,6 +2,7 @@
 using CarApp.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Xamarin.Forms;
 
@@ -10,7 +11,6 @@ namespace CarApp.ViewModels
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class DamageDetailViewModel : BaseViewModel
     {
-        public List<string> Parts { get; set; } = new List<string> { "Φρένα", "Πόρτα", "Ιμάντας", "Φώτα", "Τούρμπο", "Μπαταρία", "Εξάτμιση", "Ζάντες", "Μηχανή", "Τιμόνι", "ABS", "Πιστόνια", "Μπρστινό Τζάμι", "Φιμέ", "Κάθισματα", "Ψυγείο", "Ηχεία", "΄Μοχλός Ταχυτήτων", "Καπό", "Καθρέφτης Πόρτας", "Κοντέρ" };
         public DamageDetailViewModel()
         {
             DeleteCommand = new Command(DeleteItem);
@@ -47,8 +47,6 @@ namespace CarApp.ViewModels
             get => price;
             set => SetProperty(ref price, value);
         }
-
-
         public Command DeleteCommand { get; set; }
 
         public async void LoadItemId(int itemId)

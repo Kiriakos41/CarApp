@@ -13,7 +13,7 @@ namespace CarApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CarPage : ContentPage
     {
-        MyCarViewModel viewModel;
+        readonly MyCarViewModel viewModel;
         public CarPage()
         {
             InitializeComponent();
@@ -21,7 +21,7 @@ namespace CarApp.Views
         }
         protected override void OnAppearing()
         {
-            viewModel.ExecuteLoadItemsCommand();
+            viewModel.OnAppear();
         }
     }
 }

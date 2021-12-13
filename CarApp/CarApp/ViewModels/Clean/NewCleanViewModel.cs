@@ -10,8 +10,10 @@ namespace CarApp.ViewModels
     public class NewCleanViewModel : BaseViewModel
     {
         private string quality;
-        private string price;
-
+        private decimal price;
+        private DateTime date = DateTime.Now;
+        public Command SaveCommand { get; }
+        public Command CancelCommand { get; }
         public List<string> Rating { get; set; } = new List<string>()
         {
             "Απλή","Μέτρια","Τέλεια"
@@ -20,30 +22,27 @@ namespace CarApp.ViewModels
         {
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
-            this.PropertyChanged +=
-                (_, __) => SaveCommand.ChangeCanExecute();
         }
-
+        public DateTime Date
+        {
+            get => date;
+            set => SetProperty(ref date, value);
+        }
         public string Quality
         {
             get => quality;
             set => SetProperty(ref quality, value);
         }
-        public string Price
+        public decimal Price
         {
             get => price;
             set => SetProperty(ref price, value);
         }
-
-        public Command SaveCommand { get; }
-        public Command CancelCommand { get; }
-
         private async void OnCancel()
         {
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");
         }
-
         private async void OnSave()
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
@@ -52,6 +51,7 @@ namespace CarApp.ViewModels
                 {
                     Quality = Quality,
                     Price = Price,
+                    Date = Date
                 };
                 await unitOfwork.Cleans.Insert(newItem);
 

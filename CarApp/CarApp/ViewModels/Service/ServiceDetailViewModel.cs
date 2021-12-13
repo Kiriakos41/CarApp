@@ -17,6 +17,13 @@ namespace CarApp.ViewModels
     public class ServiceDetailViewModel : BaseViewModel
     {
         private int itemId;
+        private string change;
+        private DateTime date;
+        public DateTime Date
+        {
+            get => date;
+            set => SetProperty(ref date, value);
+        }
         public int Id { get; set; }
         public int ItemId
         {
@@ -30,50 +37,17 @@ namespace CarApp.ViewModels
                 LoadItemId(value);
             }
         }
-        private string price;
-        private List<BindingEnum> services;
-        private bool show;
-        public bool Show
-        {
-            get => show;
-            set => SetProperty(ref show, value);
-        }
-        private bool showsecond = true;
-        public bool ShowSecond
-        {
-            get => showsecond;
-            set => SetProperty(ref showsecond, value);
-        }
-
-        private IList<object> _selectedServices;
-        public IList<object> SelectedServices
-        {
-            get => _selectedServices;
-            set => SetProperty(ref _selectedServices, value);
-        }
-        public List<BindingEnum> Services
-        {
-            get => services;
-            set => SetProperty(ref services, value);
-        }
-        public string Price
+        private decimal price;
+        public decimal Price
         {
             get => price;
             set => SetProperty(ref price, value);
         }
-        private string[] selitem;
-        public string[] SelectedItems 
+        public string Changes
         {
-            get => selitem; 
-            set => SetProperty(ref selitem, value);
+            get => change;
+            set => SetProperty(ref change, value);
         }
-
-
-        public void FillServices()
-        {
-            Services = new BindingEnum().BindEnumToSelectListItem<ServiceEnum>();
-        }
-
         public Command DeleteCommand { get; set; }
         public Command UpdateCommand { get; set; }
         public Command CancelCommand { get; set; }
@@ -84,7 +58,6 @@ namespace CarApp.ViewModels
             DeleteCommand = new Command(DeleteItem);
             UpdateCommand = new Command(UpdateItem);
             CancelCommand = new Command(OnCancel);
-            PopUp = new Command(ChangeList);
         }
         private async void OnCancel()
         {
@@ -103,16 +76,13 @@ namespace CarApp.ViewModels
         }
         public async void UpdateItem()
         {
-            var sr = SelectedServices.ToList();
-            var newSr = sr.Cast<BindingEnum>().ToList();
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
                 var item = await unitOfwork.ServiceTables.Get(itemId);
                 item.Id = Id;
                 item.Price = Price;
-                item.Changes = null;
-                item.Changes = string.Join(",", newSr.Select(x => x.Text));
-                item.NumberOfChanges = sr.Count;
+                item.Changes = Changes;
+                item.Date = Date;
                 await unitOfwork.ServiceTables.Update(item);
                 await Shell.Current.GoToAsync("..");
             }
@@ -125,26 +95,8 @@ namespace CarApp.ViewModels
                 var item = await unitOfwork.ServiceTables.Get(itemId);
                 Id = item.Id;
                 Price = item.Price;
-                SelectedItems = item.Changes.Split(',');
-            }
-        }
-
-        public void ChangeList()
-        {
-            var sr = SelectedServices.ToList();
-            if (Show)
-            {
-                Show = false;
-                ShowSecond = true;
-                if (sr.Count > 0)
-                {
-                    UpdateItem();
-                }
-            }
-            else
-            {
-                Show = true;
-                ShowSecond = false;
+                Changes = item.Changes;
+                Date = item.Date;
             }
         }
     }

@@ -10,9 +10,8 @@ namespace CarApp.Models
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        public string Price { get; set; }
+        public decimal Price { get; set; }
         public string Changes { get; set; }
-        public int NumberOfChanges { get; set; }
-      
+        public DateTime Date { get; set; }
     }
 }

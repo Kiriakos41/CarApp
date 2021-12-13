@@ -2,29 +2,31 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.NewRubberPage"
-             Title="Σελίδα Προσθήκης">
+             Title="Σελίδα Προσθήκης"
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}"
+             Shell.PresentationMode="ModalAnimated">
     <ContentPage.Content>
         <StackLayout>
-            <Frame Margin="5" HasShadow="True">
+            <Frame Margin="5" HasShadow="True"  BackgroundColor="{AppThemeBinding Light=White, Dark=gray}">
                 <StackLayout Margin="15">
                     <StackLayout Orientation="Horizontal">
                         <Image Source="money" HeightRequest="30"/>
-                        <Label Text="Τιμή Ελαστικών " FontSize="Medium"/>
+                        <Label Text="Τιμή Ελαστικών " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
                     </StackLayout>
-                    <Entry Text="{Binding Pr, Mode=TwoWay}" Placeholder="Γράψε εδώ.."/>
+                    <Entry Text="{Binding Pr}" Placeholder="Γράψε εδώ.." TextColor="{AppThemeBinding Dark=White, Light=black}"/>
                     <StackLayout Orientation="Horizontal">
                         <Image Source="schedule" HeightRequest="30"/>
-                        <Label Text="Ημερομηνία" FontSize="Medium"/>
+                        <Label Text="Ημερομηνία" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
                     </StackLayout>
-                    <DatePicker/>   
+                    <DatePicker Date="{Binding Date}"/>   
                     <StackLayout Orientation="Horizontal">
                         <Image Source="wheel" HeightRequest="30"/>
-                        <Label Text="Σχόλια" FontSize="Medium"/>
+                        <Label Text="Σχόλια" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=White}"/>
                     </StackLayout>
-                    <Editor Text="{Binding Commend, Mode=TwoWay}" Placeholder="Γράψε εδώ.." AutoSize="TextChanges" HeightRequest="80" BackgroundColor="WhiteSmoke"/>
+                    <Editor Text="{Binding Commend}" TextColor="{AppThemeBinding Dark=White, Light=black}" Placeholder="Γράψε εδώ.." AutoSize="TextChanges" HeightRequest="80" BackgroundColor="{AppThemeBinding Dark=gray, Light=black}"/>
                 </StackLayout>
             </Frame>
-            <Frame Margin="5" HasShadow="true" BackgroundColor="WhiteSmoke">
+            <Frame Margin="5" HasShadow="true" BackgroundColor="{AppThemeBinding Light=White, Dark=Gray}">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                     <Button WidthRequest="200" BackgroundColor="Red" Text="Ακύρωση" Command="{Binding CancelCommand}"/>
                     <Button WidthRequest="200" Background="Green" Text="Προσθήκη" Command="{Binding SaveCommand}"/>

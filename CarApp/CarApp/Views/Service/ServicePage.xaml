@@ -5,24 +5,41 @@
              Title="Service"
              xmlns:local="clr-namespace:CarApp.ViewModels"  
              xmlns:model="clr-namespace:CarApp.Models"
-             Shell.ForegroundColor="Transparent">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="add" Command="{Binding AddItemCommand}" />
-    </ContentPage.ToolbarItems>
+             Shell.ForegroundColor="Transparent"
+               BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <ContentPage.Content>
         <StackLayout>
-            <RefreshView x:DataType="local:ServiceViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <Frame HeightRequest="350" WidthRequest="550" 
+                           BackgroundColor="White" Padding="0"
+                           HasShadow="True" Margin="0,-10,0,0" CornerRadius="10"
+                           HorizontalOptions="CenterAndExpand">
+                <Grid>
+                    <StackLayout  BackgroundColor="Black">
+                        <Image Source="https://cdn.wearemarmalade.co.uk/wam/2020-12/car-service_0.jpg" 
+                                     Opacity="0.6"
+                                     HeightRequest="350"
+                                     HorizontalOptions="Center"
+                                     Aspect="AspectFill"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Button Text="+" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="EndAndExpand" FontSize="20" Margin="385,0,0,105" Command="{Binding AddItemCommand}"/>
+                        <Label Text="Σελίδα Service" TextColor="White" FontSize="20" Opacity="0.9"
+                           VerticalOptions="EndAndExpand" HorizontalOptions="Center"/>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+            <RefreshView x:DataType="local:ServiceViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" BackgroundColor="{AppThemeBinding Light=Black, Dark=White}">
                 <CollectionView ItemsSource="{Binding Items}" SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                                 <StackLayout Padding="10" x:DataType="model:Service">
-                                    <Frame WidthRequest="500" HasShadow="True">
-                                        <StackLayout Padding="10" Orientation="Horizontal" Spacing="25">
+                                    <Frame WidthRequest="500" HasShadow="True" BackgroundColor="{StaticResource Key=Secondary}" CornerRadius="10">
+                                        <StackLayout Padding="10" Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
                                             <Image Source="maintenance.png" HeightRequest="30"/>
-                                            <Label Text="{Binding NumberOfChanges, StringFormat='Αλλαγές : {0}'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="16" />
+                                            <Label Text="{Binding Changes, StringFormat='{0}'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="14" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
                                             <Image Source="money.png" HeightRequest="30"/>
-                                            <Label Text="{Binding Price, StringFormat='Τιμή {0}€'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="16" />
+                                            <Label Text="{Binding Price, StringFormat='-{0}€'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="14" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
                                             <StackLayout.GestureRecognizers>
                                                 <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"

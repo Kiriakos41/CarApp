@@ -3,32 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.ItemDetailPage"
              Title="{Binding Date, StringFormat='{0:MMMM dd, yyyy}'}"
-             Shell.ForegroundColor="Transparent">
+             Shell.ForegroundColor="Transparent"
+               BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="update" Command="{Binding UpdateCommand}" />
         <ToolbarItem IconImageSource="delete" Command="{Binding DeleteCommand}" />
     </ContentPage.ToolbarItems>
     <StackLayout>
-        <StackLayout Orientation="Horizontal" Margin="5">
-            <Image Source="gas" HeightRequest="30"/>
-            <Label Text="Ανανέωση Βενζίνης/Πετρελαίου/Αερίου: " FontSize="Medium" />
-        </StackLayout>
-        <StackLayout Margin="45,-15,0,0" >
-            <Entry Text="{Binding Gas, Mode=TwoWay}" FontSize="Large" TextColor="Black"/>
-        </StackLayout>
-        <StackLayout Orientation="Horizontal" Margin="5">
-            <Image Source="money" HeightRequest="30"/>
-            <Label Text="Τιμή γεμίσματος " FontSize="Medium" />
-        </StackLayout>
-        <StackLayout Margin="45,-15,0,0" >
-            <Entry Text="{Binding Price, Mode=TwoWay}" FontSize="Large" TextColor="Black"/>
-        </StackLayout>
-        <StackLayout Orientation="Horizontal" Margin="5">
-            <Image Source="distance" HeightRequest="30"/>
-            <Label Text="Συνολικά Χιλιόμετρα" FontSize="Medium" />
-        </StackLayout>
-        <StackLayout Margin="45,-15,0,0" >
-            <Entry Text="{Binding Khm, Mode=TwoWay}" FontSize="Large" TextColor="Black"/>
-        </StackLayout>
+        <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="0,-8,-1,0">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="5">
+                    <Image Source="gas" HeightRequest="30"/>
+                    <Label Text="Ανανέωση Βενζίνης/Πετρελαίου/Αερίου: " FontSize="Medium" TextColor="white"/>
+                </StackLayout>
+                <StackLayout Margin="45,-15,0,0" >
+                    <Entry Text="{Binding Gas, Mode=TwoWay}" FontSize="Large" TextColor="white"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="5">
+                    <Image Source="money" HeightRequest="30"/>
+                    <Label Text="Τιμή γεμίσματος " FontSize="Medium" TextColor="white"/>
+                </StackLayout>
+                <StackLayout Margin="45,-15,0,0" >
+                    <Entry Text="{Binding Price, Mode=TwoWay}" FontSize="Large" TextColor="white"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="5">
+                    <Image Source="distance" HeightRequest="30"/>
+                    <Label Text="Συνολικά Χιλιόμετρα" FontSize="Medium" TextColor="white"/>
+                </StackLayout>
+                <StackLayout Margin="45,-15,0,0" >
+                    <Entry Text="{Binding Khm, Mode=TwoWay}" FontSize="Large" TextColor="white"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
     </StackLayout>
 </ContentPage>

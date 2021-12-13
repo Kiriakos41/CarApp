@@ -9,7 +9,7 @@ namespace CarApp.Models
         public int Id { get; set; }
         public long Gas { get; set; }
         public long Kilometer { get; set; }
-        public string Price { get; set; }
+        public decimal Price { get; set; }
         public DateTime Date { get; set; }
     }
 }

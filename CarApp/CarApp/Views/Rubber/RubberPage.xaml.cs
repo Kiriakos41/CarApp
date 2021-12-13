@@ -23,6 +23,7 @@ namespace CarApp.Views
         {
             base.OnAppearing();
             viewmodel.OnAppearing();
+            viewmodel.fillList();
         }
     }
 }

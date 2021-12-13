@@ -2,24 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.NewCleanPage"
-             Title="Προσθήκη Καθαριότητας">
+             Title="Προσθήκη Καθαριότητας"
+             Shell.ForegroundColor="Transparent"
+             Shell.PresentationMode="ModalAnimated"
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <ContentPage.Content>
         <StackLayout>
-            <Frame Margin="5" HasShadow="True">
+            <Frame Margin="5" HasShadow="True" BackgroundColor="{AppThemeBinding Dark=gray, Light=White}">
                 <StackLayout Margin="15">
-                    <Label Text="Ποιότητα Καθαριότητας" FontSize="Medium"/>
-                    <Picker ItemsSource="{Binding Rating}" Title="Αναζήτησε εδώ.." SelectedItem="{Binding Quality, Mode=TwoWay}"/>
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Τιμή Καθαριότητας" FontSize="Medium"/>
-                        <Label Text="Έαν υπήρξαν υλικά για αλλγή*" TextColor="PaleVioletRed"/>
+                        <Image Source="cleaning" HeightRequest="30"/>
+                        <Label Text="Ποιότητα Καθαριότητας" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                     </StackLayout>
-                    <Entry Text="{Binding Price, Mode=TwoWay}" Placeholder="Γράψε εδώ.."/>
+                    <Picker ItemsSource="{Binding Rating}" Title="Αναζήτησε εδώ.." SelectedItem="{Binding Quality, Mode=TwoWay}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Image HeightRequest="30" Source="money"/>
+                        <Label Text="Τιμή Καθαριότητας" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                        <Label Text="Έαν υπήρξαν υλικά για αλλαγή*" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                    <Entry Text="{Binding Price, Mode=TwoWay}" Placeholder="Γράψε εδώ.." TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
+                        <Image Source="schedule" HeightRequest="40"/>
+                        <DatePicker Date="{Binding Date,Mode=TwoWay}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
                 </StackLayout>
             </Frame>
-            <Frame Margin="5" HasShadow="true" BackgroundColor="WhiteSmoke">
+            <Frame Margin="5" HasShadow="true" BackgroundColor="{AppThemeBinding Light=White, Dark=gray}">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Button WidthRequest="200" BackgroundColor="Red" Text="Ακύρωση" Command="{Binding CancelCommand}"/>
-                    <Button WidthRequest="200" Background="Green" Text="Προσθήκη" Command="{Binding SaveCommand}"/>
+                    <Button WidthRequest="200" BackgroundColor="Red" Text="Ακύρωση" Command="{Binding CancelCommand}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    <Button WidthRequest="200" Background="Green" Text="Προσθήκη" Command="{Binding SaveCommand}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                 </StackLayout>
             </Frame>
         </StackLayout>

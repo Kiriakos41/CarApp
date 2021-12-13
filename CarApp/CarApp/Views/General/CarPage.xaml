@@ -2,53 +2,119 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.CarPage"
-             xmlns:local="clr-namespace:CarApp.ViewModels"  
-             xmlns:model="clr-namespace:CarApp.Models"
              Title="Γενικά"
-             Shell.ForegroundColor="Transparent">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="sedan" />
-    </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        <StackLayout x:DataType="local:MyCarViewModel">
-            <Frame BackgroundColor="#2196f3" HasShadow="True">
-                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
-                    <Image Source="schedule" HeightRequest="30"/>
-                    <DatePicker WidthRequest="150" TextColor="White" Date="{Binding DateFrom, StringFormat='Ημερομηνία : {0:MMMM dd, yyyy}',Mode=TwoWay}"/>
-                    <Label Text="Εώς" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18" TextColor="White"/>
-                    <DatePicker WidthRequest="150" TextColor="White" Date="{Binding DateTo, StringFormat='Ημερομηνία : {0:MMMM dd, yyyy}',Mode=TwoWay}"/>
-                    <Image Source="Search" HeightRequest="30">
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding SortCommand}"/>
-                        </Image.GestureRecognizers>
-                    </Image>
-                </StackLayout>
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
+
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Frame HeightRequest="280" WidthRequest="180" 
+                           BackgroundColor="White" Padding="0"
+                           HasShadow="True" Margin="10" CornerRadius="10"
+                           HorizontalOptions="CenterAndExpand">
+                <Grid>
+                    <StackLayout  BackgroundColor="Black">
+                        <Image Source="https://cdn.pixabay.com/photo/2016/08/15/22/20/fuel-1596622_960_720.jpg" 
+                                     Opacity="0.6"
+                                     HeightRequest="350"
+                                     HorizontalOptions="Center"
+                                     Aspect="AspectFill"/>
+                    </StackLayout>
+                    <StackLayout Margin="0,0,0,10">
+                        <Label Text="Ανεφοδιασμός" TextColor="White" FontSize="15"
+                           FontAttributes="None" Margin="5,5"
+                           VerticalOptions="EndAndExpand"/>
+
+                        <StackLayout Orientation="Horizontal"  Margin="15,-8,0,0">
+                            <Image Source="gas" 
+                               HeightRequest="20"  Margin="-5,0"
+                               Aspect="AspectFit"/>
+                            <Label Text="{Binding Gs}" TextColor="White" FontSize="14" Margin="5"
+                           FontAttributes="None" 
+                           VerticalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
             </Frame>
-            <BoxView BackgroundColor="Black" HeightRequest="1" Margin="0,-6,0,0"/>
-            <Label Text="Σύνολο Ανεφοδιασμών : " FontSize="Title" Margin="30,10,-10,-10"/>
-            <Frame Margin="25" HasShadow="True">
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="gas" HeightRequest="60" HorizontalOptions="Start"/>
-                    <Label Text="{Binding Gs}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
-                </StackLayout>
+            <Frame HeightRequest="280" WidthRequest="180" 
+                           BackgroundColor="White" Padding="0"
+                           HasShadow="True" Margin="10" CornerRadius="10"
+                           HorizontalOptions="CenterAndExpand">
+                <Grid>
+                    <StackLayout  BackgroundColor="Black">
+                        <Image Source="carmiles" 
+                                    HeightRequest="350" Opacity="0.6"
+                                    Aspect="AspectFill"/>
+                    </StackLayout>
+                    <StackLayout Margin="0,0,0,10">
+                        <Label Text="Χιλιόμετρα" TextColor="White" FontSize="15"
+                           FontAttributes="None" Margin="5,5"
+                           VerticalOptions="EndAndExpand"/>
+
+                        <StackLayout Orientation="Horizontal"  Margin="15,-8,0,0">
+                            <Image Source="distance" 
+                               HeightRequest="20"  Margin="-5,0"
+                               Aspect="AspectFit"/>
+                            <Label Text="{Binding KilMax}" TextColor="White" FontSize="14"
+                           FontAttributes="None" 
+                           VerticalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
             </Frame>
-            <BoxView BackgroundColor="Gray" HeightRequest="1" Margin="0,0,0,30"/>
-            <Label Text="Συνολικά Χιλιόμετρα : " FontSize="Title" Margin="30,-10,-10,-10"/>
-            <Frame Margin="25" HasShadow="True">
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="distance" HeightRequest="60" HorizontalOptions="Start"/>
-                    <Label Text="{Binding KilMax}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
-                </StackLayout>
+            <Frame HeightRequest="280" WidthRequest="180" 
+                           BackgroundColor="White" Padding="0"
+                           HasShadow="True" Margin="10" CornerRadius="10"
+                           HorizontalOptions="CenterAndExpand">
+                <Grid>
+                    <StackLayout  BackgroundColor="Black">
+                        <Image Source="carmoney" 
+                                    HeightRequest="350" Opacity="0.6"
+                                    Aspect="AspectFill"/>
+                    </StackLayout>
+                    <StackLayout Margin="0,0,0,10">
+                        <Label Text="Έξοδα" TextColor="White" FontSize="15"
+                           FontAttributes="None" Margin="5,5"
+                           VerticalOptions="EndAndExpand"/>
+
+                        <StackLayout Orientation="Horizontal"  Margin="15,-8,0,0">
+                            <Image Source="money" 
+                               HeightRequest="20"  Margin="-5,0"
+                               Aspect="AspectFit"/>
+                            <Label Text="{Binding Pr}" TextColor="White" FontSize="14"
+                           FontAttributes="None" 
+                           VerticalOptions="EndAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
             </Frame>
-            <BoxView BackgroundColor="Gray" HeightRequest="1" Margin="0,0,0,30"/>
-            <Label Text="Συνολικά Έξοδα : " FontSize="Title" Margin="30,-10,-10,-10"/>
-            <Frame Margin="25" HasShadow="True">
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="money" HeightRequest="60" HorizontalOptions="Start"/>
-                    <Label Text="{Binding Pr}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" FontSize="Title"/>
-                </StackLayout>
-            </Frame>
-            <Button VerticalOptions="EndAndExpand" Text="Διάγραμμα" Command="{Binding ChartsCommand}"/>
         </StackLayout>
-    </ContentPage.Content>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Συνολικά Έξοδα: " TextColor="Black" FontSize="24" FontAttributes="Bold" Margin="15"/>
+        </StackLayout>
+        <Frame Margin="5" HasShadow="true" CornerRadius="10" BackgroundColor="#17A589">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="forex" HeightRequest="30"/>
+                <Label Text="Προηγούμενες 7 Μέρες: " TextColor="white" FontSize="16" FontAttributes="none" Margin="15"/>
+                <Label Text="{Binding WeekPrice, StringFormat='-{0}'}" TextColor="white" FontSize="16" FontAttributes="none" Margin="15"/>
+                <Image Source="money" HeightRequest="30"/>
+            </StackLayout>
+        </Frame>
+        <Frame Margin="5" HasShadow="true" CornerRadius="10"  BackgroundColor="#17A589">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="forex" HeightRequest="30"/>
+                <Label Text="Προηγούμενες 30 μέρες: " TextColor="white" FontSize="16" FontAttributes="none" Margin="15"/>
+                <Label Text="{Binding MonthPrice, StringFormat='-{0}'}" TextColor="white" FontSize="16" FontAttributes="none" Margin="15"/>
+                <Image Source="money" HeightRequest="30"/>
+            </StackLayout>
+        </Frame>
+        <Frame Margin="5" HasShadow="true" CornerRadius="10"  BackgroundColor="#17A589">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="forex" HeightRequest="30"/>
+                <Label Text="Προηγούμενες 90 μέρες: " TextColor="white" FontSize="16" FontAttributes="none" Margin="15"/>
+                <Label Text="{Binding ThreeMonthPrice, StringFormat='-{0}'}" TextColor="white" FontSize="16" FontAttributes="none" Margin="15"/>
+                <Image Source="money" HeightRequest="30"/>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+
 </ContentPage>

@@ -14,8 +14,14 @@ namespace CarApp.ViewModels
     {
         private int itemId;
         private string quality;
-        private string price;
-        public List<string> Rating { get; set; }
+        private decimal price;
+        private DateTime date;
+        public DateTime Date
+        {
+            get => date;
+            set => SetProperty(ref date, value);
+        }
+        public List<string> Rating { get; set; } = new List<string> { "Απλή", "Μέτρια", "Άριστη" };
         public int Id { get; set; }
         public string Quality
         {
@@ -34,7 +40,7 @@ namespace CarApp.ViewModels
                 LoadItemId(value);
             }
         }
-        public string Price
+        public decimal Price
         {
             get => price;
             set => SetProperty(ref price, value);
@@ -45,7 +51,6 @@ namespace CarApp.ViewModels
 
         public CleanDetailViewModel()
         {
-            Rating = new List<string> { "Απλή", "Μέτρια", "Άριστη" };
             DeleteCommand = new Command(DeleteItem);
             UpdateCommand = new Command(UpdateItem);
             CancelCommand = new Command(OnCancel);
@@ -72,6 +77,7 @@ namespace CarApp.ViewModels
                 item.Id = Id;
                 item.Quality = Quality;
                 item.Price = Price;
+                item.Date = Date;
                 await unitOfwork.Cleans.Update(item);
                 await Shell.Current.GoToAsync("..");
             }
@@ -85,6 +91,7 @@ namespace CarApp.ViewModels
                 Id = item.Id;
                 Quality = item.Quality;
                 Price = item.Price;
+                Date = item.Date;
             }
         }
     }

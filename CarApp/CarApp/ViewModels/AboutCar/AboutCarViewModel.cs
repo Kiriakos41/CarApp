@@ -3,7 +3,6 @@ using CarApp.Repositories;
 using CarApp.Views;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -17,7 +16,6 @@ namespace CarApp.ViewModels
         public ObservableCollection<AboutCar> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
-        public Command DeleteCommand { get; }
         public Command<AboutCar> ItemTapped { get; }
         public Command SortListCommand { get; }
 
@@ -51,8 +49,6 @@ namespace CarApp.ViewModels
         {
             Title = "Γεμίσματα";
             Items = new ObservableCollection<AboutCar>();
-
-
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
             ItemTapped = new Command<AboutCar>(OnItemSelected);
@@ -61,7 +57,6 @@ namespace CarApp.ViewModels
 
             SortListCommand = new Command(SortList);
 
-            DeleteCommand = new Command(DeleteItem);
         }
         public void SortList()
         {
@@ -101,10 +96,9 @@ namespace CarApp.ViewModels
                 {
                     Items.Add(refil);
                 }
-                /////////////
-                SortList();
-                IsBusy = false;
+                SortList();   
             }
+            IsBusy = false;
         }
 
         public void OnAppearing()
@@ -135,14 +129,6 @@ namespace CarApp.ViewModels
 
             // This will push the ItemDetailPage onto the navigation stack
             await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
-        }
-        private async void DeleteItem()
-        {
-            using (var unitOfwork = new UnitOfWork(App.DbPath))
-            {
-                //await unitOfwork.AboutCars.Delete();
-            }
-
         }
     }
 }

@@ -19,10 +19,5 @@ namespace CarApp.Views
             InitializeComponent();
             BindingContext = viewmodel = new ServiceDetailViewModel();
         }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            viewmodel.FillServices();
-        }
     }
 }

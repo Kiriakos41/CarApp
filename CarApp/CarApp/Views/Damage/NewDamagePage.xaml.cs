@@ -8,11 +8,10 @@ namespace CarApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewDamagePage : ContentPage
     {
-        NewDamageViewModel vm;
         public NewDamagePage()
         {
             InitializeComponent();
-            BindingContext = vm = new NewDamageViewModel();
+            BindingContext = new NewDamageViewModel();
         }
     }
 }

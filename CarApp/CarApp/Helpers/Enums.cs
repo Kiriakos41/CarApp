@@ -31,6 +31,5 @@ namespace CarApp.Helpers
         DynamoBelt,
         [Description("Υγρά Φρένων")]
         Brakesliquid
-
     }
 }

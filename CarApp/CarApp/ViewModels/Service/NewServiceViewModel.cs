@@ -15,25 +15,16 @@ namespace CarApp.ViewModels
     public class NewServiceViewModel : BaseViewModel
     {
         private string changes;
-        private string price;
-        private IList<object> _selectedServices;
-        private List<BindingEnum> services;
-
-        public IList<object> SelectedServices
+        private decimal price;
+        private DateTime date = DateTime.Now;
+        public DateTime Date
         {
-            get => _selectedServices;
-            set => SetProperty(ref _selectedServices, value);
+            get => date;
+            set => SetProperty(ref date, value);
         }
-
-        public List<BindingEnum> Services { 
-            get => services;
-            set => SetProperty(ref services, value);
-        }
-
 
         public NewServiceViewModel()
         {
-            Services = new BindingEnum().BindEnumToSelectListItem<ServiceEnum>();
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
             this.PropertyChanged +=
@@ -44,7 +35,7 @@ namespace CarApp.ViewModels
             get => changes;
             set => SetProperty(ref changes, value);
         }
-        public string Price
+        public decimal Price
         {
             get => price;
             set => SetProperty(ref price, value);
@@ -62,13 +53,11 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                var sr = SelectedServices.ToList();
-                var newSr = sr.Cast<BindingEnum>().ToList();
                 Service newItem = new Service()
                 {
-                    Changes = string.Join(",", newSr.Select(x => x.Text)),
+                    Changes = Changes,
                     Price = Price,
-                    NumberOfChanges = sr.Count,
+                    Date = Date
                 };
                 await unitOfwork.ServiceTables.Insert(newItem);
 

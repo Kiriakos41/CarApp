@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -16,7 +17,24 @@ namespace CarApp.ViewModels
         private string id;
         private DateTime dateTo;
         private DateTime dateFrom;
-
+        private decimal monthPrice;
+        private decimal weekPrice;
+        private decimal threeMonthPrice;
+        public decimal ThreeMonthPrice
+        {
+            get => threeMonthPrice;
+            set => SetProperty(ref threeMonthPrice, value);
+        }
+        public decimal WeekPrice
+        {
+            get => weekPrice;
+            set => SetProperty(ref weekPrice, value);
+        }
+        public decimal MonthPrice
+        {
+            get => monthPrice;
+            set => SetProperty(ref monthPrice, value);
+        }
         public DateTime DateTo
         {
             get => dateTo;
@@ -47,27 +65,18 @@ namespace CarApp.ViewModels
             get => gs;
             set => SetProperty(ref gs, value);
         }
-
-
-
         private long pr;
         private long kilmax;
         private long gs;
         public ObservableCollection<AboutCar> Items { get; set; }
         public Command SortCommand { get; set; }
-        public Command ChartsCommand { get; set; }
         public MyCarViewModel()
         {
             SortCommand = new Command(SortByDate);
-            ChartsCommand = new Command(GoToCharts);
             Items = new ObservableCollection<AboutCar>();
             DateTo = DateTime.Now;
         }
-        public void GoToCharts()
-        {
-            Shell.Current.CurrentItem.CurrentItem.Items.Add(new ChartsPage());
-            Shell.Current.CurrentItem.CurrentItem.Items.RemoveAt(0);
-        }
+
         public async Task ExecuteLoadItemsCommand()
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
@@ -77,6 +86,7 @@ namespace CarApp.ViewModels
                 KilMax = 0;
                 try
                 {
+                    // List 0
                     var items = await unitOfwork.AboutCars.Get<AboutCar>();
                     foreach (var item in items)
                     {
@@ -85,27 +95,83 @@ namespace CarApp.ViewModels
                         Pr += Convert.ToInt64(item.Price);
                         Gs += Convert.ToInt64(item.Gas);
                     }
+                    var smg = items
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-7) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    var smgMon = items
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-30) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    var smg3Mon = items
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-90) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    // List 1
                     var items1 = await unitOfwork.Cleans.Get<Clean>();
                     foreach (var item in items1)
                     {
                         Pr += Convert.ToInt64(item.Price);
                     }
-                    var items2 = await unitOfwork.ServiceTables.Get<Clean>();
+                    var smg1 = items1
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-7) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    var smgMon1 = items1
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-30) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    var smg3Mon1 = items1
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-90) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    //List 2
+                    var items2 = await unitOfwork.Damages.Get<Damage>();
                     foreach (var item in items2)
                     {
                         Pr += Convert.ToInt64(item.Price);
                     }
-                    var items3 = await unitOfwork.Damages.Get<Damage>();
+                    var smg2 = items2
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-7) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    var smgMon2 = items2
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-30) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    var smg3Mon2 = items2
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-90) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    // List 4
+                    var items3 = await unitOfwork.RubberTables.Get<Rubber>();
                     foreach (var item in items3)
                     {
                         Pr += Convert.ToInt64(item.Price);
                     }
-                    var items4 = await unitOfwork.RubberTables.Get<Rubber>();
+                    var smg3 = items3
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-7) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    var smgMon3 = items3
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-30) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    var smg3Mon3 = items3
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-90) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    //List 5
+                    var items4 = await unitOfwork.ServiceTables.Get<Service>();
                     foreach (var item in items4)
                     {
                         Pr += Convert.ToInt64(item.Price);
                     }
+                    var smg4 = items4
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-7) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    var smgMon4 = items4
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-30) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    var smg3Mon4 = items4
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-90) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    //
                     KilMax = items.Select(x => x.Kilometer).Max();
+                    WeekPrice = 0;
+                    MonthPrice = 0;
+                    ThreeMonthPrice = 0;
+                    WeekPrice += smg + smg1 + smg2 + smg3 + smg4;
+                    MonthPrice += smgMon + smgMon2 + smgMon3 + smgMon4;
+                    ThreeMonthPrice += smg3Mon + smg3Mon1 + smg3Mon2 + smg3Mon3 + smg3Mon4;
                     IsBusy = false;
                 }
                 catch (Exception ex)
@@ -113,6 +179,10 @@ namespace CarApp.ViewModels
                     Console.WriteLine(ex.Message);
                 }
             }
+        }
+        public async void OnAppear()
+        {
+            await ExecuteLoadItemsCommand();
         }
         public void SortByDate()
         {
@@ -127,15 +197,6 @@ namespace CarApp.ViewModels
                 Gs += Convert.ToInt64(item.Gas);
             }
         }
-        private async void OnSave()
-        {
 
-            await Shell.Current.GoToAsync(nameof(ItemsPage));
-        }
-        private async void OnCancel()
-        {
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync(nameof(ItemsPage));
-        }
     }
 }

@@ -2,9 +2,7 @@
 using CarApp.Repositories;
 using CarApp.Views;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -13,8 +11,7 @@ namespace CarApp.ViewModels
     public class RubberViewModel : BaseViewModel
     {
         private Rubber _selectedItem;
-        public ObservableCollection<Rubber> Items { get; }
-        public Command LoadItemsCommand { get; }
+        public ObservableCollection<Rubber> RuberItems { get; set; }
         public Command AddItemCommand { get; }
         public Command<Rubber> ItemTapped { get; }
         public Command SortListCommand { get; }
@@ -34,59 +31,24 @@ namespace CarApp.ViewModels
         }
         public RubberViewModel()
         {
-            Items = new ObservableCollection<Rubber>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
-
+            RuberItems = new ObservableCollection<Rubber>();
             ItemTapped = new Command<Rubber>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
-
-            //SortListCommand = new Command(SortList);
         }
-        //public void SortList()
-        //{
-        //    if (!isSort)
-        //    {
-        //        isSort = true;
-        //        var sorted = Items.OrderByDescending(x => x.Price).ToList();
-        //        Items.Clear();
-        //        Pr = 0;
-        //        foreach (var item in sorted)
-        //        {
-        //            Items.Add(item);
-        //            Pr += Convert.ToInt64(item.Price);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        isSort = false;
-        //        var sorted = Items.OrderBy(x => x.Price).ToList();
-        //        Items.Clear();
-        //        Pr = 0;
-        //        foreach (var item in sorted)
-        //        {
-        //            Items.Add(item);
-        //            Pr += Convert.ToInt64(item.Price);
-        //        }
-        //    }
-        //}
 
-        async Task ExecuteLoadItemsCommand()
+        public async void fillList()
         {
+            RuberItems.Clear();
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                Items.Clear();
                 var servs = await unitOfwork.RubberTables.Get<Service>();
                 foreach (var srv in servs)
                 {
-                    Items.Add(srv);
-                    Pr += Convert.ToInt64(srv.Price);
+                    RuberItems.Add(srv);
                 }
-
-                //SortList();
-                IsBusy = false;
             }
-
+            IsBusy = false;
         }
 
         public void OnAppearing()
@@ -115,7 +77,7 @@ namespace CarApp.ViewModels
             if (item == null)
                 return;
 
-            //await Shell.Current.GoToAsync($"{nameof(ServiceDetailPage)}?{nameof(ServiceDetailViewModel.ItemId)}={item.Id}");
+            await Shell.Current.GoToAsync($"{nameof(RubberDetailPage)}?{nameof(RubberDetailViewModel.ItemId)}={item.Id}");
         }
     }
 }

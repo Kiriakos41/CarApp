@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
-namespace CarApp.ViewModels
+namespace CarApp.Compoments
 {
-    public class RubberDetailPage : BaseViewModel
+    public class CustomEntry : Entry
     {
     }
 }

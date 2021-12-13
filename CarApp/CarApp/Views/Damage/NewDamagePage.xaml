@@ -2,7 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.NewDamagePage"
-             Title="Διάφορες Βλάβες">
+             Title="Διάφορες Βλάβες"
+             Shell.ForegroundColor="Transparent"
+             Shell.PresentationMode="ModalAnimated"
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Αποθήκευση" Command="{Binding SaveCommand}" />
     </ContentPage.ToolbarItems>
@@ -10,32 +13,33 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal" Margin="5">
                 <Image Source="parts" HeightRequest="30"/>
-                <Label Text="Ανταλλακτικό:" FontSize="Medium" />
-                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="PaleVioletRed"/>
+                <Label Text="Ανταλλακτικό:" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
             </StackLayout>
             <StackLayout Margin="45,-15,0,0" >
-                <Picker SelectedItem="{Binding Description}" ItemsSource="{Binding Parts}"/>
+                <Entry Text="{Binding Description}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="5">
                 <Image Source="money" HeightRequest="30"/>
-                <Label Text="Τιμή: " FontSize="Medium" />
-                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="PaleVioletRed"/>
+                <Label Text="Τιμή: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
             </StackLayout>
             <StackLayout Margin="45,-15,0,0" >
-                <Entry Text="{Binding Price}"/>
+                <Entry Text="{Binding Price}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Margin="5">
                 <Image Source="schedule" HeightRequest="30"/>
-                <Label Text="Ημερομηνία: " FontSize="Medium" />
+                <Label Text="Ημερομηνία: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}" />
             </StackLayout>
             <StackLayout Margin="45,-15,0,0" >
-                <DatePicker Date="{Binding Date, Mode=TwoWay}"/>
+                <DatePicker Date="{Binding Date}"/>
             </StackLayout>
-
-            <StackLayout Orientation="Horizontal">
-                <Button Text="Πίσω" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
-                <Button Text="Αποθήκευση" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
-            </StackLayout>
+            <Frame Margin="5" HasShadow="true" BackgroundColor="{AppThemeBinding Light=White, Dark=gray}">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button WidthRequest="200" BackgroundColor="Red" Text="Ακύρωση" Command="{Binding CancelCommand}" TextColor="White"/>
+                    <Button WidthRequest="200" Background="Green" Text="Προσθήκη" Command="{Binding SaveCommand}" TextColor="White"/>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

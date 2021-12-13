@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.CleanDetailPage"
              Title="Λεπτομέρειες Καθαριότητας"
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}"
              Shell.ForegroundColor="Transparent">
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="Update" Command="{Binding UpdateCommand}"/>
@@ -10,15 +11,19 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Frame>
+            <Frame BackgroundColor="{AppThemeBinding Light=White, Dark=gray}">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
                         <Image Source="cleaning" HeightRequest="40"/>
-                        <Picker ItemsSource="{Binding Rating}" SelectedItem="{Binding Quality, Mode=TwoWay}" WidthRequest="250"/>
+                        <Picker ItemsSource="{Binding Rating}" SelectedItem="{Binding Quality, Mode=TwoWay}" WidthRequest="250" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
                         <Image Source="money" HeightRequest="40"/>
-                        <Entry Text="{Binding Price, Mode=TwoWay}" WidthRequest="250"/>
+                        <Entry Text="{Binding Price, Mode=TwoWay}" WidthRequest="250" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
+                        <Image Source="schedule" HeightRequest="40"/>
+                        <DatePicker Date="{Binding Date, Mode=TwoWay}" WidthRequest="250" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>

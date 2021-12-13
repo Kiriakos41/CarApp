@@ -6,27 +6,45 @@
              xmlns:local="clr-namespace:CarApp.ViewModels"  
              xmlns:model="clr-namespace:CarApp.Models"  
              x:Name="BrowseItemsPage"
-             Shell.ForegroundColor="Transparent">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="add" Command="{Binding AddItemCommand}" />
-    </ContentPage.ToolbarItems>
+             Shell.ForegroundColor="Transparent"
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <StackLayout>
-        <RefreshView x:DataType="local:AboutCarViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None" >
+        <Frame HeightRequest="350" WidthRequest="550"
+                           BackgroundColor="White" Padding="0"
+                           HasShadow="True" Margin="0,-10,0,0" CornerRadius="10"
+                           HorizontalOptions="CenterAndExpand">
+            <Grid x:DataType="local:AboutCarViewModel">
+                <StackLayout  BackgroundColor="Black">
+                    <Image Source="https://cdn.pixabay.com/photo/2016/08/15/22/20/fuel-1596622_960_720.jpg" 
+                                     Opacity="0.6"
+                                     HeightRequest="350"
+                                     HorizontalOptions="Center"
+                                     Aspect="AspectFill"/>
+                  
+                </StackLayout>
+                <StackLayout>
+                    <Button Text="+" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="EndAndExpand" FontSize="20" Margin="385,0,0,105" Command="{Binding AddItemCommand}"/>
+                    <Label Text="Σελίδα Ανεφοδιασμού" TextColor="White" FontSize="20" Opacity="0.9"
+                           VerticalOptions="EndAndExpand" HorizontalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+        <RefreshView x:DataType="local:AboutCarViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" BackgroundColor="{AppThemeBinding Dark=gray, Light=Black}">
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="None" BackgroundColor="{AppThemeBinding Dark=gray, Light=White} ">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Orientation="Horizontal">
                             <StackLayout Padding="10" x:DataType="model:AboutCar">
-                                <Label Text="{Binding Date, StringFormat='  {0:MMMM dd, yyyy}'}" FontSize="Body" FontAttributes="Italic"/>
-                                <Frame  WidthRequest="500" HasShadow="True">
+                                <Label Text="{Binding Date, StringFormat='  {0:MMMM dd, yyyy}'}" FontSize="Body" FontAttributes="Italic" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                                <Frame  WidthRequest="550" HasShadow="True" BackgroundColor="{StaticResource Key=Secondary}" CornerRadius="10">
                                     <StackLayout>
-                                        <StackLayout Orientation="Horizontal" Spacing="15">
+                                        <StackLayout Orientation="Horizontal" Spacing="25">
                                             <Image Source="gas.png" HeightRequest="30"/>
-                                            <Label Text="{Binding Gas , StringFormat='Λίτρα {0}'}"  LineBreakMode="NoWrap"  Style="{DynamicResource ListItemTextStyle}"  FontSize="13" VerticalOptions="Center" />
+                                            <Label Text="{Binding Gas , StringFormat='{0}L'}"  LineBreakMode="NoWrap"  Style="{DynamicResource ListItemTextStyle}"  FontSize="14" VerticalOptions="Center" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                                             <Image Source="distance.png" HeightRequest="30"/>
-                                            <Label Text="{Binding Kilometer, StringFormat='Χιλιόμετρα {0}'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="13" />
+                                            <Label Text="{Binding Kilometer, StringFormat='{0}Khm'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="14" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                                             <Image Source="money.png" HeightRequest="30"/>
-                                            <Label Text="{Binding Price, StringFormat='Τιμή {0}€'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="13" />
+                                            <Label Text="{Binding Price, StringFormat='-{0}€'}"  LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="14" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                                             <StackLayout.GestureRecognizers>
                                                 <TapGestureRecognizer 
                                 NumberOfTapsRequired="1"
@@ -43,19 +61,5 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
-        <StackLayout>
-            <StackLayout>
-                <Frame BackgroundColor="#2196f3" HasShadow="True" Margin="5">
-                    <StackLayout Orientation="Horizontal" Margin="5" Spacing="25">
-                        <Label Text="{Binding SortText}" TextColor="White" VerticalOptions="Center"/>
-                        <Image Source="{Binding SortImage}" HeightRequest="40">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding SortListCommand}"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-                    </StackLayout>
-                </Frame>
-            </StackLayout>
-        </StackLayout>
     </StackLayout>
 </ContentPage>

@@ -4,9 +4,9 @@
        xmlns:local="clr-namespace:CarApp.Views"
        Title="CarApp"
        x:Class="CarApp.AppShell"
-       FlyoutHeaderBehavior="CollapseOnScroll"
-       x:Name="myShell">
-
+       FlyoutHeaderBehavior="Fixed"
+       x:Name="myShell"
+       BackgroundColor="#7393B3">
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid BackgroundColor="Black" HeightRequest="200">
@@ -28,16 +28,18 @@
         <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:CleanPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Βλάβες" Icon="breakdown.png">
-        <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:DamagePage}" />
+        <ShellContent Route="DamagePage" ContentTemplate="{DataTemplate local:DamagePage}" />
     </FlyoutItem>
     <FlyoutItem Title="Ελαστικά" Icon="wheel">
-        <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:RubberPage}" />
+        <ShellContent Route="RubberPage" ContentTemplate="{DataTemplate local:RubberPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Extra" Icon="extra">
+        <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ChartsPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Διάγραμμα" Icon="charts">
-        <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:ChartsPage}" />
+        <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ChartsPage}" />
     </FlyoutItem>
-
     <FlyoutItem Title="Αναφορά Προβλήματος" Icon="support">
-        <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:ChartsPage}" />
+        <ShellContent/>
     </FlyoutItem>
 </Shell>

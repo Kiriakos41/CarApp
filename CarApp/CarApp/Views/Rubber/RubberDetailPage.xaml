@@ -1,12 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CarApp.Views.RubberDetailPage">
+             x:Class="CarApp.Views.RubberDetailPage"
+             Title="Επεξεργασία"
+             Shell.ForegroundColor="Transparent"
+               BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="Update" Command="{Binding UpdateCommand}"/>
+        <ToolbarItem IconImageSource="Delete" Command="{Binding DeleteCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Frame Margin="5" HasShadow="True"  BackgroundColor="{AppThemeBinding Light=white, Dark=gray}">
+                <StackLayout>
+                    <Label Text="Σχόλιο: " Margin="60,0,0,0" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
+                    <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
+                        <Image Source="commend" HeightRequest="40"/>
+                        <Entry Text="{Binding Commend, Mode=TwoWay}" WidthRequest="250" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
+                    </StackLayout>
+                    <Label Text="Τιμή: " Margin="60,0,0,0" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
+                    <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
+                        <Image Source="money" HeightRequest="40"/>
+                        <Entry Text="{Binding Price, Mode=TwoWay}" WidthRequest="250" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
+                    </StackLayout>
+                    <Label Text="Ημερομηνία: " Margin="60,0,0,0" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
+                    <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
+                        <Image Source="schedule" HeightRequest="40"/>
+                        <DatePicker  Date="{Binding Date}" WidthRequest="250" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

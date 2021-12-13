@@ -12,8 +12,8 @@ namespace CarApp.ViewModels
     {
         private long gas;
         private long khm;
-        private string price;
-        private DateTime date;
+        private decimal price;
+        private DateTime date = DateTime.Now;
 
         public DateTime Date
         {
@@ -23,7 +23,6 @@ namespace CarApp.ViewModels
 
         public NewItemViewModel()
         {
-            Date = DateTime.Now;
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
             this.PropertyChanged +=
@@ -35,7 +34,7 @@ namespace CarApp.ViewModels
             get => gas;
             set => SetProperty(ref gas, value);
         }
-        public string Price
+        public decimal Price
         {
             get => price;
             set => SetProperty(ref price, value);
@@ -51,7 +50,6 @@ namespace CarApp.ViewModels
 
         private async void OnCancel()
         {
-            // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");
         }
 
