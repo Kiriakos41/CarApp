@@ -11,7 +11,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Frame BackgroundColor="{AppThemeBinding Light=White, Dark=gray}">
+            <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="0,-8,-1,0">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
                         <Image Source="cleaning" HeightRequest="40"/>

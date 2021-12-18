@@ -18,7 +18,7 @@
     <FlyoutItem Title="Γενικά" Icon="sedan.png">
         <ShellContent Route="CarPage" ContentTemplate="{DataTemplate local:CarPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Ανεφοδιασμός" Icon="gas.png">
+    <FlyoutItem Title="Ανεφοδιασμός/Χιλιόμετρα" Icon="gas.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Service" Icon="maintenance.png">
@@ -36,10 +36,10 @@
     <FlyoutItem Title="Extra" Icon="extra">
         <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ChartsPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="KTEO" Icon="test">
+        <ShellContent Route="car" ContentTemplate="{DataTemplate local:KteosPage}" />
+    </FlyoutItem>
     <FlyoutItem Title="Διάγραμμα" Icon="charts">
         <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ChartsPage}" />
-    </FlyoutItem>
-    <FlyoutItem Title="Αναφορά Προβλήματος" Icon="support">
-        <ShellContent/>
     </FlyoutItem>
 </Shell>

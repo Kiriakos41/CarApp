@@ -11,29 +11,33 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal" Margin="5">
-                <Image Source="parts" HeightRequest="30"/>
-                <Label Text="Ανταλλακτικό:" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-            </StackLayout>
-            <StackLayout Margin="45,-15,0,0" >
-                <Entry Text="{Binding Description}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" Margin="5">
-                <Image Source="money" HeightRequest="30"/>
-                <Label Text="Τιμή: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-            </StackLayout>
-            <StackLayout Margin="45,-15,0,0" >
-                <Entry Text="{Binding Price,Mode=TwoWay}"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" Margin="5">
-                <Image Source="schedule" HeightRequest="30"/>
-                <Label Text="Ημερομηνία: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-            </StackLayout>
-            <StackLayout Margin="45,-15,0,0" >
-                <DatePicker Date="{Binding Date, Mode=TwoWay}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-            </StackLayout>
+            <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="0,-8,-1,0">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="5">
+                        <Image Source="parts" HeightRequest="30"/>
+                        <Label Text="Ανταλλακτικό:" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                        <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                    <StackLayout Margin="45,-15,0,0" >
+                        <Entry Text="{Binding Description}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="5">
+                        <Image Source="money" HeightRequest="30"/>
+                        <Label Text="Τιμή: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                        <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                    <StackLayout Margin="45,-15,0,0" >
+                        <Entry Text="{Binding Price,Mode=TwoWay}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="5">
+                        <Image Source="schedule" HeightRequest="30"/>
+                        <Label Text="Ημερομηνία: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                    <StackLayout Margin="45,-15,0,0" >
+                        <DatePicker Date="{Binding Date, Mode=TwoWay}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

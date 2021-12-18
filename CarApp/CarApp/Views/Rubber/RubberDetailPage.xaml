@@ -11,8 +11,9 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Frame Margin="5" HasShadow="True"  BackgroundColor="{AppThemeBinding Light=white, Dark=gray}">
+            <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="0,-8,-1,0">
                 <StackLayout>
+                    <StackLayout>
                     <Label Text="Σχόλιο: " Margin="60,0,0,0" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
                     <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
                         <Image Source="commend" HeightRequest="40"/>
@@ -28,6 +29,7 @@
                         <Image Source="schedule" HeightRequest="40"/>
                         <DatePicker  Date="{Binding Date}" WidthRequest="250" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
                     </StackLayout>
+                </StackLayout>
                 </StackLayout>
             </Frame>
         </StackLayout>

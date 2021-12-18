@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CarApp.Views.DamagePage"
+             x:Class="CarApp.Views.KteosPage"
              xmlns:local="clr-namespace:CarApp.ViewModels"  
              xmlns:model="clr-namespace:CarApp.Models"  
              x:Name="BrowseItemsPage"
@@ -16,7 +16,7 @@
                            HorizontalOptions="CenterAndExpand">
                 <Grid>
                     <StackLayout  BackgroundColor="Black">
-                        <Image Source="https://www.theaa.com/~/media/the-aa/insurance/car-insurance/advice/damage-categories.jpg" 
+                        <Image Source="https://www.drive.gr/sites/default/files/styles/main_image/public/node-files/photos/news/2020/11/kteo.jpg?itok=ZLq2vdCG" 
                                      Opacity="0.6"
                                      HeightRequest="350"
                                      HorizontalOptions="Center"
@@ -24,29 +24,31 @@
                     </StackLayout>
                     <StackLayout>
                         <Button Text="+" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="EndAndExpand" FontSize="20" Margin="385,0,0,105" Command="{Binding AddItemCommand}"/>
-                        <Label Text="Σελίδα Βλάβες" TextColor="White" FontSize="20" Opacity="0.9"
+                        <Label Text="Σελίδα ΚΤΕΟ" TextColor="White" FontSize="20" Opacity="0.9"
                            VerticalOptions="EndAndExpand" HorizontalOptions="Center"/>
                     </StackLayout>
                 </Grid>
             </Frame>
-            <RefreshView x:DataType="local:DamageViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" BackgroundColor="{AppThemeBinding Dark=gray, Light=Black}">
+            <RefreshView x:DataType="local:KteoViweModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" BackgroundColor="{AppThemeBinding Dark=gray, Light=Black}">
                 <CollectionView ItemsSource="{Binding Items}" SelectionMode="None" BackgroundColor="{AppThemeBinding Dark=gray, Light=White} ">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Orientation="Horizontal">
-                                <StackLayout Padding="10" x:DataType="model:Damage">
+                                <StackLayout Padding="10" x:DataType="model:Kteo">
                                     <Label Text="{Binding Date, StringFormat='{0:MMMM dd, yyyy}'}" FontSize="Body" FontAttributes="Italic" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
                                     <Frame  WidthRequest="500" HasShadow="True" BackgroundColor="{StaticResource Secondary}" CornerRadius="10">
                                         <StackLayout>
                                             <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
                                                 <Image Source="money.png" HeightRequest="30"/>
-                                                <Label Text="{Binding Price , StringFormat='{0}€'}"  LineBreakMode="NoWrap"  Style="{DynamicResource ListItemTextStyle}"  FontSize="14" VerticalOptions="Center" TextColor="{AppThemeBinding Dark=White, Light=White}"/>
-                                                <Image Source="engine.png" HeightRequest="30"/>
-                                                <Label Text="{Binding Description}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="14" TextColor="{AppThemeBinding Dark=White, Light=White}"/>
+                                                <Label Text="{Binding Price , StringFormat='{0}€'}"  LineBreakMode="NoWrap"  Style="{DynamicResource ListItemTextStyle}"  FontSize="11" VerticalOptions="Center" TextColor="{AppThemeBinding Dark=White, Light=White}"/>
+                                                <Image Source="test" HeightRequest="30"/>
+                                                <Label Text="{Binding KteoDetail}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="11" TextColor="{AppThemeBinding Dark=White, Light=White}"/>
+                                                <Image Source="schedule" HeightRequest="30"/>
+                                                <Label Text="{Binding NextKteo, StringFormat='{0:MMMM dd, yyyy}'}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="11" TextColor="{AppThemeBinding Dark=White, Light=White}"/>
                                                 <StackLayout.GestureRecognizers>
                                                     <TapGestureRecognizer 
                                                 NumberOfTapsRequired="1"
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:DamageViewModel}}, Path=ItemTapped}"		
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:KteoViweModel}}, Path=ItemTapped}"		
                                                 CommandParameter="{Binding .}">
                                                     </TapGestureRecognizer>
                                                 </StackLayout.GestureRecognizers>

@@ -2,23 +2,23 @@
 using CarApp.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Text;
 using Xamarin.Forms;
 
 namespace CarApp.ViewModels
 {
-    public class NewDamageViewModel : BaseViewModel
+    public class NewKteoViewModel : BaseViewModel
     {
         private DateTime _date = DateTime.Now;
         private decimal price;
         private string desc;
+        private DateTime _next = DateTime.Now.AddYears(2);
         public decimal Price
         {
             get => price;
             set => SetProperty(ref price, value);
         }
-        public string Description
+        public string KteoDetail
         {
             get => desc;
             set => SetProperty(ref desc, value);
@@ -28,7 +28,12 @@ namespace CarApp.ViewModels
             get => _date;
             set => SetProperty(ref _date, value);
         }
-        public NewDamageViewModel()
+        public DateTime Next
+        {
+            get => _next;
+            set => SetProperty(ref _next, value);
+        }
+        public NewKteoViewModel()
         {
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
@@ -45,13 +50,14 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                Damage newItem = new Damage()
+                Kteo newItem = new Kteo()
                 {
                     Price = Price,
-                    Description = Description,
+                    KteoDetail = KteoDetail,
                     Date = Date,
+                    NextKteo = Next
                 };
-                await unitOfwork.Damages.Insert(newItem);
+                await unitOfwork.KteoTables.Insert(newItem);
                 await Shell.Current.GoToAsync("..");
             }
         }

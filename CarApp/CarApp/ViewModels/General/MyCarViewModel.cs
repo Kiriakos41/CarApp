@@ -81,9 +81,13 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
+                Items.Clear();
                 Gs = 0;
                 Pr = 0;
                 KilMax = 0;
+                WeekPrice = 0;
+                MonthPrice = 0;
+                ThreeMonthPrice = 0;
                 try
                 {
                     // List 0
@@ -155,6 +159,22 @@ namespace CarApp.ViewModels
                     {
                         Pr += Convert.ToInt64(item.Price);
                     }
+                    //List 6
+                    var items5 = await unitOfwork.KteoTables.Get<Rubber>();
+                    foreach (var item in items5)
+                    {
+                        Pr += Convert.ToInt64(item.Price);
+                    }
+                    var smg5 = items5
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-7) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    var smgMon5 = items5
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-30) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    var smg3Mon5 = items5
+                    .Where(x => x.Date >= DateTime.Now.AddDays(-90) && x.Date <= DateTime.Now)
+                    .Sum(x => x.Price);
+                    //
                     var smg4 = items4
                     .Where(x => x.Date >= DateTime.Now.AddDays(-7) && x.Date <= DateTime.Now)
                     .Sum(x => x.Price);
@@ -169,9 +189,9 @@ namespace CarApp.ViewModels
                     WeekPrice = 0;
                     MonthPrice = 0;
                     ThreeMonthPrice = 0;
-                    WeekPrice += smg + smg1 + smg2 + smg3 + smg4;
-                    MonthPrice += smgMon + smgMon2 + smgMon3 + smgMon4;
-                    ThreeMonthPrice += smg3Mon + smg3Mon1 + smg3Mon2 + smg3Mon3 + smg3Mon4;
+                    WeekPrice += smg + smg1 + smg2 + smg3 + smg4 + smg5;
+                    MonthPrice += smgMon + smgMon2 + smgMon3 + smgMon4 + smgMon5;
+                    ThreeMonthPrice += smg3Mon + smg3Mon1 + smg3Mon2 + smg3Mon3 + smg3Mon4 + smg3Mon5;
                     IsBusy = false;
                 }
                 catch (Exception ex)

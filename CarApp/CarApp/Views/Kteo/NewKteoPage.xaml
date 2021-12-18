@@ -1,58 +1,57 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CarApp.Views.NewItemPage"
-             Shell.PresentationMode="ModalAnimated"
+             x:Class="CarApp.Views.NewKteoPage"
+             Title="ΚΤΕΟ"
              Shell.ForegroundColor="Transparent"
+             Shell.PresentationMode="ModalAnimated"
              BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <ContentPage.Content>
         <StackLayout>
             <Frame BackgroundColor="{StaticResource Primary}" CornerRadius="30" HasShadow="True" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="250" Margin="10">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15">
-                    <Image Source="gas" HeightRequest="64"/>
-                    <Label Text="Ανεφοδιασμός" VerticalOptions="Center" FontSize="20" TextColor="Black"/>
+                    <Image Source="test" HeightRequest="64"/>
+                    <Label Text="ΚΤΕΟ" VerticalOptions="Center" FontSize="20" TextColor="Black"/>
                 </StackLayout>
             </Frame>
             <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="5">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" Margin="5">
-                        <Image Source="gas" HeightRequest="30"/>
-                        <Label Text="Ανεφοδιασμός Καυσίμου: " FontSize="Medium" TextColor="Black"/>
-                        <Label Text="Προαιρετικό*" FontSize="Small" TextColor="gray"/>
+                        <Image Source="test" HeightRequest="30"/>
+                        <Label Text="Ονομασία ΚΤΕΟ:" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                        <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                     </StackLayout>
                     <StackLayout Margin="45,-15,0,0" >
-                        <Entry Text="{Binding Gas}" TextColor="Black"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" Margin="5">
-                        <Image Source="distance" HeightRequest="30"/>
-                        <Label Text="Τωρινά Χιλιόμετρα: " TextColor="Black"/>
-                        <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="Red"/>
-                    </StackLayout>
-                    <StackLayout Margin="45,-15,0,0" >
-                        <Entry Text="{Binding Khm}" TextColor="Black"/>
+                        <Entry Text="{Binding KteoDetail}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" Margin="5">
                         <Image Source="money" HeightRequest="30"/>
-                        <Label Text="Τιμή: " FontSize="Medium"  TextColor="Black"/>
-                        <Label Text="Προαιρετικό*" FontSize="Small" TextColor="Gray"/>
+                        <Label Text="Τιμή: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                        <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                     </StackLayout>
                     <StackLayout Margin="45,-15,0,0" >
-                        <Entry Text="{Binding Price}" TextColor="Black"/>
+                        <Entry Text="{Binding Price}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" Margin="5">
                         <Image Source="schedule" HeightRequest="30"/>
-                        <Label Text="Ημερομηνία: " FontSize="Medium" />
+                        <Label Text="Ημερομηνία: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}" />
                     </StackLayout>
                     <StackLayout Margin="45,-15,0,0" >
-                        <DatePicker Date="{Binding Date}" TextColor="Black"/>
+                        <DatePicker Date="{Binding Date}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="5">
+                        <Image Source="schedule" HeightRequest="30"/>
+                        <Label Text="Επόμενο ΚΤΕΟ: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}" />
+                    </StackLayout>
+                    <StackLayout Margin="45,-15,0,0" >
+                        <DatePicker Date="{Binding Next}"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="5">
                         <Button WidthRequest="125" BackgroundColor="#17A589" Text="Ακύρωση" Command="{Binding CancelCommand}" CornerRadius="20"/>
-                        <Button WidthRequest="125" Background="#17A589" Text="Προσθήκη" Command="{Binding SaveCommand}" CornerRadius="20"/>
+                        <Button WidthRequest="125" Background="#17A589" Text="Αποθήκευση" Command="{Binding SaveCommand}" CornerRadius="20"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
         </StackLayout>
     </ContentPage.Content>
-
 </ContentPage>

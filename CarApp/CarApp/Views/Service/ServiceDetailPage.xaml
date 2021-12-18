@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.ServiceDetailPage"
              Title="Λεπτομέρειες Service"
-             Padding="0,20,0,0"
              Shell.ForegroundColor="Transparent"
                BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <ContentPage.ToolbarItems>
@@ -11,23 +10,25 @@
         <ToolbarItem IconImageSource="Delete" Command="{Binding DeleteCommand}"/>
     </ContentPage.ToolbarItems>
     <StackLayout>
-        <Frame Margin="5,10,15,5"  BackgroundColor="{AppThemeBinding Light=white, Dark=gray}" HasShadow="True">
+        <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="0,-8,-1,0">
             <StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="money" HeightRequest="30"/>
-                    <Label Text="Τιμή Εργασίας:" VerticalOptions="Center" FontSize="Medium" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="money" HeightRequest="30"/>
+                        <Label Text="Τιμή Εργασίας:" VerticalOptions="Center" FontSize="Medium" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                    </StackLayout>
+                    <Entry Text="{Binding Price}" Placeholder="Γράψε εδώ" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="change" HeightRequest="30"/>
+                        <Label Text="Τιμή Εργασίας:" VerticalOptions="Center" FontSize="Medium" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                    </StackLayout>
+                    <Entry Text="{Binding Changes}" Placeholder="Γράψε εδώ" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="schedule" HeightRequest="30"/>
+                        <Label Text="Τιμή Εργασίας:" VerticalOptions="Center" FontSize="Medium" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                    </StackLayout>
+                    <DatePicker Date="{Binding Date}" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
                 </StackLayout>
-                <Entry Text="{Binding Price}" Placeholder="Γράψε εδώ" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="change" HeightRequest="30"/>
-                    <Label Text="Τιμή Εργασίας:" VerticalOptions="Center" FontSize="Medium" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
-                </StackLayout>
-                <Entry Text="{Binding Changes}" Placeholder="Γράψε εδώ" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
-                <StackLayout Orientation="Horizontal">
-                    <Image Source="schedule" HeightRequest="30"/>
-                    <Label Text="Τιμή Εργασίας:" VerticalOptions="Center" FontSize="Medium" TextColor="{AppThemeBinding Light=Black, Dark=White}" />
-                </StackLayout>
-                <DatePicker Date="{Binding Date}" TextColor="{AppThemeBinding Light=Black, Dark=White}"/>
             </StackLayout>
         </Frame>
     </StackLayout>

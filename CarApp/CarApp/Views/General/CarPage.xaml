@@ -2,9 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.CarPage"
-             Title="Γενικά"
-             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
-
+             Title="Γενικά">
     <StackLayout>
         <StackLayout Orientation="Horizontal">
             <Frame HeightRequest="280" WidthRequest="180" 
@@ -40,6 +38,7 @@
                            HasShadow="True" Margin="10" CornerRadius="10"
                            HorizontalOptions="CenterAndExpand">
                 <Grid>
+
                     <StackLayout  BackgroundColor="Black">
                         <Image Source="carmiles" 
                                     HeightRequest="350" Opacity="0.6"
@@ -108,13 +107,12 @@
             </StackLayout>
         </Frame>
         <Frame Margin="5" HasShadow="true" CornerRadius="10"  BackgroundColor="#17A589">
-            <StackLayout Orientation="Horizontal">
-                <Image Source="forex" HeightRequest="30"/>
-                <Label Text="Προηγούμενες 90 μέρες: " TextColor="white" FontSize="16" FontAttributes="none" Margin="15"/>
-                <Label Text="{Binding ThreeMonthPrice, StringFormat='-{0}'}" TextColor="white" FontSize="16" FontAttributes="none" Margin="15"/>
-                <Image Source="money" HeightRequest="30"/>
-            </StackLayout>
-        </Frame>
-    </StackLayout>
-
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="forex" HeightRequest="30"/>
+                    <Label Text="Προηγούμενες 90 μέρες: " TextColor="white" FontSize="16" FontAttributes="none" Margin="15"/>
+                    <Label Text="{Binding ThreeMonthPrice, StringFormat='-{0}'}" TextColor="white" FontSize="16" FontAttributes="none" Margin="15"/>
+                    <Image Source="money" HeightRequest="30"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
 </ContentPage>

@@ -34,6 +34,7 @@
                         <DataTemplate>
                             <StackLayout Orientation="Horizontal">
                                 <StackLayout Padding="10" x:DataType="model:Clean">
+                                    <Label Text="{Binding Date, StringFormat='{0:MMMM dd, yyyy}'}" FontSize="Body" FontAttributes="Italic" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
                                     <Frame WidthRequest="500" HasShadow="True" BackgroundColor="{StaticResource Secondary}" CornerRadius="10">
                                         <StackLayout Padding="10" Orientation="Horizontal" Spacing="25">
                                             <Image Source="cleaning.png" HeightRequest="30"/>

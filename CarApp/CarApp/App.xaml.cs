@@ -31,6 +31,8 @@ namespace CarApp
             DbPath.CreateTableAsync<AboutCar>();
             DbPath.CreateTableAsync<Clean>();
             DbPath.CreateTableAsync<Rubber>();
+            DbPath.CreateTableAsync<Extra>();
+            DbPath.CreateTableAsync<Kteo>();
         }
 
         protected override void OnSleep()

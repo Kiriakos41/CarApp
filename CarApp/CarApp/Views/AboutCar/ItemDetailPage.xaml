@@ -33,6 +33,13 @@
                 <StackLayout Margin="45,-15,0,0" >
                     <Entry Text="{Binding Khm, Mode=TwoWay}" FontSize="Large" TextColor="white"/>
                 </StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="5">
+                    <Image Source="schedule" HeightRequest="30"/>
+                    <Label Text="Ημερομηνία: " FontSize="Medium" TextColor="white"/>
+                </StackLayout>
+                <StackLayout Margin="45,-15,0,0" >
+                    <DatePicker Date="{Binding Date, Mode=TwoWay}" FontSize="Large" TextColor="white"/>
+                </StackLayout>
             </StackLayout>
         </Frame>
     </StackLayout>
