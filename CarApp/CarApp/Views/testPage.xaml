@@ -1,36 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CarApp.Views.NewRubberPage"
-             Title="Σελίδα Προσθήκης"
-             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}"
-             Shell.PresentationMode="ModalAnimated">
+             x:Class="CarApp.Views.testPage">
     <ContentPage.Content>
         <StackLayout>
             <Frame BackgroundColor="{StaticResource Primary}" CornerRadius="30" HasShadow="True" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="250" Margin="10">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15">
-                    <Image Source="wheel" HeightRequest="64"/>
-                    <Label Text="Ελαστικά" VerticalOptions="Center" FontSize="20" TextColor="Black"/>
+                    <Image Source="cleaning" HeightRequest="64"/>
+                    <Label Text="Καθαριότητα" VerticalOptions="Center" FontSize="20" TextColor="Black"/>
                 </StackLayout>
             </Frame>
             <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="5">
                 <StackLayout>
-                    <StackLayout Margin="15">
+                    <StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <Image Source="money" HeightRequest="30"/>
-                            <Label Text="Τιμή Ελαστικών" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
+                            <Image Source="cleaning" HeightRequest="30"/>
+                            <Label Text="Ποιότητα Καθαριότητας" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                         </StackLayout>
-                        <Entry Text="{Binding Pr}" Placeholder="Γράψε εδώ.." TextColor="{AppThemeBinding Dark=White, Light=black}"/>
+
+                        <Picker ItemsSource="{Binding Rating}" Title="Αναζήτησε εδώ.." SelectedItem="{Binding Quality, Mode=TwoWay}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Image HeightRequest="30" Source="money"/>
+                            <Label Text="Τιμή Καθαριότητας" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                            <Label Text="Έαν υπήρξαν υλικά για αλλαγή*" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                        </StackLayout>
+
+                        <Entry Text="{Binding Price, Mode=TwoWay}" Placeholder="Γράψε εδώ.." TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                         <StackLayout Orientation="Horizontal">
                             <Image Source="schedule" HeightRequest="30"/>
-                            <Label Text="Ημερομηνία" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
+                            <Label Text="Ημερομηνία: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                         </StackLayout>
-                        <DatePicker Date="{Binding Date}"/>
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="wheel" HeightRequest="30"/>
-                            <Label Text="Σχόλια" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
-                        </StackLayout>
-                        <Editor Text="{Binding Commend}" TextColor="{AppThemeBinding Dark=White, Light=White}" Placeholder="Γράψε εδώ.." AutoSize="TextChanges" HeightRequest="80" BackgroundColor="{StaticResource Key=Primary}"/>
+                        <DatePicker Date="{Binding Date,Mode=TwoWay}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="5">
                         <Frame CornerRadius="20" HorizontalOptions="Start" WidthRequest="120" BackgroundColor="#17A589">

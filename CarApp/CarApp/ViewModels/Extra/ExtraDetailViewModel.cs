@@ -4,34 +4,28 @@ using System;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
+
 namespace CarApp.ViewModels
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public class ItemDetailViewModel : BaseViewModel
+    public class ExtraDetailViewModel : BaseViewModel
     {
         private int itemId;
-        private long gas;
-        private long khm;
         private decimal price;
+        private string desc;
         private DateTime date;
-        public ObservableCollection<AboutCar> car { get; set; } = new ObservableCollection<AboutCar>();
+        public ObservableCollection<Extra> car { get; set; } = new ObservableCollection<Extra>();
         public int Id { get; set; }
-        public long Gas
-        {
-            get => gas;
-            set => SetProperty(ref gas, value);
-        }
         public DateTime Date
         {
             get => date;
             set => SetProperty(ref date, value);
         }
-        public long Khm
+        public string Description
         {
-            get => khm;
-            set => SetProperty(ref khm, value);
+            get => desc;
+            set => SetProperty<string>(ref desc, value);
         }
-
         public int ItemId
         {
             get
@@ -52,7 +46,7 @@ namespace CarApp.ViewModels
         public Command DeleteCommand { get; set; }
         public Command UpdateCommand { get; set; }
 
-        public ItemDetailViewModel()
+        public ExtraDetailViewModel()
         {
             DeleteCommand = new Command(DeleteItem);
             UpdateCommand = new Command(UpdateItem);
@@ -61,8 +55,8 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                var item = await unitOfwork.AboutCars.Get(ItemId);
-                await unitOfwork.AboutCars.Delete(item);
+                var item = await unitOfwork.ExtraTables.Get(ItemId);
+                await unitOfwork.ExtraTables.Delete(item);
                 await Shell.Current.GoToAsync("..");
             }
 
@@ -71,12 +65,12 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                AboutCar item = await unitOfwork.AboutCars.Get(ItemId);
+                Extra item = await unitOfwork.ExtraTables.Get(ItemId);
                 item.Id = Id;
-                item.Gas = Gas;
-                item.Kilometer = Khm;
                 item.Price = Price;
-                await unitOfwork.AboutCars.Update(item);
+                item.Description = Description;
+                item.Date = Date;
+                await unitOfwork.ExtraTables.Update(item);
                 await Shell.Current.GoToAsync("..");
             }
 
@@ -86,12 +80,11 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                var item = await unitOfwork.AboutCars.Get(itemId);
+                var item = await unitOfwork.ExtraTables.Get(itemId);
                 Id = item.Id;
-                Gas = item.Gas;
-                Khm = item.Kilometer;
                 Price = item.Price;
                 Date = item.Date;
+                Description = item.Description;
             }
         }
     }

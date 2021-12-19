@@ -1,5 +1,4 @@
-﻿using CarApp.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace CarApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ExtraDetailPage : ContentPage
+    public partial class testPage : ContentPage
     {
-        public ExtraDetailPage()
+        public testPage()
         {
             InitializeComponent();
-            BindingContext = new ExtraDetailViewModel();
         }
     }
 }

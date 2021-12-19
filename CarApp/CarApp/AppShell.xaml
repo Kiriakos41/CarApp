@@ -34,12 +34,15 @@
         <ShellContent Route="RubberPage" ContentTemplate="{DataTemplate local:RubberPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Extra" Icon="extra">
-        <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ChartsPage}" />
+        <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ExtraPage}" />
     </FlyoutItem>
     <FlyoutItem Title="KTEO" Icon="test">
         <ShellContent Route="car" ContentTemplate="{DataTemplate local:KteosPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Διάγραμμα" Icon="charts">
         <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ChartsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="test" Icon="back">
+        <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:testPage}" />
     </FlyoutItem>
 </Shell>

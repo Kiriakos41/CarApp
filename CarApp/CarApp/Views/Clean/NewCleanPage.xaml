@@ -37,8 +37,26 @@
                         <DatePicker Date="{Binding Date,Mode=TwoWay}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="5">
-                        <Button WidthRequest="125" BackgroundColor="#17A589" Text="Ακύρωση" Command="{Binding CancelCommand}" CornerRadius="20"/>
-                        <Button WidthRequest="125" Background="#17A589" Text="Προσθήκη" Command="{Binding SaveCommand}" CornerRadius="20"/>
+                        <Frame CornerRadius="20" HorizontalOptions="Start" WidthRequest="120" BackgroundColor="#17A589">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="update" HeightRequest="25" VerticalOptions="Center"/>
+                                <Label Text="Αποθήκευση" TextColor="White" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SaveCommand}">
+                                </TapGestureRecognizer>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame CornerRadius="20" HorizontalOptions="Start" BackgroundColor="#17A589"  WidthRequest="120">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="back" HeightRequest="25" VerticalOptions="Center"/>
+                                <Label Text="Άκυρωση" TextColor="White" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer  Command="{Binding CancelCommand}">
+                                </TapGestureRecognizer>
+                            </Frame.GestureRecognizers>
+                        </Frame>
                     </StackLayout>
                 </StackLayout>
             </Frame>

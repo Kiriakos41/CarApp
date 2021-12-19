@@ -5,10 +5,9 @@ using Xamarin.Forms;
 
 namespace CarApp.ViewModels
 {
-    public class NewItemViewModel : BaseViewModel
+    public class NewExtraViewModel : BaseViewModel
     {
-        private long gas;
-        private long khm;
+        private string desc;
         private decimal price;
         private DateTime date = DateTime.Now;
 
@@ -18,7 +17,7 @@ namespace CarApp.ViewModels
             set => SetProperty(ref date, value);
         }
 
-        public NewItemViewModel()
+        public NewExtraViewModel()
         {
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
@@ -26,20 +25,15 @@ namespace CarApp.ViewModels
                 (_, __) => SaveCommand.ChangeCanExecute();
         }
 
-        public long Gas
+        public string Description
         {
-            get => gas;
-            set => SetProperty(ref gas, value);
+            get => desc;
+            set => SetProperty(ref desc, value);
         }
         public decimal Price
         {
             get => price;
             set => SetProperty(ref price, value);
-        }
-        public long Khm
-        {
-            get => khm;
-            set => SetProperty(ref khm, value);
         }
 
         public Command SaveCommand { get; }
@@ -54,15 +48,14 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                AboutCar newItem = new AboutCar()
+                Extra newItem = new Extra()
                 {
-                    Gas = Gas,
-                    Kilometer = Khm,
+                    Description = desc,
                     Price = Price,
                     Date = Date,
                 };
 
-                await unitOfwork.AboutCars.Insert(newItem);
+                await unitOfwork.ExtraTables.Insert(newItem);
 
                 await Shell.Current.GoToAsync("..");
             }

@@ -31,6 +31,10 @@ namespace CarApp
             Routing.RegisterRoute(nameof(NewKteoPage), typeof(NewKteoPage));
             Routing.RegisterRoute(nameof(KteosPage), typeof(KteosPage));
             Routing.RegisterRoute(nameof(KteoDetailPage), typeof(KteoDetailPage));
+            Routing.RegisterRoute(nameof(ExtraDetailPage), typeof(ExtraDetailPage));
+            Routing.RegisterRoute(nameof(ExtraPage), typeof(ExtraPage));
+            Routing.RegisterRoute(nameof(NewExtraPage), typeof(NewExtraPage));
+            Routing.RegisterRoute(nameof(testPage), typeof(testPage));
         }
 
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using CarApp.ViewModels;
 namespace CarApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -15,6 +15,7 @@ namespace CarApp.Views
         public NewExtraPage()
         {
             InitializeComponent();
+            BindingContext = new NewExtraViewModel();
         }
     }
 }

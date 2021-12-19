@@ -1,12 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CarApp.Views.ExtraDetailPage">
+             x:Class="CarApp.Views.ExtraDetailPage"
+             Title="Επεξεργασία"
+             Shell.ForegroundColor="Transparent"
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="Update" Command="{Binding UpdateCommand}"/>
+        <ToolbarItem IconImageSource="Delete" Command="{Binding DeleteCommand}"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="0,-8,-1,0">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
+                        <Image Source="box" HeightRequest="40"/>
+                        <Entry Text="{Binding Description}" WidthRequest="250" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
+                        <Image Source="money" HeightRequest="40"/>
+                        <Entry Text="{Binding Price, Mode=TwoWay}" WidthRequest="250" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
+                        <Image Source="schedule" HeightRequest="40"/>
+                        <DatePicker Date="{Binding Date, Mode=TwoWay}" WidthRequest="250" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
