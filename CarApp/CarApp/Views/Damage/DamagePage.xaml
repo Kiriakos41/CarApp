@@ -23,9 +23,26 @@
                                      Aspect="AspectFill"/>
                     </StackLayout>
                     <StackLayout>
-                        <Button Text="+" CornerRadius="20" HorizontalOptions="Center" VerticalOptions="EndAndExpand" FontSize="20" Margin="385,0,0,105" Command="{Binding AddItemCommand}"/>
-                        <Label Text="Σελίδα Βλάβες" TextColor="White" FontSize="20" Opacity="0.9"
-                           VerticalOptions="EndAndExpand" HorizontalOptions="Center"/>
+                        <Frame CornerRadius="20" HorizontalOptions="Start" BackgroundColor="#17A589"  WidthRequest="120" Margin="310,20,0,0">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="add" HeightRequest="25" VerticalOptions="Center"/>
+                                <Label Text="Προσθήκη" TextColor="White" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer  Command="{Binding AddItemCommand}">
+                                </TapGestureRecognizer>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Frame CornerRadius="20" HorizontalOptions="End" BackgroundColor="Chocolate"  WidthRequest="120" Margin="310,20,10,0">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="sort" HeightRequest="25" VerticalOptions="Center"/>
+                                <Label Text="Ταξινόμιση" TextColor="White" VerticalOptions="Center"/>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SortListCommand}">
+                                </TapGestureRecognizer>
+                            </Frame.GestureRecognizers>
+                        </Frame>
                     </StackLayout>
                 </Grid>
             </Frame>

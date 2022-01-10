@@ -27,11 +27,11 @@
                     <Entry Text="{Binding Price, Mode=TwoWay}" FontSize="Large" TextColor="white"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Margin="5">
-                    <Image Source="distance" HeightRequest="30"/>
-                    <Label Text="Συνολικά Χιλιόμετρα" FontSize="Medium" TextColor="white"/>
+                    <Image Source="Station" HeightRequest="30"/>
+                    <Label Text="Βενζινάδικο: " FontSize="Medium" TextColor="white"/>
                 </StackLayout>
                 <StackLayout Margin="45,-15,0,0" >
-                    <Entry Text="{Binding Khm, Mode=TwoWay}" FontSize="Large" TextColor="white"/>
+                    <Entry Text="{Binding GasStation, Mode=TwoWay}" FontSize="Large" TextColor="white"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" Margin="5">
                     <Image Source="schedule" HeightRequest="30"/>

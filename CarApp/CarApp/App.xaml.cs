@@ -29,18 +29,21 @@ namespace CarApp
             DbPath.CreateTableAsync<Damage>();
             DbPath.CreateTableAsync<Service>();
             DbPath.CreateTableAsync<AboutCar>();
-            DbPath.CreateTableAsync<Clean>();
             DbPath.CreateTableAsync<Rubber>();
             DbPath.CreateTableAsync<Extra>();
             DbPath.CreateTableAsync<Kteo>();
+            DbPath.CreateTableAsync<Distance>();
+            DbPath.CreateTableAsync<Profile>();
         }
 
         protected override void OnSleep()
         {
+
         }
 
         protected override void OnResume()
         {
+
         }
         private void SetCultureToGreek()
         {

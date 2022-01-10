@@ -17,21 +17,15 @@ namespace CarApp.ViewModels
         public Command AddItemCommand { get; }
         public Command<Extra> ItemTapped { get; }
         public Command SortListCommand { get; }
+        private bool isSort;
+        public bool IsSort
+        {
+            get => isSort;
+            set => SetProperty(ref isSort, value);
 
-        private string sortText;
-        private string sortImage;
+        }
+
         private DateTime date;
-
-        public string SortText
-        {
-            get => sortText;
-            set => SetProperty(ref sortText, value);
-        }
-        public string SortImage
-        {
-            get => sortImage;
-            set => SetProperty(ref sortImage, value);
-        }
         public DateTime Date
         {
             get => date;
@@ -46,6 +40,9 @@ namespace CarApp.ViewModels
             ItemTapped = new Command<Extra>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+
+            SortListCommand = new Command(SortList);
+
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -60,6 +57,29 @@ namespace CarApp.ViewModels
                 }
             }
             IsBusy = false;
+        }
+        public void SortList()
+        {
+            if (!isSort)
+            {
+                isSort = true;
+                var sorted = Items.OrderByDescending(x => x.Date).ToList();
+                Items.Clear();
+                foreach (var item in sorted)
+                {
+                    Items.Add(item);
+                }
+            }
+            else
+            {
+                isSort = false;
+                var sorted = Items.OrderBy(x => x.Date).ToList();
+                Items.Clear();
+                foreach (var item in sorted)
+                {
+                    Items.Add(item);
+                }
+            }
         }
 
         public void OnAppearing()

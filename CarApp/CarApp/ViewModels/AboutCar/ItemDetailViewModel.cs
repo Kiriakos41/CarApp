@@ -11,9 +11,14 @@ namespace CarApp.ViewModels
     {
         private int itemId;
         private long gas;
-        private long khm;
+        private string gasStation;
         private decimal price;
         private DateTime date;
+        public string GasStation
+        {
+            get => gasStation;
+            set => SetProperty(ref gasStation, value);
+        }
         public ObservableCollection<AboutCar> car { get; set; } = new ObservableCollection<AboutCar>();
         public int Id { get; set; }
         public long Gas
@@ -26,12 +31,6 @@ namespace CarApp.ViewModels
             get => date;
             set => SetProperty(ref date, value);
         }
-        public long Khm
-        {
-            get => khm;
-            set => SetProperty(ref khm, value);
-        }
-
         public int ItemId
         {
             get
@@ -74,8 +73,8 @@ namespace CarApp.ViewModels
                 AboutCar item = await unitOfwork.AboutCars.Get(ItemId);
                 item.Id = Id;
                 item.Gas = Gas;
-                item.Kilometer = Khm;
                 item.Price = Price;
+                item.GasName = GasStation;
                 await unitOfwork.AboutCars.Update(item);
                 await Shell.Current.GoToAsync("..");
             }
@@ -89,7 +88,6 @@ namespace CarApp.ViewModels
                 var item = await unitOfwork.AboutCars.Get(itemId);
                 Id = item.Id;
                 Gas = item.Gas;
-                Khm = item.Kilometer;
                 Price = item.Price;
                 Date = item.Date;
             }

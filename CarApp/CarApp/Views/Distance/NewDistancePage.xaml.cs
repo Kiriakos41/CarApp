@@ -1,5 +1,4 @@
-﻿using CarApp.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,16 +6,17 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using CarApp.ViewModels;
 
 namespace CarApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CleanDetailPage : ContentPage
+    public partial class NewDistancePage : ContentPage
     {
-        public CleanDetailPage()
+        public NewDistancePage()
         {
             InitializeComponent();
-            BindingContext = new CleanDetailViewModel();
+            BindingContext = new NewDistanceViewModel();
         }
     }
 }

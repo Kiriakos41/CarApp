@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.ProfilePage"
+             Title="Profile">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame HasShadow="true" Margin="-25" Padding="0" HeightRequest="330" CornerRadius="50" BackgroundColor="black">
+                <StackLayout>
+                    <Image Source="{Binding ProfileImage,Mode=TwoWay}" Aspect="AspectFill"/>
+                </StackLayout>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NewImage}"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+            <inputLayout:SfTextInputLayout
+            Hint="Name" 
+            ContainerType="Outlined"
+            HelperText="Enter your name"
+	    FocusedStrokeWidth="4"
+	    UnfocusedStrokeWidth="2"
+                Margin="25">
+                <Entry />
+            </inputLayout:SfTextInputLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.DistanceDetailPage"
+             Title="Χιλιόμετρα"
+             Shell.ForegroundColor="Transparent"
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="update" Command="{Binding UpdateCommand}" />
+        <ToolbarItem IconImageSource="delete" Command="{Binding DeleteCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="0,-8,-1,0">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="5">
+                        <Image Source="Khm" HeightRequest="30"/>
+                        <Label Text="Χιλιόμετρα:" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                        <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                    <StackLayout Margin="45,-15,0,0" >
+                        <Entry Text="{Binding CarDistance}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="5">
+                        <Image Source="schedule" HeightRequest="30"/>
+                        <Label Text="Ημερομηνία: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                    <StackLayout Margin="45,-15,0,0" >
+                        <DatePicker Date="{Binding Date, Mode=TwoWay}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

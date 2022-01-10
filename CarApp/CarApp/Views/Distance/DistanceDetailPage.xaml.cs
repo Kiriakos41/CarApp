@@ -11,12 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace CarApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NewCleanPage : ContentPage
+    public partial class DistanceDetailPage : ContentPage
     {
-        public NewCleanPage()
+        public DistanceDetailPage()
         {
             InitializeComponent();
-            BindingContext = new NewCleanViewModel();
+            BindingContext = new DistanceDetailViewModel();
         }
     }
 }

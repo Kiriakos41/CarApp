@@ -8,8 +8,8 @@ namespace CarApp.ViewModels
     public class NewItemViewModel : BaseViewModel
     {
         private long gas;
-        private long khm;
         private decimal price;
+        private string gasStation;
         private DateTime date = DateTime.Now;
 
         public DateTime Date
@@ -17,7 +17,11 @@ namespace CarApp.ViewModels
             get => date;
             set => SetProperty(ref date, value);
         }
-
+        public string GasStation
+        {
+            get => gasStation;
+            set => SetProperty<string>(ref gasStation, value);
+        }
         public NewItemViewModel()
         {
             SaveCommand = new Command(OnSave);
@@ -36,11 +40,6 @@ namespace CarApp.ViewModels
             get => price;
             set => SetProperty(ref price, value);
         }
-        public long Khm
-        {
-            get => khm;
-            set => SetProperty(ref khm, value);
-        }
 
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
@@ -57,9 +56,9 @@ namespace CarApp.ViewModels
                 AboutCar newItem = new AboutCar()
                 {
                     Gas = Gas,
-                    Kilometer = Khm,
                     Price = Price,
                     Date = Date,
+                    GasName = GasStation
                 };
 
                 await unitOfwork.AboutCars.Insert(newItem);

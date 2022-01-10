@@ -1,42 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CarApp.Views.NewRubberPage"
+             x:Class="CarApp.Views.NewDistancePage"
+             Title="Προσθήκη Χιλιομέτρων"
+             Shell.ForegroundColor="Transparent"
+             Shell.PresentationMode="ModalAnimated"
              xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
-             Title="Σελίδα Προσθήκης"
-             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}"
-             Shell.PresentationMode="ModalAnimated">
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <ContentPage.Content>
         <StackLayout>
             <Frame BackgroundColor="{StaticResource Primary}" CornerRadius="30" HasShadow="True" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="250" Margin="10">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15">
-                    <Image Source="wheel" HeightRequest="64"/>
-                    <Label Text="Ελαστικά" VerticalOptions="Center" FontSize="20" TextColor="Black"/>
+                    <Image Source="distance" HeightRequest="64"/>
+                    <Label Text="Χιλιόμετρα" VerticalOptions="Center" FontSize="20" TextColor="Black"/>
                 </StackLayout>
             </Frame>
             <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="5">
                 <StackLayout>
-                    <StackLayout Margin="15">
+                    <StackLayout>
 
-                        <inputLayout:SfTextInputLayout Hint="Τιμή Ελαστικών"  ContainerType="Outlined" HelperText="Ονομασία Προιόντος" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
-                            <Entry Text="{Binding Pr}" Placeholder="Γράψε εδώ.." TextColor="{AppThemeBinding Dark=White, Light=black}"/>
+                        <inputLayout:SfTextInputLayout Hint="Τωρινά χιλιόμετρα"  ContainerType="Outlined"  FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
+                            <Entry Text="{Binding CarDistance, Mode=TwoWay}" Placeholder="Γράψε εδώ.." TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                             <inputLayout:SfTextInputLayout.LeadingView>
-                                <Image HeightRequest="30" Source="money"/>
+                                <Image HeightRequest="30" Source="distance"/>
                             </inputLayout:SfTextInputLayout.LeadingView>
                         </inputLayout:SfTextInputLayout>
 
-                        <inputLayout:SfTextInputLayout Hint="Ημερομηνία" ContainerType="Outlined"  FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
-                            <DatePicker Date="{Binding Date}"/>
+                        <inputLayout:SfTextInputLayout Hint="Ημερομηνία"  ContainerType="Outlined" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
+                            <DatePicker Date="{Binding Date,Mode=TwoWay}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                             <inputLayout:SfTextInputLayout.LeadingView>
                                 <Image HeightRequest="30" Source="schedule"/>
-                            </inputLayout:SfTextInputLayout.LeadingView>
-                        </inputLayout:SfTextInputLayout>
-
-                        <inputLayout:SfTextInputLayout Hint="Σχόλια" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2" ContainerType="Outlined"  LeadingViewPosition="Inside">
-                            <Editor Text="{Binding Commend}" TextColor="{AppThemeBinding Dark=White, Light=White}" Placeholder="Γράψε εδώ.." AutoSize="TextChanges" HeightRequest="80" BackgroundColor="{StaticResource Key=Primary}"/>
-                            <inputLayout:SfTextInputLayout.LeadingView>
-                                <Image HeightRequest="30" Source="wheel"/>
                             </inputLayout:SfTextInputLayout.LeadingView>
                         </inputLayout:SfTextInputLayout>
 

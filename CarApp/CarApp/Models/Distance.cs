@@ -5,12 +5,14 @@ using System.Text;
 
 namespace CarApp.Models
 {
-    public class Clean
+    public class Distance
     {
         [PrimaryKey, AutoIncrement]
+
         public int Id { get; set; }
-        public string Quality{ get; set; }
-        public decimal Price { get; set; }
+
+        public decimal CarDistance { get; set; }
+
         public DateTime Date { get; set; }
     }
 }

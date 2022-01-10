@@ -3,6 +3,7 @@ using CarApp.Repositories;
 using CarApp.Views;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -32,9 +33,12 @@ namespace CarApp.ViewModels
         public RubberViewModel()
         {
             RuberItems = new ObservableCollection<Rubber>();
+
             ItemTapped = new Command<Rubber>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+
+            SortListCommand = new Command(SortList);
         }
 
         public async void fillList()
@@ -49,6 +53,30 @@ namespace CarApp.ViewModels
                 }
             }
             IsBusy = false;
+        }
+
+        public void SortList()
+        {
+            if (!isSort)
+            {
+                isSort = true;
+                var sorted = RuberItems.OrderByDescending(x => x.Date).ToList();
+                RuberItems.Clear();
+                foreach (var item in sorted)
+                {
+                    RuberItems.Add(item);
+                }
+            }
+            else
+            {
+                isSort = false;
+                var sorted = RuberItems.OrderBy(x => x.Date).ToList();
+                RuberItems.Clear();
+                foreach (var item in sorted)
+                {
+                    RuberItems.Add(item);
+                }
+            }
         }
 
         public void OnAppearing()

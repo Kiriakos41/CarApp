@@ -2,19 +2,16 @@
 using CarApp.Repositories;
 using CarApp.Views;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace CarApp.ViewModels
 {
-    public class CleanViewModel : BaseViewModel
+    public class DistanceViewModel : BaseViewModel
     {
-        private Clean _selectedItem;
+        private Distance _selectedItem;
         private bool isSort;
         private string quality;
         public bool IsSort
@@ -31,22 +28,16 @@ namespace CarApp.ViewModels
                 SetProperty(ref quality, value);
             }
         }
-        private long price;
-        public long Price
-        {
-            get => price;
-            set => SetProperty(ref price, value);
-        }
-        public ObservableCollection<Clean> Items { get; set; } = new ObservableCollection<Clean>();
+        public ObservableCollection<Distance> Items { get; set; } = new ObservableCollection<Distance>();
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
-        public Command<Clean> ItemTapped { get; }
+        public Command<Distance> ItemTapped { get; }
         public Command SortListCommand { get; }
-        public CleanViewModel()
+        public DistanceViewModel()
         {
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            ItemTapped = new Command<Clean>(OnItemSelected);
+            ItemTapped = new Command<Distance>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
 
@@ -57,41 +48,33 @@ namespace CarApp.ViewModels
             if (!isSort)
             {
                 isSort = true;
-                var sorted = Items.OrderByDescending(x => x.Price).ToList();
+                var sorted = Items.OrderByDescending(x => x.Date).ToList();
                 Items.Clear();
-                Price = 0;
                 foreach (var item in sorted)
                 {
                     Items.Add(item);
-                    Price += Convert.ToInt64(item.Price);
                 }
             }
             else
             {
                 isSort = false;
-                var sorted = Items.OrderBy(x => x.Price).ToList();
-                Items.Clear();
-                Price = 0;
+                var sorted = Items.OrderBy(x => x.Date).ToList();
                 foreach (var item in sorted)
                 {
                     Items.Add(item);
-                    Price += Convert.ToInt64(item.Price);
                 }
             }
         }
         async Task ExecuteLoadItemsCommand()
         {
-            Price = 0;
             Items.Clear();
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                var refills = await unitOfwork.Cleans.Get<Clean>();
+                var refills = await unitOfwork.DistanceTable.Get<Distance>();
                 foreach (var refil in refills)
                 {
                     Items.Add(refil);
-                    Price += Convert.ToInt64(refil.Price);
                 }
-                SortList();
             }
             IsBusy = false;
         }
@@ -100,7 +83,7 @@ namespace CarApp.ViewModels
             IsBusy = true;
             SelectedItem = null;
         }
-        public Clean SelectedItem
+        public Distance SelectedItem
         {
             get => _selectedItem;
             set
@@ -111,14 +94,14 @@ namespace CarApp.ViewModels
         }
         private async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(NewCleanPage));
+            await Shell.Current.GoToAsync(nameof(NewDistancePage));
         }
-        async void OnItemSelected(Clean item)
+        async void OnItemSelected(Distance item)
         {
             if (item == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(CleanDetailPage)}?{nameof(CleanDetailViewModel.ItemId)}={item.Id}");
+            await Shell.Current.GoToAsync($"{nameof(DistanceDetailPage)}?{nameof(DistanceDetailViewModel.ItemId)}={item.Id}");
         }
     }
 }

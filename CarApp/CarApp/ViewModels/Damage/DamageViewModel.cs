@@ -48,6 +48,8 @@ namespace CarApp.ViewModels
             ItemTapped = new Command<Damage>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+
+            SortListCommand = new Command(SortList);
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -63,6 +65,29 @@ namespace CarApp.ViewModels
                 }
             }
             IsBusy = false;
+        }
+        public void SortList()
+        {
+            if (!isSort)
+            {
+                isSort = true;
+                var sorted = Items.OrderByDescending(x => x.Date).ToList();
+                Items.Clear();
+                foreach (var item in sorted)
+                {
+                    Items.Add(item);
+                }
+            }
+            else
+            {
+                isSort = false;
+                var sorted = Items.OrderBy(x => x.Date).ToList();
+                Items.Clear();
+                foreach (var item in sorted)
+                {
+                    Items.Add(item);
+                }
+            }
         }
 
         public void OnAppearingAsync()

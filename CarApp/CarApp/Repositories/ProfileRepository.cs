@@ -4,10 +4,10 @@ using SQLite;
 
 namespace CarApp.Repositories
 {
-    public class KteoRepository : Repository<Kteo>, IKteoRepository
+    public class ProfileRepository : Repository<Profile>, IProfileRepository
     {
         private readonly SQLiteAsyncConnection _connection;
-        public KteoRepository(SQLiteAsyncConnection db) : base(db)
+        public ProfileRepository(SQLiteAsyncConnection db) : base(db)
         {
             _connection = db;
         }

@@ -2,31 +2,26 @@
 using CarApp.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Text;
 using Xamarin.Forms;
 
 namespace CarApp.ViewModels
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public class CleanDetailViewModel : BaseViewModel
+    public class DistanceDetailViewModel : BaseViewModel
     {
         private int itemId;
-        private string quality;
-        private decimal price;
+        private decimal carDistance;
         private DateTime date;
         public DateTime Date
         {
             get => date;
             set => SetProperty(ref date, value);
         }
-        public List<string> Rating { get; set; } = new List<string> { "Απλή", "Μέτρια", "Άριστη" };
         public int Id { get; set; }
-        public string Quality
+        public decimal CarDistance
         {
-            get => quality;
-            set => SetProperty(ref quality, value);
+            get => carDistance;
+            set => SetProperty(ref carDistance, value);
         }
         public int ItemId
         {
@@ -40,16 +35,11 @@ namespace CarApp.ViewModels
                 LoadItemId(value);
             }
         }
-        public decimal Price
-        {
-            get => price;
-            set => SetProperty(ref price, value);
-        }
         public Command DeleteCommand { get; set; }
         public Command UpdateCommand { get; set; }
         public Command CancelCommand { get; set; }
 
-        public CleanDetailViewModel()
+        public DistanceDetailViewModel()
         {
             DeleteCommand = new Command(DeleteItem);
             UpdateCommand = new Command(UpdateItem);
@@ -64,8 +54,8 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                Clean item = await unitOfwork.Cleans.Get(itemId);
-                await unitOfwork.Cleans.Delete(item);
+                Distance item = await unitOfwork.DistanceTable.Get(itemId);
+                await unitOfwork.DistanceTable.Delete(item);
                 await Shell.Current.GoToAsync("..");
             }
         }
@@ -73,12 +63,11 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                var item = await unitOfwork.Cleans.Get(itemId);
+                var item = await unitOfwork.DistanceTable.Get(itemId);
                 item.Id = Id;
-                item.Quality = Quality;
-                item.Price = Price;
+                item.CarDistance = CarDistance;
                 item.Date = Date;
-                await unitOfwork.Cleans.Update(item);
+                await unitOfwork.DistanceTable.Update(item);
                 await Shell.Current.GoToAsync("..");
             }
         }
@@ -87,10 +76,9 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                var item = await unitOfwork.Cleans.Get(itemId);
+                var item = await unitOfwork.DistanceTable.Get(itemId);
                 Id = item.Id;
-                Quality = item.Quality;
-                Price = item.Price;
+                CarDistance = item.CarDistance;
                 Date = item.Date;
             }
         }

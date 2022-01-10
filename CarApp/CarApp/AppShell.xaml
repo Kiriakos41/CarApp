@@ -10,7 +10,11 @@
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid BackgroundColor="Black" HeightRequest="200">
-                <Image Aspect="AspectFill" Source="gg" Opacity="1" />
+                <Image Aspect="AspectFill" Source="{Binding ProfileImage,Mode=TwoWay}" Opacity="1" x:Name="img">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NewImage}"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
@@ -18,14 +22,14 @@
     <FlyoutItem Title="Γενικά" Icon="sedan.png">
         <ShellContent Route="CarPage" ContentTemplate="{DataTemplate local:CarPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Ανεφοδιασμός/Χιλιόμετρα" Icon="gas.png">
+    <FlyoutItem Title="Χιλιόμετρα" Icon="distance">
+        <ShellContent Route="DistancePage" ContentTemplate="{DataTemplate local:DistancePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Ανεφοδιασμός" Icon="gas.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Service" Icon="maintenance.png">
         <ShellContent Route="ServicePage" ContentTemplate="{DataTemplate local:ServicePage}" />
-    </FlyoutItem>
-    <FlyoutItem Title="Καθαριότητα" Icon="cleaning.png">
-        <ShellContent Route="CleanPage" ContentTemplate="{DataTemplate local:CleanPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Βλάβες" Icon="breakdown.png">
         <ShellContent Route="DamagePage" ContentTemplate="{DataTemplate local:DamagePage}" />
@@ -33,16 +37,13 @@
     <FlyoutItem Title="Ελαστικά" Icon="wheel">
         <ShellContent Route="RubberPage" ContentTemplate="{DataTemplate local:RubberPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Extra" Icon="extra">
-        <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ExtraPage}" />
-    </FlyoutItem>
     <FlyoutItem Title="KTEO" Icon="test">
         <ShellContent Route="car" ContentTemplate="{DataTemplate local:KteosPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Διάγραμμα" Icon="charts">
-        <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ChartsPage}" />
+    <FlyoutItem Title="Ασφάλεια" Icon="protection">
+        <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ExtraPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="test" Icon="back">
-        <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:testPage}" />
+    <FlyoutItem Title="Extra Έξοδα" Icon="extra">
+        <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ExtraPage}" />
     </FlyoutItem>
 </Shell>

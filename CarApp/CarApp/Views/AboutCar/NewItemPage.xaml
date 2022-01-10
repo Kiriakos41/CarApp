@@ -4,6 +4,8 @@
              x:Class="CarApp.Views.NewItemPage"
              Shell.PresentationMode="ModalAnimated"
              Shell.ForegroundColor="Transparent"
+             xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
              BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <ContentPage.Content>
         <StackLayout>
@@ -15,40 +17,38 @@
             </Frame>
             <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="5">
                 <StackLayout>
-                    <StackLayout Orientation="Horizontal" Margin="5">
-                        <Image Source="gas" HeightRequest="30"/>
-                        <Label Text="Ανεφοδιασμός Καυσίμου: " FontSize="Medium" TextColor="Black"/>
-                        <Label Text="Προαιρετικό*" FontSize="Small" TextColor="gray"/>
-                    </StackLayout>
-                    <StackLayout Margin="45,-15,0,0" >
+                    
+                    <inputLayout:SfTextInputLayout Hint="Ανεφοδιασμός Καυσίμου"  ContainerType="Outlined" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
                         <Entry Text="{Binding Gas}" TextColor="Black"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" Margin="5">
-                        <Image Source="distance" HeightRequest="30"/>
-                        <Label Text="Τωρινά Χιλιόμετρα: " TextColor="Black"/>
-                        <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="Red"/>
-                    </StackLayout>
-                    <StackLayout Margin="45,-15,0,0" >
-                        <Entry Text="{Binding Khm}" TextColor="Black"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" Margin="5">
-                        <Image Source="money" HeightRequest="30"/>
-                        <Label Text="Τιμή: " FontSize="Medium"  TextColor="Black"/>
-                        <Label Text="Προαιρετικό*" FontSize="Small" TextColor="Gray"/>
-                    </StackLayout>
-                    <StackLayout Margin="45,-15,0,0" >
+                        <inputLayout:SfTextInputLayout.LeadingView>
+                            <Image HeightRequest="30" Source="gas"/>
+                        </inputLayout:SfTextInputLayout.LeadingView>
+                    </inputLayout:SfTextInputLayout>
+
+                    <inputLayout:SfTextInputLayout Hint="Βενζινάδικο" HelperText="Υποχρεωτικό*"  ContainerType="Outlined" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
+                        <Entry Text="{Binding GasStation}" TextColor="Black"/>
+                        <inputLayout:SfTextInputLayout.LeadingView>
+                            <Image HeightRequest="30" Source="distance"/>
+                        </inputLayout:SfTextInputLayout.LeadingView>
+                    </inputLayout:SfTextInputLayout>
+
+                    <inputLayout:SfTextInputLayout Hint="Τιμή" HelperText="Προαιρετικό*"  ContainerType="Outlined" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
                         <Entry Text="{Binding Price}" TextColor="Black"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" Margin="5">
-                        <Image Source="schedule" HeightRequest="30"/>
-                        <Label Text="Ημερομηνία: " FontSize="Medium" />
-                    </StackLayout>
-                    <StackLayout Margin="45,-15,0,0" >
+                        <inputLayout:SfTextInputLayout.LeadingView>
+                            <Image HeightRequest="30" Source="money"/>
+                        </inputLayout:SfTextInputLayout.LeadingView>
+                    </inputLayout:SfTextInputLayout>
+
+                    <inputLayout:SfTextInputLayout Hint="Ημερομηνία" ContainerType="Outlined" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
                         <DatePicker Date="{Binding Date}" TextColor="Black"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="5">
-                        <Button WidthRequest="125" BackgroundColor="#17A589" Text="Ακύρωση" Command="{Binding CancelCommand}" CornerRadius="20"/>
-                        <Button WidthRequest="125" Background="#17A589" Text="Προσθήκη" Command="{Binding SaveCommand}" CornerRadius="20"/>
+                        <inputLayout:SfTextInputLayout.LeadingView>
+                            <Image HeightRequest="30" Source="schedule"/>
+                        </inputLayout:SfTextInputLayout.LeadingView>
+                    </inputLayout:SfTextInputLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="5" HeightRequest="60">
+                        <button:SfButton Text="Αποθήκευση" ShowIcon="True" ImageSource="Update.png" Command="{Binding SaveCommand}" CornerRadius="20" BackgroundColor="{StaticResource Secondary}"/>
+                        <button:SfButton Text="Ακύρωση" ShowIcon="True" ImageSource="back.png" Command="{Binding CancelCommand}" CornerRadius="20" WidthRequest="120" BackgroundColor="{StaticResource Secondary}"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>

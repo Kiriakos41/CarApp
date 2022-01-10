@@ -2,23 +2,17 @@
 using CarApp.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
-
 namespace CarApp.ViewModels
 {
-    public class NewCleanViewModel : BaseViewModel
+    public class NewDistanceViewModel : BaseViewModel
     {
-        private string quality;
-        private decimal price;
+        private decimal carDistance;
         private DateTime date = DateTime.Now;
         public Command SaveCommand { get; }
         public Command CancelCommand { get; }
-        public List<string> Rating { get; set; } = new List<string>()
-        {
-            "Απλή","Μέτρια","Τέλεια"
-        };
-        public NewCleanViewModel()
+
+        public NewDistanceViewModel()
         {
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
@@ -28,15 +22,10 @@ namespace CarApp.ViewModels
             get => date;
             set => SetProperty(ref date, value);
         }
-        public string Quality
+        public decimal CarDistance
         {
-            get => quality;
-            set => SetProperty(ref quality, value);
-        }
-        public decimal Price
-        {
-            get => price;
-            set => SetProperty(ref price, value);
+            get => carDistance;
+            set => SetProperty(ref carDistance, value);
         }
         private async void OnCancel()
         {
@@ -47,13 +36,12 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                Clean newItem = new Clean()
+                Distance newItem = new Distance()
                 {
-                    Quality = Quality,
-                    Price = Price,
+                    CarDistance = CarDistance,
                     Date = Date
                 };
-                await unitOfwork.Cleans.Insert(newItem);
+                await unitOfwork.DistanceTable.Insert(newItem);
 
                 // This will pop the current page off the navigation stack
                 await Shell.Current.GoToAsync("..");

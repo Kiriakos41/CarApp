@@ -4,6 +4,7 @@ using CarApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -35,6 +36,13 @@ namespace CarApp.ViewModels
         public Command<Kteo> ItemTapped { get; }
         public Command SortListCommand { get; }
 
+        private bool isSort;
+        public bool IsSort
+        {
+            get => isSort;
+            set => SetProperty(ref isSort, value);
+
+        }
         public KteoViweModel()
         {
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
@@ -42,6 +50,8 @@ namespace CarApp.ViewModels
             ItemTapped = new Command<Kteo>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
+
+            SortListCommand = new Command(SortList);
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -57,6 +67,29 @@ namespace CarApp.ViewModels
                 }
             }
             IsBusy = false;
+        }
+        public void SortList()
+        {
+            if (!isSort)
+            {
+                isSort = true;
+                var sorted = Items.OrderByDescending(x => x.Date).ToList();
+                Items.Clear();
+                foreach (var item in sorted)
+                {
+                    Items.Add(item);
+                }
+            }
+            else
+            {
+                isSort = false;
+                var sorted = Items.OrderBy(x => x.Date).ToList();
+                Items.Clear();
+                foreach (var item in sorted)
+                {
+                    Items.Add(item);
+                }
+            }
         }
 
         public void OnAppearingAsync()

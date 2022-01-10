@@ -18,21 +18,7 @@ namespace CarApp.ViewModels
         public Command AddItemCommand { get; }
         public Command<AboutCar> ItemTapped { get; }
         public Command SortListCommand { get; }
-
-        private string sortText;
-        private string sortImage;
         private DateTime date;
-
-        public string SortText
-        {
-            get => sortText;
-            set => SetProperty(ref sortText, value);
-        }
-        public string SortImage
-        {
-            get => sortImage;
-            set => SetProperty(ref sortImage, value);
-        }
         public DateTime Date
         {
             get => date;
@@ -56,14 +42,11 @@ namespace CarApp.ViewModels
             AddItemCommand = new Command(OnAddItem);
 
             SortListCommand = new Command(SortList);
-
         }
         public void SortList()
         {
             if (!isSort)
             {
-                SortImage = "sortdescending";
-                SortText = "Ταξινόμηση από το παλιότερο προς το νεότερο: ";
                 isSort = true;
                 var sorted = Items.OrderByDescending(x => x.Date).ToList();
                 Items.Clear();
@@ -74,8 +57,6 @@ namespace CarApp.ViewModels
             }
             else
             {
-                SortImage = "sortascending";
-                SortText = "Ταξινόμηση από το νεότερο προς το παλιότερο: ";
                 isSort = false;
                 var sorted = Items.OrderBy(x => x.Date).ToList();
                 Items.Clear();
@@ -85,7 +66,6 @@ namespace CarApp.ViewModels
                 }
             }
         }
-
         async Task ExecuteLoadItemsCommand()
         {
             Items.Clear();

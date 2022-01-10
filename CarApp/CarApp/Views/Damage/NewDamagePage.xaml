@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.NewDamagePage"
              Title="Διάφορες Βλάβες"
+             xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
              Shell.ForegroundColor="Transparent"
              Shell.PresentationMode="ModalAnimated"
              BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
@@ -16,50 +18,31 @@
             </Frame>
             <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="5">
                 <StackLayout>
-                    <StackLayout Orientation="Horizontal" Margin="5">
-                        <Image Source="parts" HeightRequest="30"/>
-                        <Label Text="Ανταλλακτικό:" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                        <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                    </StackLayout>
-                    <StackLayout Margin="45,-15,0,0" >
+
+                    <inputLayout:SfTextInputLayout Hint="Ανταλλακτικό"  ContainerType="Outlined" HelperText="Υποχρεωτικό" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
                         <Entry Text="{Binding Description}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" Margin="5">
-                        <Image Source="money" HeightRequest="30"/>
-                        <Label Text="Τιμή: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                        <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                    </StackLayout>
-                    <StackLayout Margin="45,-15,0,0" >
+                        <inputLayout:SfTextInputLayout.LeadingView>
+                            <Image HeightRequest="30" Source="parts"/>
+                        </inputLayout:SfTextInputLayout.LeadingView>
+                    </inputLayout:SfTextInputLayout>
+
+                    <inputLayout:SfTextInputLayout Hint="Τιμή"  ContainerType="Outlined" HelperText="Υποχρεωτικό" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
                         <Entry Text="{Binding Price}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" Margin="5">
-                        <Image Source="schedule" HeightRequest="30"/>
-                        <Label Text="Ημερομηνία: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}" />
-                    </StackLayout>
-                    <StackLayout Margin="45,-15,0,0" >
+                        <inputLayout:SfTextInputLayout.LeadingView>
+                            <Image HeightRequest="30" Source="money"/>
+                        </inputLayout:SfTextInputLayout.LeadingView>
+                    </inputLayout:SfTextInputLayout>
+
+                    <inputLayout:SfTextInputLayout Hint="Ημερομηνία"  ContainerType="Outlined" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
                         <DatePicker Date="{Binding Date}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="5">
-                        <Frame CornerRadius="20" HorizontalOptions="Start" WidthRequest="120" BackgroundColor="#17A589">
-                            <StackLayout Orientation="Horizontal">
-                                <Image Source="update" HeightRequest="25" VerticalOptions="Center"/>
-                                <Label Text="Αποθήκευση" TextColor="White" VerticalOptions="Center"/>
-                            </StackLayout>
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding SaveCommand}">
-                                </TapGestureRecognizer>
-                            </Frame.GestureRecognizers>
-                        </Frame>
-                        <Frame CornerRadius="20" HorizontalOptions="Start" BackgroundColor="#17A589"  WidthRequest="120">
-                            <StackLayout Orientation="Horizontal">
-                                <Image Source="back" HeightRequest="25" VerticalOptions="Center"/>
-                                <Label Text="Άκυρωση" TextColor="White" VerticalOptions="Center"/>
-                            </StackLayout>
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer  Command="{Binding CancelCommand}">
-                                </TapGestureRecognizer>
-                            </Frame.GestureRecognizers>
-                        </Frame>
+                        <inputLayout:SfTextInputLayout.LeadingView>
+                            <Image HeightRequest="30" Source="schedule"/>
+                        </inputLayout:SfTextInputLayout.LeadingView>
+                    </inputLayout:SfTextInputLayout>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="5" HeightRequest="60">
+                        <button:SfButton Text="Αποθήκευση" ShowIcon="True" ImageSource="Update.png" Command="{Binding SaveCommand}" CornerRadius="20" BackgroundColor="{StaticResource Secondary}"/>
+                        <button:SfButton Text="Ακύρωση" ShowIcon="True" ImageSource="back.png" Command="{Binding CancelCommand}" CornerRadius="20" WidthRequest="120" BackgroundColor="{StaticResource Secondary}"/>
                     </StackLayout>
                 </StackLayout>
             </Frame>
