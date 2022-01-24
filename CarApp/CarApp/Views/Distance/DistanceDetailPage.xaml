@@ -14,7 +14,7 @@
             <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="0,-8,-1,0">
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" Margin="5">
-                        <Image Source="Khm" HeightRequest="30"/>
+                        <Image Source="distance" HeightRequest="30"/>
                         <Label Text="Χιλιόμετρα:" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                         <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
                     </StackLayout>

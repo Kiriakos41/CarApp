@@ -5,27 +5,27 @@ using Xamarin.Forms;
 
 namespace CarApp.ViewModels
 {
-    public class NewDamageViewModel : BaseViewModel
+    public class NewProtectionViewModel : BaseViewModel
     {
         private DateTime _date = DateTime.Now;
         private decimal price;
-        private string desc;
-        public decimal Price
+        private string protName;
+        public decimal ProtectionPrice
         {
             get => price;
             set => SetProperty(ref price, value);
         }
-        public string Description
+        public string ProtectionName
         {
-            get => desc;
-            set => SetProperty(ref desc, value);
+            get => protName;
+            set => SetProperty(ref protName, value);
         }
         public DateTime Date
         {
             get => _date;
             set => SetProperty(ref _date, value);
         }
-        public NewDamageViewModel()
+        public NewProtectionViewModel()
         {
             SaveCommand = new Command(OnSave);
             CancelCommand = new Command(OnCancel);
@@ -42,13 +42,13 @@ namespace CarApp.ViewModels
         {
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                Damage newItem = new Damage()
+                Protection newItem = new Protection()
                 {
-                    Price = Price,
-                    Description = Description,
-                    Date = Date,
+                    ProtectionPrice = ProtectionPrice,
+                    ProtectionName = ProtectionName,
+                    ProtectionDate = Date,
                 };
-                await unitOfwork.Damages.Insert(newItem);
+                await unitOfwork.ProtectionTables.Insert(newItem);
                 await Shell.Current.GoToAsync("..");
             }
         }

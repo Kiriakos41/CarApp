@@ -6,15 +6,26 @@
        x:Class="CarApp.AppShell"
        FlyoutHeaderBehavior="Fixed"
        x:Name="myShell"
+       xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
        BackgroundColor="#7393B3">
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
-            <Grid BackgroundColor="Black" HeightRequest="200">
-                <Image Aspect="AspectFill" Source="{Binding ProfileImage,Mode=TwoWay}" Opacity="1" x:Name="img">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NewImage}"/>
-                    </Image.GestureRecognizers>
-                </Image>
+            <Grid HeightRequest="200" x:Name="MyTabbar" BackgroundColor="Black">
+                <Image Aspect="AspectFill" Source="{Binding ProfileImage,Mode=TwoWay}" Opacity="1"  x:Name="img"/>
+                <StackLayout>
+             <button:SfButton Text="Άλλαγή"
+            TextColor="Black"
+            ImageSource="add"
+            ShowIcon="True" 
+            HorizontalOptions="Start"
+            BorderWidth="2"
+            CornerRadius="15"
+            Margin="5"
+            BorderColor="Gray"
+            BackgroundColor="White"
+            ImageAlignment="Start"
+            Command="{Binding NewImage}"/>
+                </StackLayout>
             </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
@@ -41,9 +52,15 @@
         <ShellContent Route="car" ContentTemplate="{DataTemplate local:KteosPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Ασφάλεια" Icon="protection">
-        <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ExtraPage}" />
+        <ShellContent Route="Protection" ContentTemplate="{DataTemplate local:ProtectionPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Extra Έξοδα" Icon="extra">
         <ShellContent Route="ChartsPage" ContentTemplate="{DataTemplate local:ExtraPage}" />
     </FlyoutItem>
+    <Shell.FlyoutFooter>
+        <StackLayout>
+            <button:SfButton Text="Email: kiriakos41@outlook.com" ShowIcon="True" ImageSource="email" Command="{Binding Email}" CornerRadius="20" BackgroundColor="{StaticResource Primary}" HorizontalTextAlignment="Start"/>
+            <Image Source="gg" HeightRequest="80" Aspect="AspectFill"/>
+        </StackLayout>
+    </Shell.FlyoutFooter>
 </Shell>

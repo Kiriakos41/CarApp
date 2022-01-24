@@ -1,12 +1,7 @@
-﻿
-using CarApp.Models;
-using CarApp.ViewModels;
-using CarApp.Views;
+﻿using CarApp.Models;
 using SQLite;
-using System;
 using System.Globalization;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace CarApp
 {
@@ -26,16 +21,16 @@ namespace CarApp
 
         protected override void OnStart()
         {
+            DbPath.CreateTableAsync<Distance>();
             DbPath.CreateTableAsync<Damage>();
             DbPath.CreateTableAsync<Service>();
             DbPath.CreateTableAsync<AboutCar>();
             DbPath.CreateTableAsync<Rubber>();
             DbPath.CreateTableAsync<Extra>();
             DbPath.CreateTableAsync<Kteo>();
-            DbPath.CreateTableAsync<Distance>();
             DbPath.CreateTableAsync<Profile>();
+            DbPath.CreateTableAsync<Protection>();
         }
-
         protected override void OnSleep()
         {
 
@@ -43,7 +38,6 @@ namespace CarApp
 
         protected override void OnResume()
         {
-
         }
         private void SetCultureToGreek()
         {

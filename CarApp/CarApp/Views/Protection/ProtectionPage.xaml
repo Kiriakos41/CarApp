@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CarApp.Views.DamagePage"
+             x:Class="CarApp.Views.ProtectionPage"
              xmlns:local="clr-namespace:CarApp.ViewModels"  
              xmlns:model="clr-namespace:CarApp.Models"  
              x:Name="BrowseItemsPage"
-             Title="Βλάβες"
+             Title="Ασφάλεια"
              Shell.ForegroundColor="Transparent"
              BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
     <ContentPage.Content>
@@ -15,12 +15,8 @@
                            HasShadow="True" Margin="0,-10,0,0" CornerRadius="10"
                            HorizontalOptions="CenterAndExpand">
                 <Grid>
-                    <StackLayout  BackgroundColor="Black">
-                        <Image Source="https://www.theaa.com/~/media/the-aa/insurance/car-insurance/advice/damage-categories.jpg" 
-                                     Opacity="0.6"
-                                     HeightRequest="350"
+                    <Image Source="https://forasfaleia.gr/wp-content/uploads/2015/10/asfaleia-autokinitou.jpg" 
                                      Aspect="AspectFill"/>
-                    </StackLayout>
                     <StackLayout>
                         <Frame CornerRadius="20" HorizontalOptions="End" BackgroundColor="#17A589" Margin="310,20,10,0">
                             <StackLayout Orientation="Horizontal">
@@ -31,7 +27,7 @@
                                 </TapGestureRecognizer>
                             </Frame.GestureRecognizers>
                         </Frame>
-                        <Frame CornerRadius="20" HorizontalOptions="End" BackgroundColor="Chocolate" Margin="310,20,10,0">
+                        <Frame CornerRadius="20" HorizontalOptions="End" BackgroundColor="Chocolate"  Margin="310,20,10,0">
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="sort" HeightRequest="25" VerticalOptions="Center"/>
                             </StackLayout>
@@ -43,24 +39,24 @@
                     </StackLayout>
                 </Grid>
             </Frame>
-            <RefreshView x:DataType="local:DamageViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" BackgroundColor="{AppThemeBinding Dark=gray, Light=Black}">
+            <RefreshView x:DataType="local:ProtectionViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" BackgroundColor="{AppThemeBinding Dark=gray, Light=Black}">
                 <CollectionView ItemsSource="{Binding Items}" SelectionMode="None" BackgroundColor="{AppThemeBinding Dark=gray, Light=White} ">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Orientation="Horizontal">
-                                <StackLayout Padding="10" x:DataType="model:Damage">
-                                    <Label Text="{Binding Date, StringFormat='{0:MMMM dd, yyyy}'}" FontSize="Body" FontAttributes="Italic" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
+                                <StackLayout Padding="10" x:DataType="model:Protection">
+                                    <Label Text="{Binding ProtectionDate, StringFormat='{0:MMMM dd, yyyy}'}" FontSize="Body" FontAttributes="Italic" TextColor="{AppThemeBinding Dark=White, Light=black}"/>
                                     <Frame  WidthRequest="500" HasShadow="True" BackgroundColor="{StaticResource Secondary}" CornerRadius="10">
                                         <StackLayout>
                                             <StackLayout Orientation="Horizontal" Spacing="25" HorizontalOptions="Center">
                                                 <Image Source="money.png" HeightRequest="30"/>
-                                                <Label Text="{Binding Price , StringFormat='{0}€'}"  LineBreakMode="NoWrap"  Style="{DynamicResource ListItemTextStyle}"  FontSize="14" VerticalOptions="Center" TextColor="{AppThemeBinding Dark=White, Light=White}"/>
-                                                <Image Source="engine.png" HeightRequest="30"/>
-                                                <Label Text="{Binding Description}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="14" TextColor="{AppThemeBinding Dark=White, Light=White}"/>
+                                                <Label Text="{Binding ProtectionPrice , StringFormat='{0}€'}"  LineBreakMode="NoWrap"  Style="{DynamicResource ListItemTextStyle}"  FontSize="14" VerticalOptions="Center" TextColor="{AppThemeBinding Dark=White, Light=White}"/>
+                                                <Image Source="protection.png" HeightRequest="30"/>
+                                                <Label Text="{Binding ProtectionName}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" VerticalOptions="Center" FontSize="14" TextColor="{AppThemeBinding Dark=White, Light=White}"/>
                                                 <StackLayout.GestureRecognizers>
                                                     <TapGestureRecognizer 
                                                 NumberOfTapsRequired="1"
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:DamageViewModel}}, Path=ItemTapped}"		
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ProtectionViewModel}}, Path=ItemTapped}"		
                                                 CommandParameter="{Binding .}">
                                                     </TapGestureRecognizer>
                                                 </StackLayout.GestureRecognizers>

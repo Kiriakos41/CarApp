@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using Plugin.LocalNotification;
 
 namespace CarApp.ViewModels
 {
@@ -57,7 +58,20 @@ namespace CarApp.ViewModels
                     Date = Date,
                     NextKteo = Next
                 };
-                await unitOfwork.KteoTables.Insert(newItem);
+
+                var item = await unitOfwork.KteoTables.Insert(newItem);
+
+                var notification = new NotificationRequest
+                {
+                    BadgeNumber = 1,
+                    NotificationId = item,
+                    Description = "ΤΟ ΕΠΟΜΕΝΟ ΣΑΣ ΚΤΕΟ " + Next,
+                    Title = "ΕΝΗΜΕΡΩΣΗ ΚΤΕΟ",
+                    Schedule = {
+                        NotifyTime = Next.AddDays(-3)
+                    }
+                };
+                await NotificationCenter.Current.Show(notification);
                 await Shell.Current.GoToAsync("..");
             }
         }

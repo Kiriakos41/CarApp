@@ -2,6 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CarApp.Views.KteoDetailPage"
+                           xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
              Title="Επεξεργασία"
              Shell.ForegroundColor="Transparent">
     <ContentPage.ToolbarItems>
@@ -11,41 +13,47 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout>
-                <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="0,-8,-1,0">
+                <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="5">
                     <StackLayout>
-                        <StackLayout Orientation="Horizontal" Margin="5">
-                            <Image Source="test" HeightRequest="30"/>
-                            <Label Text="Ονομασία ΚΤΕΟ:" FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                            <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                        </StackLayout>
-                        <StackLayout Margin="45,-15,0,0" >
+                        <inputLayout:SfTextInputLayout Hint="Ονομασία ΚΤΕΟ"  ContainerType="Outlined" HelperText="Υποχρεωτικό*" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
                             <Entry Text="{Binding KteoDetail}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" Margin="5">
-                            <Image Source="money" HeightRequest="30"/>
-                            <Label Text="Τιμή: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                            <Label Text="Υποχρεωτικό*" FontSize="Small" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                        </StackLayout>
-                        <StackLayout Margin="45,-15,0,0" >
-                            <Entry Text="{Binding Price,Mode=TwoWay}"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" Margin="5">
-                            <Image Source="schedule" HeightRequest="30"/>
-                            <Label Text="Ημερομηνία: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                        </StackLayout>
-                        <StackLayout Margin="45,-15,0,0" >
-                            <DatePicker Date="{Binding Date, Mode=TwoWay}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Horizontal" Margin="5">
-                            <Image Source="schedule" HeightRequest="30"/>
-                            <Label Text="Επόμενο ΚΤΕΟ: " FontSize="Medium" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
-                        </StackLayout>
-                        <StackLayout Margin="45,-15,0,0" >
-                            <DatePicker Date="{Binding Next, Mode=TwoWay}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                            <inputLayout:SfTextInputLayout.LeadingView>
+                                <Image HeightRequest="30" Source="test"/>
+                            </inputLayout:SfTextInputLayout.LeadingView>
+                        </inputLayout:SfTextInputLayout>
+
+                        <inputLayout:SfTextInputLayout Hint="Τιμή"  ContainerType="Outlined" HelperText="Υποχρεωτικό*" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
+                            <Entry Text="{Binding Price}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                            <inputLayout:SfTextInputLayout.LeadingView>
+                                <Image HeightRequest="30" Source="money"/>
+                            </inputLayout:SfTextInputLayout.LeadingView>
+                        </inputLayout:SfTextInputLayout>
+
+                        <inputLayout:SfTextInputLayout Hint="Ημερομηνία"  ContainerType="Outlined" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
+                            <DatePicker Date="{Binding Date}"/>
+                            <inputLayout:SfTextInputLayout.LeadingView>
+                                <Image HeightRequest="30" Source="schedule"/>
+                            </inputLayout:SfTextInputLayout.LeadingView>
+                        </inputLayout:SfTextInputLayout>
+
+                        <inputLayout:SfTextInputLayout Hint="Επόμενο ΚΤΕΟ"  ContainerType="Outlined" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
+                            <DatePicker Date="{Binding Next}"/>
+                            <inputLayout:SfTextInputLayout.LeadingView>
+                                <Image HeightRequest="30" Source="schedule"/>
+                            </inputLayout:SfTextInputLayout.LeadingView>
+                        </inputLayout:SfTextInputLayout>
+
+
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="5" HeightRequest="60">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="5" HeightRequest="60">
+                                <button:SfButton Text="Αποθήκευση" ShowIcon="True" ImageSource="Update.png" Command="{Binding SaveCommand}" CornerRadius="20" BackgroundColor="{StaticResource Secondary}"/>
+                                <button:SfButton Text="Ακύρωση" ShowIcon="True" ImageSource="back.png" Command="{Binding CancelCommand}" CornerRadius="20" WidthRequest="120" BackgroundColor="{StaticResource Secondary}"/>
+                            </StackLayout>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
             </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

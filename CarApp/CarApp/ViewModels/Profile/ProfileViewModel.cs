@@ -1,13 +1,10 @@
 ﻿using CarApp.Models;
 using CarApp.Repositories;
-using System;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using System.Linq;
-
 
 namespace CarApp.ViewModels
 {
@@ -15,11 +12,13 @@ namespace CarApp.ViewModels
     {
         public Command NewImage { get; }
         public Command LoadImg { get; }
+        public Command Email { get; }
         private string profileImage;
         public ProfileViewModel()
         {
             NewImage = new Command(AddImage);
             LoadImg = new Command(LoadImage);
+            Email = new Command(CopyEmailAsync);
         }
         public string ProfileImage
         {
@@ -78,12 +77,18 @@ namespace CarApp.ViewModels
                     var uri = imageUri.Last().ImagePath;
                     ProfileImage = uri;
                 }
+
             }
         }
         public void OnAppearing()
         {
             IsBusy = true;
             LoadImage();
+        }
+        public async void CopyEmailAsync()
+        {
+            await Clipboard.SetTextAsync("kiriakos41@outlook.com");
+            await App.Current.MainPage.DisplayAlert("Ενημέρωση", "Έγινε αντιγραφή του email", "Εντάξει");
         }
     }
 }

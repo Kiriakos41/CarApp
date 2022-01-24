@@ -1,5 +1,4 @@
-﻿using CarApp.Helpers;
-using CarApp.Models;
+﻿using CarApp.Models;
 using CarApp.Repositories;
 using CarApp.Views;
 using System;
@@ -9,7 +8,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Xamarin.Forms;
-using static CarApp.Helpers.Extensions;
 
 namespace CarApp.ViewModels
 {

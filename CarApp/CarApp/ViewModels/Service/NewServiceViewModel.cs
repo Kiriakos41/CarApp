@@ -7,8 +7,6 @@ using System.Text;
 using Xamarin.Forms;
 using System.Linq;
 using CarApp.Repositories;
-using CarApp.Helpers;
-using static CarApp.Helpers.Extensions;
 
 namespace CarApp.ViewModels
 {

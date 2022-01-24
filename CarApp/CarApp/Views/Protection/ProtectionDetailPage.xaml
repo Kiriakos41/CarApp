@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CarApp.Views.PotectionDetailPage"
+             xmlns:local="clr-namespace:CarApp.ViewModels"  
+             xmlns:model="clr-namespace:CarApp.Models"  
+             xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             x:Name="BrowseItemsPage"
+             Title="Επεξεργασία Ασφάλειας"
+             Shell.ForegroundColor="Transparent"
+             BackgroundColor="{AppThemeBinding Dark=gray,Light=White}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="update" Command="{Binding UpdateCommand}" />
+        <ToolbarItem IconImageSource="delete" Command="{Binding DeleteCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="{StaticResource Primary}" CornerRadius="30" HasShadow="True" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="250" Margin="10">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="15">
+                    <Image Source="protection" HeightRequest="64"/>
+                    <Label Text="ΑΣΦΑΛΕΙΑ" VerticalOptions="Center" FontSize="20" TextColor="Black"/>
+                </StackLayout>
+            </Frame>
+            <Frame HasShadow="True" CornerRadius="10" Background="{StaticResource Key=Primary}" Margin="5">
+                <StackLayout>
+
+                    <inputLayout:SfTextInputLayout Hint="Ασφάλεια Αυτοκινήτου"  ContainerType="Outlined" HelperText="Υποχρεωτικό" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
+                        <Entry Text="{Binding ProtectionName}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                        <inputLayout:SfTextInputLayout.LeadingView>
+                            <Image HeightRequest="30" Source="protection"/>
+                        </inputLayout:SfTextInputLayout.LeadingView>
+                    </inputLayout:SfTextInputLayout>
+
+                    <inputLayout:SfTextInputLayout Hint="Τιμή ασφάλειας"  ContainerType="Outlined" HelperText="Υποχρεωτικό" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
+                        <Entry Text="{Binding ProtectionPrice}" TextColor="{AppThemeBinding Dark=White, Light=Black}"/>
+                        <inputLayout:SfTextInputLayout.LeadingView>
+                            <Image HeightRequest="30" Source="money"/>
+                        </inputLayout:SfTextInputLayout.LeadingView>
+                    </inputLayout:SfTextInputLayout>
+
+                    <inputLayout:SfTextInputLayout Hint="Ημερομηνία"  ContainerType="Outlined" FocusedStrokeWidth="4" UnfocusedStrokeWidth="2"  LeadingViewPosition="Inside">
+                        <DatePicker Date="{Binding ProtectionDate}"/>
+                        <inputLayout:SfTextInputLayout.LeadingView>
+                            <Image HeightRequest="30" Source="schedule"/>
+                        </inputLayout:SfTextInputLayout.LeadingView>
+                    </inputLayout:SfTextInputLayout>
+                </StackLayout>
+            </Frame>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

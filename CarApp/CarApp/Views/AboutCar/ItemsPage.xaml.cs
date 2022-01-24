@@ -1,14 +1,5 @@
-﻿using CarApp.Models;
-using CarApp.ViewModels;
-using CarApp.Views;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CarApp.ViewModels;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace CarApp.Views
 {

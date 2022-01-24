@@ -1,15 +1,19 @@
 ﻿using CarApp.ViewModels;
 using CarApp.Views;
+using System.ComponentModel;
 using Xamarin.Forms;
+
 
 namespace CarApp
 {
-    public partial class AppShell : Xamarin.Forms.Shell
+    public partial class AppShell : Shell
     {
+        ProfileViewModel vprofm;
         public AppShell()
         {
             InitializeComponent();
-            BindingContext = new ProfileViewModel();
+            BindingContext = vprofm = new ProfileViewModel();
+            PropertyChanged += Shell_PropertyChanged;
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             Routing.RegisterRoute(nameof(ItemsPage), typeof(ItemsPage));
@@ -33,6 +37,15 @@ namespace CarApp
             Routing.RegisterRoute(nameof(NewDistancePage), typeof(NewDistancePage));
             Routing.RegisterRoute(nameof(DistancePage), typeof(DistancePage));
             Routing.RegisterRoute(nameof(DistanceDetailPage), typeof(DistanceDetailPage));
+            Routing.RegisterRoute(nameof(ProtectionPage), typeof(ProtectionPage));
+            Routing.RegisterRoute(nameof(NewProtection), typeof(NewProtection));
+            Routing.RegisterRoute(nameof(PotectionDetailPage), typeof(PotectionDetailPage));
+
+        }
+        private void Shell_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.Equals("FlyoutIsPresented"))
+                vprofm.OnAppearing();
         }
     }
 }

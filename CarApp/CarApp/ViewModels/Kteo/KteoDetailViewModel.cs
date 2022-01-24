@@ -1,5 +1,6 @@
 ﻿using CarApp.Models;
 using CarApp.Repositories;
+using Plugin.LocalNotification;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,7 +13,7 @@ namespace CarApp.ViewModels
     {
         public KteoDetailViewModel()
         {
-            UpdateCommand = new Command(UpdateItem);      
+            UpdateCommand = new Command(UpdateItem);
             DeleteCommand = new Command(DeleteItem);
         }
         private string kteoDetail;
@@ -90,6 +91,17 @@ namespace CarApp.ViewModels
                 await unitOfwork.KteoTables.Update(item);
                 await Shell.Current.GoToAsync("..");
             }
+            var notification = new NotificationRequest
+            {
+                BadgeNumber = 1,
+                NotificationId = Id,
+                Description = "ΤΟ ΕΠΟΜΕΝΟ ΣΑΣ ΚΤΕΟ " + Next,
+                Title = "ΕΝΗΜΕΡΩΣΗ ΚΤΕΟ",
+                Schedule = {
+                        NotifyTime = Next
+                    }
+            };
+            await NotificationCenter.Current.Show(notification);
         }
     }
 }

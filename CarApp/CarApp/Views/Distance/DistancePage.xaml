@@ -14,28 +14,21 @@
                            HasShadow="True" Margin="0,-10,0,0" CornerRadius="10"
                            HorizontalOptions="CenterAndExpand">
                 <Grid>
-                    <StackLayout  BackgroundColor="Black">
-                        <Image Source="carmiles" 
-                                     Opacity="0.6"
-                                     HeightRequest="350"
-                                     HorizontalOptions="Center"
+                    <Image Source="carmiles" 
                                      Aspect="AspectFill"/>
-                    </StackLayout>
                     <StackLayout>
-                        <Frame CornerRadius="20" HorizontalOptions="Start" BackgroundColor="#17A589"  WidthRequest="120" Margin="310,20,0,0">
+                        <Frame CornerRadius="20" HorizontalOptions="End" BackgroundColor="#17A589" Margin="310,20,10,0">
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="add" HeightRequest="25" VerticalOptions="Center"/>
-                                <Label Text="Προσθήκη" TextColor="White" VerticalOptions="Center"/>
                             </StackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer  Command="{Binding AddItemCommand}">
                                 </TapGestureRecognizer>
                             </Frame.GestureRecognizers>
                         </Frame>
-                        <Frame CornerRadius="20" HorizontalOptions="End" BackgroundColor="Chocolate"  WidthRequest="120" Margin="310,20,10,0">
+                        <Frame CornerRadius="20" HorizontalOptions="End" BackgroundColor="Chocolate"  Margin="310,20,10,0">
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="sort" HeightRequest="25" VerticalOptions="Center"/>
-                                <Label Text="Ταξινόμιση" TextColor="White" VerticalOptions="Center"/>
                             </StackLayout>
                             <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding SortListCommand}">

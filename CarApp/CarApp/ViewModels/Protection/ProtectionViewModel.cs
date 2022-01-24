@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace CarApp.ViewModels
 {
-    public class DamageViewModel : BaseViewModel
+    public class ProtectionViewModel : BaseViewModel
     {
-        private Damage _selectedItem;
+        private Protection _selectedItem;
         private bool isSort;
         public bool IsSort
         {
@@ -18,32 +18,33 @@ namespace CarApp.ViewModels
             set => SetProperty(ref isSort, value);
 
         }
-        private string quality;
-        public string Quality
+
+        private string protName;
+        public string ProtectionName
         {
-            get => quality;
+            get => protName;
             set
             {
-                SetProperty(ref quality, value);
+                SetProperty(ref protName, value);
             }
         }
         private long price;
-        public long Price
+        public long ProtectionPrice
         {
             get => price;
             set => SetProperty(ref price, value);
         }
-        public ObservableCollection<Damage> Items { get; set; } = new ObservableCollection<Damage>();
+        public ObservableCollection<Protection> Items { get; set; } = new ObservableCollection<Protection>();
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
-        public Command<Damage> ItemTapped { get; }
+        public Command<Protection> ItemTapped { get; }
         public Command SortListCommand { get; }
 
-        public DamageViewModel()
+        public ProtectionViewModel()
         {
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            ItemTapped = new Command<Damage>(OnItemSelected);
+            ItemTapped = new Command<Protection>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
 
@@ -52,11 +53,11 @@ namespace CarApp.ViewModels
 
         async Task ExecuteLoadItemsCommand()
         {
-            Price = 0;
+            ProtectionPrice = 0;
             Items.Clear();
             using (var unitOfwork = new UnitOfWork(App.DbPath))
             {
-                var refills = await unitOfwork.Damages.Get<Damage>();
+                var refills = await unitOfwork.ProtectionTables.Get<Protection>();
                 foreach (var refil in refills)
                 {
                     Items.Add(refil);
@@ -69,7 +70,7 @@ namespace CarApp.ViewModels
             if (!isSort)
             {
                 isSort = true;
-                var sorted = Items.OrderByDescending(x => x.Date).ToList();
+                var sorted = Items.OrderByDescending(x => x.ProtectionDate).ToList();
                 Items.Clear();
                 foreach (var item in sorted)
                 {
@@ -79,7 +80,7 @@ namespace CarApp.ViewModels
             else
             {
                 isSort = false;
-                var sorted = Items.OrderBy(x => x.Date).ToList();
+                var sorted = Items.OrderBy(x => x.ProtectionDate).ToList();
                 Items.Clear();
                 foreach (var item in sorted)
                 {
@@ -94,7 +95,7 @@ namespace CarApp.ViewModels
             SelectedItem = null;
         }
 
-        public Damage SelectedItem
+        public Protection SelectedItem
         {
             get => _selectedItem;
             set
@@ -106,15 +107,15 @@ namespace CarApp.ViewModels
 
         private async void OnAddItem(object obj)
         {
-            await Shell.Current.GoToAsync(nameof(NewDamagePage));
+            await Shell.Current.GoToAsync(nameof(NewProtection));
         }
 
-        async void OnItemSelected(Damage item)
+        async void OnItemSelected(Protection item)
         {
             if (item == null)
                 return;
 
-            await Shell.Current.GoToAsync($"{nameof(DamageDetailPage)}?{nameof(DamageDetailViewModel.ItemId)}={item.Id}");
+            await Shell.Current.GoToAsync($"{nameof(PotectionDetailPage)}?{nameof(ProtectionDetailViewModel.ItemId)}={item.Id}");
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using CarApp.Interfaces;
 using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CarApp.Repositories
 {
@@ -18,8 +15,10 @@ namespace CarApp.Repositories
             KteoTables = new KteoRepository(context);
             DistanceTable = new DistanceRepository(context);
             ProfileTb = new ProfileRepository(context);
+            ProtectionTables = new ProtectionRepository(context);
         }
 
+        public IProtectionRepository ProtectionTables { get; }
         public IAboutCarRepository AboutCars { get; }
         public IDamageRepository Damages { get; }
         public IServiceTableRepository ServiceTables { get; }

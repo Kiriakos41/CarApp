@@ -1,5 +1,4 @@
 ﻿using CarApp.Models;
-using Microcharts;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +8,5 @@ namespace CarApp.Interfaces
 {
     public interface IServiceTableRepository : IRepository<Service>
     {
-        Task<List<ChartEntry>> ChartEntries(int year);
     }
 }

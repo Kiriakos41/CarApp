@@ -1,9 +1,6 @@
 ﻿using CarApp.Models;
 using CarApp.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 using Xamarin.Forms;
 
 namespace CarApp.ViewModels
