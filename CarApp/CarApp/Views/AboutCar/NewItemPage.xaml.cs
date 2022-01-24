@@ -16,6 +16,7 @@ namespace CarApp.Views
         {
             InitializeComponent();
             BindingContext = new NewItemViewModel();
+            //test
         }
     }
 }
